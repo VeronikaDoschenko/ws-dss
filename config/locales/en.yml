@@ -20,4 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  welcome_to_ws_dss:
+    Welcome to Web Services for Decision Support Systems!
+  now:
+    Now
+  srv_descr:
+    On this portal are a lot of methods to support decision-making
+    and operations research, including methods of multi-criteria analysis of
+    alternatives and optimization methods. All methods are available for free through
+    restfull api.
