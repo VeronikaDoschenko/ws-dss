@@ -20,6 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  characters_minimum:
+    characters minimum
+  sign_up:
+    Sign up
+  registration:
+    Register as new user
   welcome_to_ws_dss:
     Welcome to Web Services for Decision Support Systems!
   now:
