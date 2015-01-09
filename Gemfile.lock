@@ -124,6 +124,7 @@ GEM
     raindrops (0.13.0)
     rake (10.4.2)
     rdoc (4.2.0)
+    recaptcha (0.3.6)
     responders (2.0.2)
       railties (>= 4.2.0.alpha, < 5)
     sass (3.4.9)
@@ -181,6 +182,7 @@ DEPENDENCIES
   pg
   rails (= 4.2.0)
   rails_12factor
+  recaptcha
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

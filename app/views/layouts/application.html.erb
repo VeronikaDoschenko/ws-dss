@@ -2,8 +2,6 @@
 <html>
 <head>
   <title>Web Services for Decision Support Systems</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -17,12 +15,14 @@
 <p class="alert"><%= alert %></p>
 
 <p>
+
 <% if user_signed_in? %>
     <span>Здравствуйте, <%= current_user.email %></span>
     <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
 <% else %>
     <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
 <% end %>
+
 </p>
 
 <%= yield %>

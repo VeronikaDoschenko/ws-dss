@@ -51,3 +51,5 @@ gem 'unicorn'
 
 gem 'devise'
 
+gem "recaptcha", :require => "recaptcha/rails"
+
