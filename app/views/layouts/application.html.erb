@@ -8,19 +8,23 @@
 
 </head>
 <body>
+<% if notice or alert%>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+<% else %>
+  <p>
+  <%= link_to_unless I18n.locale == :ru, "Русский", locale: :ru %>
+  |
+  <%= link_to_unless I18n.locale == :en, "English", locale: :en %>
+  </p>
+<% end %>
+
 <p>
-<%= link_to_unless I18n.locale == :ru, "Русский", locale: :ru %>
-|
-<%= link_to_unless I18n.locale == :en, "English", locale: :en %>
-</p>
-
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
-<p>
-
+  
+<span><%= link_to 'Главная страница', '/' %></span>&nbsp;&nbsp;&nbsp;&nbsp
 <% if user_signed_in? %>
-    <span>Здравствуйте, <%= current_user.email %></span>
+    <span>Здравствуйте, <%= current_user.email %></span>&nbsp;&nbsp;
+    <%= link_to 'Профиль', '/persons/profile' %>&nbsp;&nbsp;
     <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
 <% else %>
     <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>

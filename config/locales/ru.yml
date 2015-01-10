@@ -1,4 +1,6 @@
 ru:
+  recaptcha_code_error:
+    Ошибка кода подтверждения. Пожалуйста, введите код еще раз
   password_confirmation:
     Подтверждение пароля
   password:
