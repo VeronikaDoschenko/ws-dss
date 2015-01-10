@@ -21,10 +21,10 @@
 
 <p>
   
-<span><%= link_to 'Главная страница', '/' %></span>&nbsp;&nbsp;&nbsp;&nbsp
+<span><%= link_to 'Главная страница', root_url %></span>&nbsp;&nbsp;&nbsp;&nbsp
 <% if user_signed_in? %>
     <span>Здравствуйте, <%= current_user.email %></span>&nbsp;&nbsp;
-    <%= link_to 'Профиль', '/persons/profile' %>&nbsp;&nbsp;
+    <%= link_to 'Профиль', user_root_url %>&nbsp;&nbsp;
     <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
 <% else %>
     <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
