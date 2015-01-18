@@ -21,7 +21,7 @@
 
 <p>
   
-<span><%= link_to 'Главная страница', root_url %></span>&nbsp;&nbsp;&nbsp;&nbsp
+<span><%= link_to t(:main_page), root_url %></span>&nbsp;&nbsp;&nbsp;&nbsp
 <% if user_signed_in? %>
     <span>Здравствуйте, <%= current_user.email %></span>&nbsp;&nbsp;
     <%= link_to 'Профиль', user_root_url %>&nbsp;&nbsp;

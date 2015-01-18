@@ -20,6 +20,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  main_page:
+    Home
   recaptcha_code_error:
     There was an error with the recaptcha code below. Please re-enter the code
   characters_minimum:

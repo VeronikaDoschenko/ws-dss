@@ -1,4 +1,6 @@
 ru:
+  main_page:
+    Главная страница 
   recaptcha_code_error:
     Ошибка кода подтверждения. Пожалуйста, введите код еще раз
   password_confirmation:
