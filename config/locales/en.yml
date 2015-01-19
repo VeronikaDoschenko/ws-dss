@@ -20,6 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  your_token:
+    Your token
+  welcome_profile:
+    Welcome to your personal page!
   confirm_link:
     Confirm my account
   confirm_email:

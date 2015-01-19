@@ -1,4 +1,8 @@
 ru:
+  your_token:
+    Ваш токен
+  welcome_profile:
+    Добро пожаловать на персональную страницу!
   confirm_link:
     Подтвердить регистрацию
   confirm_email:
