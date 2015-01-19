@@ -20,6 +20,40 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  confirm_link:
+    Confirm my account
+  confirm_email:
+    You can confirm your account email through the link below.
+  change_password_1:
+    Someone has requested a link to change your password. You can do this through the link below.
+  change_password_2:    
+    If you didn't request this, please ignore this email.
+  change_password_3:   
+    Your password won't change until you access the link above and create a new one.
+  confirm_new_password:
+    Confirm new password
+  new_password:
+    New password
+  resend_confirmation:
+    Resend confirmation instructions
+  send_reset_instructions:
+    Send me reset password instructions
+  didnt_receive_confirmation:
+    Didn't receive confirmation instructions?
+  forgot_password:
+    Forgot your password?
+  change_password:
+    Change your password
+  or:
+    or
+  logout:
+    Log out
+  login:
+    Log in
+  profile:
+    Profile
+  hello:
+    Hello
   main_page:
     Home
   recaptcha_code_error:

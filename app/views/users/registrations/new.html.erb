@@ -9,7 +9,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :password, t(:password) %>
+    <%= f.label :password %>
     <% if @validatable %>
     <em>(<%= @minimum_password_length.to_s + ' ' + t(:characters_minimum)%>)</em>
     <% end %><br />
@@ -17,7 +17,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation, t(:password_confirmation) %><br />
+    <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
   

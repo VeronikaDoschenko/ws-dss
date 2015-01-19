@@ -1,12 +1,42 @@
 ru:
+  confirm_link:
+    Подтвердить регистрацию
+  confirm_email:
+    Вы должны подтвержить регистрацию щелкнув по ссылке ниже.
+  change_password_1:
+    Кто-то запросил ссылку для смены пароля. Вы можете изменить пароль по ссылке приведенной ниже.
+  change_password_2:
+    Если вы не запрашивали смену пароля, не обращайте внимания на это письмо.
+  change_password_3:
+    Ваш пароль не будет меняться до тех пор, пока вы не кликните по вышеуказанной ссылке и не введете новый пароль.
+  confirm_new_password:
+    Подтверждение нового пароля
+  new_password:
+    Новый пароль
+  change_password:
+    Изменение пароля
+  resend_confirmation:
+    Отправка инструкции по подтверждению регистрации
+  send_reset_instructions:
+    Пришлите мне инструкции по сбросу пароля
+  didnt_receive_confirmation:
+    Не получили письмо подтверждения регистрации?
+  forgot_password:
+    Забыли пароль?
+  or:
+    или
+  logout:
+    Выйти
+  login:
+    Войти
+  profile:
+    Профиль
+  hello:
+    Здравствуйте,
   main_page:
     Главная страница 
   recaptcha_code_error:
     Ошибка кода подтверждения. Пожалуйста, введите код еще раз
-  password_confirmation:
-    Подтверждение пароля
-  password:
-    Пароль
   characters_minimum:
     минимальное количество символов
   sign_up:
@@ -196,6 +226,14 @@ ru:
       create: Создать %{model}
       submit: Сохранить %{model}
       update: Сохранить %{model}
+    label:
+      user:
+        password:
+          Пароль
+        remember_me:
+          Запомнить меня
+        password_confirmation:
+          Подтверждение пароля
   number:
     currency:
       format:

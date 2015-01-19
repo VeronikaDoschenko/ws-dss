@@ -13,9 +13,9 @@
   <p class="alert"><%= alert %></p>
 <% else %>
   <p>
-  <%= link_to_unless I18n.locale == :ru, "Русский", locale: :ru %>
+  <%= link_to_unless I18n.locale == :ru, "Русский", url_for(params.merge(locale: :ru)) %>
   |
-  <%= link_to_unless I18n.locale == :en, "English", locale: :en %>
+  <%= link_to_unless I18n.locale == :en, "English", url_for(params.merge(locale: :en)) %>
   </p>
 <% end %>
 
@@ -23,11 +23,11 @@
   
 <span><%= link_to t(:main_page), root_url %></span>&nbsp;&nbsp;&nbsp;&nbsp
 <% if user_signed_in? %>
-    <span>Здравствуйте, <%= current_user.email %></span>&nbsp;&nbsp;
-    <%= link_to 'Профиль', user_root_url %>&nbsp;&nbsp;
-    <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+    <span><%= t(:hello) + ' ' + current_user.email %></span>&nbsp;&nbsp;
+    <%= link_to t(:profile), user_root_url %>&nbsp;&nbsp;
+    <%= link_to t(:logout), destroy_user_session_path, :method => :delete %>
 <% else %>
-    <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
+    <%= link_to( t(:login), new_user_session_path) + ' ' + t(:or) + ' ' + link_to( t(:sign_up), new_user_registration_path) %>
 <% end %>
 
 </p>
