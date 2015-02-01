@@ -4,5 +4,18 @@
     <td><b><%= t(:your_token) %>:</b></td><td><%= current_user.authentication_token %></td> 
   </tr>
 </table>
+
+<p>Реализованные в ws-dss методы:</p>
+<table border="1">
+  <tr>
+    <th>Метод</th><th>Описание</th><th></th>
+  </tr>
+  <% @ws_methods.each do |ws| %>
+  <tr>
+    <td><%= ws.name%></td><td></td><td><%= link_to "Проверить", person_test_url(:method_id => ws.id) %></td>
+  </tr>
+  <% end %>
+</table>
+
   
 

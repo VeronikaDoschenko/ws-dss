@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'persons/profile', as: 'user_root'
-  
+  get 'persons/test', as: 'person_test'
   devise_for :users, controllers: { sessions: "users/sessions",
                                     registrations: "users/registrations",
                                     confirmations: "users/confirmations",
