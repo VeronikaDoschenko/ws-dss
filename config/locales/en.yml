@@ -78,3 +78,12 @@ en:
     All methods are available for free through restful api.
   copyright:
     © Copyright 2015 Vladimir Sudakov, Release 1
+  helpers:
+    label:
+      user:
+        password:
+          Password
+        remember_me:
+          Remember me
+        password_confirmation:
+          Password Confirmation
