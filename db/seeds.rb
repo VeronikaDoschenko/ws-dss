@@ -11,13 +11,13 @@ code = <<-EOS
     # Author: Vladimir Sudakov (c) 2015
     
     require 'json'
-    
+    my_data = $stdin.read
     puts "-------------------------------------------------------------"
     puts "Input Data:"
-    puts $input_data
+    puts my_data
     puts
     
-    h = JSON.parse($input_data)
+    h = JSON.parse(my_data)
     
     puts "-------------------------------------------------------------"
     puts "Everythin is OK!"
@@ -27,7 +27,7 @@ EOS
 test_input = <<-EOS
     {  
     "criterions": [
-      {"name":"Научный эффект", "scale": ["н/у",	"неуд",	"уд",	"хор", "отл"], "rank": 0.19697},
+      {"name":"Научный эффект", "scale": ["н/у", "неуд",	"уд",	"хор", "отл"], "rank": 0.19697},
       {"name":"Прикладной эффект", "scale": [98,	155, 173, 256], "rank": 0.19697, "min":0}
       ]
     }
@@ -38,14 +38,15 @@ test_output = <<-EOS
     Input Data:
     {  
     "criterions": [
-      {"name":"Научный эффект КЭ", "scale": ["н/у",	"неуд",	"уд",	"хор", "отл"], "rank": 0.19697},
-      {"name":"Прикладной эффект КЭ", "scale": [98,	155, 173, 256], "rank": 0.19697, "min":0}
+      {"name":"Научный эффект", "scale": ["н/у",	"неуд",	"уд",	"хор", "отл"], "rank": 0.19697},
+      {"name":"Прикладной эффект", "scale": [98,	155, 173, 256], "rank": 0.19697, "min":0}
       ]
     }
     
     -------------------------------------------------------------
     Everythin is OK!
-    {"criterions"=>[{"name"=>"Научный эффект КЭ", "scale"=>["н/у", "неуд", "уд", "хор", "отл"], "rank"=>0.19697}, {"name"=>"Прикладной эффект КЭ", "scale"=>[98, 155, 173, 256], "rank"=>0.19697, "min"=>0}]}
+    {"criterions"=>[{"name"=>"Научный эффект", "scale"=>["н/у", "неуд", "уд", "хор", "отл"], "rank"=>0.19697},
+    {"name"=>"Прикладной эффект", "scale"=>[98, 155, 173, 256], "rank"=>0.19697, "min"=>0}]}
 EOS
 
 WsMethod.create({:name => 'DummyMethod', :code => code, :test_input => test_input, :test_output => test_output})
