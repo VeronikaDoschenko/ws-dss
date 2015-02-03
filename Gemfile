@@ -50,3 +50,6 @@ gem 'devise'
 
 gem "recaptcha", :require => "recaptcha/rails"
 
+gem 'royce'
+
+gem 'cancancan'

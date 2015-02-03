@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   before_save :ensure_authentication_token
 
+  royce_roles %w[ user admin ]
 
   def ensure_authentication_token
     self.authentication_token ||= generate_authentication_token
