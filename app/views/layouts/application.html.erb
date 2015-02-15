@@ -58,11 +58,14 @@
   
 <span><%= link_to t(:main_page), root_url %></span>&nbsp;&nbsp;&nbsp;&nbsp
 <% if user_signed_in? %>
-    <span><%= t(:hello) + ' ' + current_user.email %></span>&nbsp;&nbsp;
-    <%= link_to t(:profile), user_root_url %>&nbsp;&nbsp;
-    <%= link_to t(:logout), destroy_user_session_path, :method => :delete %>
+  <span><%= t(:hello) + ' ' + current_user.email %></span>&nbsp;&nbsp;
+  <%= link_to t(:profile), user_root_url %>&nbsp;&nbsp;
+  <% if current_user.admin? %>
+    <%= link_to "Администрирование", admin_url %>&nbsp;&nbsp;
+  <% end %>
+  <%= link_to t(:logout), destroy_user_session_path, :method => :delete %>
 <% else %>
-    <%= link_to( t(:login), new_user_session_path) + ' ' + t(:or) + ' ' + link_to( t(:sign_up), new_user_registration_path) %>
+  <%= link_to( t(:login), new_user_session_path) + ' ' + t(:or) + ' ' + link_to( t(:sign_up), new_user_registration_path) %>
 <% end %>
 
 </p>

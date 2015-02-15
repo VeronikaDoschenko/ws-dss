@@ -1,0 +1,43 @@
+<h1>Список пользователей</h1>
+ 
+<table border="1">
+  <tr>
+    <th>email</th>
+    <th>reset_password_sent_at</th>
+    <th>remember_created_at</th>
+    <th>sign_in_count</th>
+    <th>current_sign_in_at</th>
+    <th>last_sign_in_at</th>
+    <th>current_sign_in_ip</th>
+    <th>last_sign_in_ip</th>
+    <th>created_at</th>
+    <th>updated_at</th>
+    <th>confirmed_at</th>
+    <th>confirmation_sent_at</th>
+    <th>unconfirmed_email</th>
+    <th>authentication_token</th>
+    <th></th>
+    <th></th>
+  </tr>
+ 
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.email %></td>
+    <td><%= user.reset_password_sent_at %></td>
+    <td><%= user.remember_created_at %></td>
+    <td><%= user.sign_in_count %></td>
+    <td><%= user.current_sign_in_at %></td>
+    <td><%= user.last_sign_in_at %></td>
+    <td><%= user.current_sign_in_ip %></td>
+    <td><%= user.last_sign_in_ip %></td>
+    <td><%= user.created_at %></td>
+    <td><%= user.updated_at %></td>
+    <td><%= user.confirmed_at %></td>
+    <td><%= user.confirmation_sent_at %></td>
+    <td><%= user.unconfirmed_email %></td>
+    <td><%= user.authentication_token %></td>
+    <td><%= link_to "Edit", edit_admin_user_path(user) %></td>
+    <td><%= link_to "Remove", admin_user_path(user), method: :delete, data: { confirm: "Are you sure?" } %></td>
+  </tr>
+<% end %>
+</table>

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :users
+  end
+  get 'admin' => 'admin/admin#index'
   get 'persons/profile', as: 'user_root'
   get 'persons/test', as: 'person_test'
   devise_for :users, controllers: { sessions: "users/sessions",
