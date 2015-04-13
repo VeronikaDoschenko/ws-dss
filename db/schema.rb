@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203121022) do
+ActiveRecord::Schema.define(version: 20150413091404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "descriptions", force: :cascade do |t|
+    t.string   "descr"
+    t.string   "locale"
+    t.integer  "rec_id"
+    t.string   "rec_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "royce_connector", force: :cascade do |t|
     t.integer  "roleable_id",   null: false

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  descr: MyString
+  locale: MyString
+  rec_id: 1
+  rec_type: MyString
+
+two:
+  descr: MyString
+  locale: MyString
+  rec_id: 1
+  rec_type: MyString

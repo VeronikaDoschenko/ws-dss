@@ -12,7 +12,8 @@
   </tr>
   <% @ws_methods.each do |ws| %>
   <tr>
-    <td><%= ws.name%></td><td></td><td><%= link_to "Проверить", person_test_url(:method_id => ws.id) %></td>
+    <% d = ws.descriptions.where(:locale => I18n.locale).first %>
+    <td><%= ws.name %></td><td><%= d ? d.descr : "" %></td><td><%= link_to "Проверить", person_test_url(:method_id => ws.id) %></td>
   </tr>
   <% end %>
 </table>
