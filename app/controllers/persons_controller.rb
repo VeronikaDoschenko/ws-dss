@@ -15,23 +15,22 @@ class PersonsController < ApplicationController
           $stdout = StringIO.new
           #{ws_method.code}
           $stdout.string
+        rescue Exception => msg   
+          $stdout.string + "\n" + msg.to_s 
         ensure
           $stdin  = STDIN
           $stdout = STDOUT
         end
       WS_EOS
-      s = eval(exec_val)
+      s = eval(exec_val)  
       if s.gsub(/\s/,'') == ws_method.test_output.gsub(/\s/,'')
         s += "\nРезультаты тестового запуска совпали с ожидаемыми!"
       else
-        s += "\n#{s.gsub(/\s/,'')}"
-        s += "\n#{ws_method.test_output.gsub(/\s/,'')}"
         s += "\nРезультаты тестового запуска не совпали с ожидаемыми!"
       end
-      s.gsub!(/\n/,"<br/>\n")
-      render text: s
+      render plain: s
     else
-      render text: "failure"
+      render plain: "failure"
     end
   end
 end

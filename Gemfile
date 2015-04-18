@@ -53,3 +53,5 @@ gem "recaptcha", :require => "recaptcha/rails"
 gem 'royce'
 
 gem 'cancancan'
+
+gem 'nilify_blanks'

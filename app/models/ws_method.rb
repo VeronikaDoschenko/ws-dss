@@ -1,4 +1,6 @@
 class WsMethod < ActiveRecord::Base
+  nilify_blanks
+  
   has_many :descriptions, as: :rec, dependent: :destroy
 
   def descr
