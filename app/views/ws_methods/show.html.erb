@@ -1,4 +1,30 @@
-<p id="notice"><%= notice %></p>
-
+<div class="field">
+  Название:<br/>
+  <%= content_tag('pre', @ws_method.name) %>
+</div>
+<div class="field">
+  Описание:<br/>
+  <%= content_tag('pre', @ws_method.descr) %>
+</div>
+<div class="field">
+  Код метода:<br/>
+  <%= content_tag('pre', @ws_method.code) %>
+</div>
+<div class="field">
+  Пример вх. данных:<br/>
+  <%= content_tag('pre', @ws_method.test_input) %>
+</div>
+<div class="field">
+  Пример вых. данных:<br/>
+  <%= content_tag('pre', @ws_method.test_output) %>
+</div>
+<div class="field">
+  Создан:<br/>
+  <%= content_tag('pre', @ws_method.created_at) %>
+</div>
+<div class="field">
+  Изменен:<br/>
+  <%= content_tag('pre', @ws_method.updated_at) %>
+</div>
 <%= link_to 'Edit', edit_ws_method_path(@ws_method) %> |
 <%= link_to 'Back', ws_methods_path %>

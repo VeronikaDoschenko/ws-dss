@@ -1,6 +1,6 @@
 class PersonsController < ApplicationController
   def profile
-    @ws_methods = WsMethod.all
+    @ws_methods = WsMethod.where("test_input is not null and test_output is not null and code is not null")
   end
   def test
     id = params[:method_id]

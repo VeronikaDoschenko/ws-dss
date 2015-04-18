@@ -29,7 +29,7 @@ class WsMethodsController < ApplicationController
 
     respond_to do |format|
       if @ws_method.save
-        format.html { redirect_to @ws_method, notice: 'Ws method was successfully created.' }
+        format.html { redirect_to @ws_method, notice: 'Метод успешно создан.' }
         format.json { render :show, status: :created, location: @ws_method }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class WsMethodsController < ApplicationController
   def update
     respond_to do |format|
       if @ws_method.update(ws_method_params)
-        format.html { redirect_to @ws_method, notice: 'Ws method was successfully updated.' }
+        format.html { redirect_to @ws_method, notice: 'Метод успешно обновлен.' }
         format.json { render :show, status: :ok, location: @ws_method }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class WsMethodsController < ApplicationController
   def destroy
     @ws_method.destroy
     respond_to do |format|
-      format.html { redirect_to ws_methods_url, notice: 'Ws method was successfully destroyed.' }
+      format.html { redirect_to ws_methods_url, notice: 'Метод успешно удален.' }
       format.json { head :no_content }
     end
   end
@@ -70,6 +70,6 @@ class WsMethodsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ws_method_params
-      params[:ws_method]
+      params[:ws_method].permit(:name, :descr, :code, :test_input, :test_output)
     end
 end

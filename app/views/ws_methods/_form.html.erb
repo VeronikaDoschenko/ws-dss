@@ -11,7 +11,32 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= f.label :name, "Название" %><br/>
+    <%= f.text_field :name, autofocus: true, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :descr, "Описание" %><br/>
+    <%= f.text_area :descr, autocomplete: "off", cols: 100, rows: 4 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :code, "Код метода" %><br/>
+    <%= f.text_area :code, autocomplete: "off", cols: 100, rows: 7 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :test_input, "Пример вх. данных" %><br/>
+    <%= f.text_area :test_input, autocomplete: "off", cols: 100, rows: 7 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :test_output, "Пример вых. данных" %><br/>
+    <%= f.text_area :test_output, autocomplete: "off", cols: 100, rows: 7 %>
+  </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Сохранить" %>
   </div>
 <% end %>

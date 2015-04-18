@@ -12,7 +12,9 @@
   </tr>
   <% @ws_methods.each do |ws| %>
   <tr>
-    <td><%= ws.name %></td><td><%= ws.descr %></td><td><%= link_to "Проверить", person_test_url(:method_id => ws.id) %></td>
+    <td><%= ws.name %></td>
+    <td><%= ws.descr %></td>
+    <td><%= link_to "Проверить", person_test_url(:method_id => ws) %></td>
   </tr>
   <% end %>
 </table>
