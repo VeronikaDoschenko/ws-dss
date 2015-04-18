@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Ws Methods</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Метод</th><th>Описание</th><th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ws_methods.each do |ws_method| %>
+      <tr>
+        <td><%= ws_method.name %></td>
+        <td><%= ws_method.descr %></td>
+        <td><%= link_to 'Show', ws_method %></td>
+        <td><%= link_to 'Edit', edit_ws_method_path(ws_method) %></td>
+        <td><%= link_to 'Destroy', ws_method, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ws method', new_ws_method_path %>
