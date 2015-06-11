@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :users
   end
   get 'admin' => 'admin/admin#index'
+  get 'admin/formula_tester' => 'admin/admin#formula_tester'
   get 'persons/profile', as: 'user_root'
   get 'persons/test', as: 'person_test'
   devise_for :users, controllers: { sessions: "users/sessions",
