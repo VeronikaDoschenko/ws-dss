@@ -10,7 +10,9 @@ Rails.application.routes.draw do
                                     registrations: "users/registrations",
                                     confirmations: "users/confirmations",
                                     passwords: "users/passwords",
-                                    unlocks: "users/unlocks"}
+                                    unlocks: "users/unlocks",
+                                    sign_out:        'users/sessions#destroy'
+                                  }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -25,8 +27,8 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   #  resource route (maps HTTP verbs to controller actions automatically):
-     resources :ws_methods
-
+    resources :ws_methods
+    resources :ws_jobs
   # Example resource route with options:
   #   resources :products do
   #     member do

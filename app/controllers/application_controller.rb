@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   before_action :set_locale
-  before_filter :authenticate_user_from_token!, except: [:index]
+  before_filter :authenticate_user_from_token!
   # This is Devise's authentication
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!
  
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale

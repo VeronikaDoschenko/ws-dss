@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Ws Jobs</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Метод</th><th>Входные данные</th><th>Результат</th><th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ws_jobs.each do |ws_job| %>
+      <tr>
+        <td><%= ws_job.ws_method.name %></td>
+        <td><%= ws_job.input %></td>
+        <td><%= ws_job.output %></td>
+        <td><%= link_to 'Show', ws_job %></td>
+        <td><%= link_to 'Edit', edit_ws_job_path(ws_job) %></td>
+        <td><%= link_to 'Destroy', ws_job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ws job', new_ws_job_path %>

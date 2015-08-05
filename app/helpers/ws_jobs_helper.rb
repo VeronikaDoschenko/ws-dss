@@ -1,0 +1,2 @@
+module WsJobsHelper
+end

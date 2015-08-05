@@ -60,6 +60,7 @@
 <% if user_signed_in? %>
   <span><%= t(:hello) + ' ' + current_user.email %></span>&nbsp;&nbsp;
   <%= link_to t(:profile), user_root_url %>&nbsp;&nbsp;
+  <%= link_to "Задания", ws_jobs_url %>&nbsp;&nbsp;
   <% if current_user.admin? %>
     <%= link_to "Администрирование", admin_url %>&nbsp;&nbsp;
   <% end %>
