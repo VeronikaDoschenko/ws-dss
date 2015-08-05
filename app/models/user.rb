@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable, 
          :recoverable, :rememberable, :trackable, :validatable
          
+  has_many :ws_jobs, dependent: :destroy
 
   before_save :ensure_authentication_token
 
