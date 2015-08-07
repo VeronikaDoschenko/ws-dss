@@ -1,4 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="field">
+  Метод:<br/>
+  <%= content_tag('pre', @ws_job.ws_method.name) %>
+</div>
+<div class="field">
+  Входные данные:<br/>
+  <%= content_tag('pre', @ws_job.input) %>
+</div>
+<div class="field">
+  Выходные данные:<br/>
+  <%= content_tag('pre', @ws_job.output) %>
+</div>
+<div class="field">
+  Создан:<br/>
+  <%= content_tag('pre', @ws_job.created_at) %>
+</div>
+<div class="field">
+  Изменен:<br/>
+  <%= content_tag('pre', @ws_job.updated_at) %>
+</div>
 
-<%= link_to 'Edit', edit_ws_job_path(@ws_job) %> |
-<%= link_to 'Back', ws_jobs_path %>
+<%= link_to 'Редактировать', edit_ws_job_path(@ws_job) %> |
+<%= link_to 'Назад', ws_jobs_path %>

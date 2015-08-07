@@ -26,10 +26,10 @@ class WsJobsController < ApplicationController
   # POST /ws_jobs.json
   def create
     @ws_job = WsJob.new(ws_job_params)
-
+    @ws_job.user = current_user
     respond_to do |format|
       if @ws_job.save
-        format.html { redirect_to @ws_job, notice: 'Ws job was successfully created.' }
+        format.html { redirect_to @ws_job, notice: 'Задача успешно создана' }
         format.json { render :show, status: :created, location: @ws_job }
       else
         format.html { render :new }
@@ -42,8 +42,11 @@ class WsJobsController < ApplicationController
   # PATCH/PUT /ws_jobs/1.json
   def update
     respond_to do |format|
-      if @ws_job.update(ws_job_params)
-        format.html { redirect_to @ws_job, notice: 'Ws job was successfully updated.' }
+      if not @ws_job.output.nil?
+        format.html { render :edit, notice: 'Задача с результатами не может быть отредактирована' }
+        format.json { render json: @ws_job.errors, status: :unprocessable_entity }
+      elsif @ws_job.update(ws_job_params)
+        format.html { redirect_to @ws_job, notice: 'Задача успешно обновлена' }
         format.json { render :show, status: :ok, location: @ws_job }
       else
         format.html { render :edit }
@@ -55,10 +58,17 @@ class WsJobsController < ApplicationController
   # DELETE /ws_jobs/1
   # DELETE /ws_jobs/1.json
   def destroy
-    @ws_job.destroy
-    respond_to do |format|
-      format.html { redirect_to ws_jobs_url, notice: 'Ws job was successfully destroyed.' }
-      format.json { head :no_content }
+    if @ws_job.output.nil? 
+      @ws_job.destroy
+      respond_to do |format|
+        format.html { redirect_to ws_jobs_url, notice: 'Задача успешно удалена' }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to ws_jobs_url, notice: 'Задача с результатами не может быть удалена' }
+        format.json { render json: @ws_job.errors, status: :unprocessable_entity }
+      end
     end
   end
 

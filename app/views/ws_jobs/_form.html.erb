@@ -1,7 +1,7 @@
 <%= form_for(@ws_job) do |f| %>
   <% if @ws_job.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@ws_job.errors.count, "error") %> prohibited this ws_job from being saved:</h2>
+      <h2><%= pluralize(@ws_job.errors.count, "error") %> Не возможно сохранение данной задачи:</h2>
 
       <ul>
       <% @ws_job.errors.full_messages.each do |message| %>
@@ -11,7 +11,17 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= f.label :ws_method_id, "Метод" %><br/>
+    <%= f.collection_select(:ws_method_id, WsMethod.all, :id, :name) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :input, "Входные данные" %><br/>
+    <%= f.text_area :input, autocomplete: "off", cols: 100, rows: 30 %>
+  </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Сохранить" %>
   </div>
 <% end %>
