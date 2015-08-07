@@ -28,12 +28,17 @@ class WsJobsController < ApplicationController
     @ws_job = WsJob.new(ws_job_params)
     @ws_job.user = current_user
     respond_to do |format|
-      if @ws_job.save
-        format.html { redirect_to @ws_job, notice: 'Задача успешно создана' }
-        format.json { render :show, status: :created, location: @ws_job }
+      if current_user.ws_jobs.size < current_user.numjobs or current_user.admin?
+        if @ws_job.save
+          @ws_job.do_job
+          format.html { redirect_to @ws_job, notice: 'Задача успешно создана' }
+          format.json { render :show, status: :created, location: @ws_job }
+        else
+          format.html { render :new }
+          format.json { render json: @ws_job.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :new }
-        format.json { render json: @ws_job.errors, status: :unprocessable_entity }
+        format.html { render :new, notice: "Превышен лимит на число задач #{current_user.numjobs}" }
       end
     end
   end
@@ -42,10 +47,8 @@ class WsJobsController < ApplicationController
   # PATCH/PUT /ws_jobs/1.json
   def update
     respond_to do |format|
-      if not @ws_job.output.nil?
-        format.html { render :edit, notice: 'Задача с результатами не может быть отредактирована' }
-        format.json { render json: @ws_job.errors, status: :unprocessable_entity }
-      elsif @ws_job.update(ws_job_params)
+      if @ws_job.update(ws_job_params)
+        @ws_job.do_job
         format.html { redirect_to @ws_job, notice: 'Задача успешно обновлена' }
         format.json { render :show, status: :ok, location: @ws_job }
       else
@@ -58,18 +61,11 @@ class WsJobsController < ApplicationController
   # DELETE /ws_jobs/1
   # DELETE /ws_jobs/1.json
   def destroy
-    if @ws_job.output.nil? 
       @ws_job.destroy
       respond_to do |format|
         format.html { redirect_to ws_jobs_url, notice: 'Задача успешно удалена' }
         format.json { head :no_content }
       end
-    else
-      respond_to do |format|
-        format.html { redirect_to ws_jobs_url, notice: 'Задача с результатами не может быть удалена' }
-        format.json { render json: @ws_job.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   private
