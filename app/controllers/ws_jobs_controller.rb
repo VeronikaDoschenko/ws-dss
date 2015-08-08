@@ -5,7 +5,7 @@ class WsJobsController < ApplicationController
   # GET /ws_jobs
   # GET /ws_jobs.json
   def index
-    @ws_jobs = current_user ? current_user.ws_jobs : []
+    @ws_jobs = current_user ? current_user.ws_jobs.order('updated_at  desc') : []
   end
 
   # GET /ws_jobs/1
