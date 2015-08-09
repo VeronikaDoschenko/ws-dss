@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150807200637) do
+ActiveRecord::Schema.define(version: 20150809130915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,10 +73,13 @@ ActiveRecord::Schema.define(version: 20150807200637) do
   create_table "ws_jobs", force: :cascade do |t|
     t.text     "input"
     t.text     "output"
-    t.integer  "ws_method_id", null: false
-    t.integer  "user_id",      null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "ws_method_id",             null: false
+    t.integer  "user_id",                  null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "error_code",   default: 0, null: false
+    t.integer  "for_check",    default: 0, null: false
+    t.integer  "do_check",     default: 0, null: false
   end
 
   create_table "ws_methods", force: :cascade do |t|

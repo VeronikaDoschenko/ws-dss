@@ -1,6 +1,8 @@
 <div class="field">
-  Метод:<br/>
-  <%= content_tag('pre', @ws_job.ws_method.name) %>
+  Метод: <%=  @ws_job.ws_method.name %>
+</div>
+<div class="field">
+  Пользователь: <%=  @ws_job.user.email %>
 </div>
 <div class="field">
   Входные данные:<br/>
@@ -10,14 +12,27 @@
   Выходные данные:<br/>
   <%= content_tag('pre', @ws_job.output) %>
 </div>
+
 <div class="field">
-  Создан:<br/>
-  <%= content_tag('pre', @ws_job.created_at) %>
-</div>
-<div class="field">
-  Изменен:<br/>
-  <%= content_tag('pre', @ws_job.updated_at) %>
+  Код проверки: <%= @ws_job.for_check %>/<%= @ws_job.do_check %>
 </div>
 
+<% if @ws_job.error_code!=0 %>
+<div class="field">
+  Код ошибки: <%= @ws_job.error_code %>
+</div>
+<% end %>
+<div class="field">
+  Создан: <%= @ws_job.created_at %>
+</div>
+<div class="field">
+  Изменен: <%=  @ws_job.updated_at %>
+</div>
+<br/>
+<div id="qrcode"></div>
+<script type="text/javascript">
+new QRCode(document.getElementById("qrcode"), "http://www.ws-dss.com/ws_jobs/<%= @ws_job.id %>?do_check=1");
+</script>
+<br/>
 <%= link_to 'Редактировать', edit_ws_job_path(@ws_job) %> |
 <%= link_to 'Назад', ws_jobs_path %>

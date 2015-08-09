@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :ws_method_id, "Метод" %><br/>
-    <%= f.collection_select(:ws_method_id, WsMethod.all, :id, :name) %>
+    <%= f.collection_select(:ws_method_id, WsMethod.where("test_output is not null and code is not null"), :id, :name) %>
   </div>
 
   <div class="field">

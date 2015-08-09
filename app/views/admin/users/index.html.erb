@@ -3,6 +3,7 @@
 <table border="1">
   <tr>
     <th>email</th>
+    <th>jbc</th>
     <th>reset_password_sent_at</th>
     <th>remember_created_at</th>
     <th>sign_in_count</th>
@@ -23,6 +24,7 @@
 <% @users.each do |user| %>
   <tr>
     <td><%= user.email %></td>
+    <td><%= link_to user.ws_jobs.size.to_s, ws_jobs_url(:user_id => user.id)  %></td>
     <td><%= user.reset_password_sent_at %></td>
     <td><%= user.remember_created_at %></td>
     <td><%= user.sign_in_count %></td>

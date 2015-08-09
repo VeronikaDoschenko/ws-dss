@@ -5,12 +5,20 @@ class WsJobsController < ApplicationController
   # GET /ws_jobs
   # GET /ws_jobs.json
   def index
-    @ws_jobs = current_user ? current_user.ws_jobs.order('updated_at  desc') : []
+    if current_user.admin? and params[:user_id]
+      @ws_jobs = WsJob.where(user_id: params[:user_id].to_i).order('updated_at  desc')
+    else
+      @ws_jobs = current_user.ws_jobs.order('updated_at  desc')
+    end
   end
 
   # GET /ws_jobs/1
   # GET /ws_jobs/1.json
   def show
+    if current_user.admin? and params[:do_check] == '1'
+      @ws_job.do_check += 1
+      @ws_job.save
+    end
   end
 
   # GET /ws_jobs/new
@@ -73,10 +81,13 @@ class WsJobsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_ws_job
       @ws_job = WsJob.find(params[:id])
+      if not current_user.admin? and @ws_job.user.id != current_user.id
+        redirect_to ws_jobs_url, notice: 'Нет прав на чужие задачи' 
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ws_job_params
-      params[:ws_job].permit(:ws_method_id, :input)
+      params[:ws_job].permit(:ws_method_id, :input )
     end
 end
