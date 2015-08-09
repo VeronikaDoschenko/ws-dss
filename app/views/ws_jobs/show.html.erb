@@ -1,3 +1,6 @@
+<style type="text/css" media="print">
+.test-page-break-inside {page-break-inside: avoid;}
+</style>
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 </script>
@@ -35,7 +38,7 @@
   Изменен: <%=  @ws_job.updated_at %>
 </div>
 <br/>
-<div id="qrcode"></div>
+<div id="qrcode" class="test-page-break-inside"></div>
 <script type="text/javascript">
 new QRCode(document.getElementById("qrcode"), "http://www.ws-dss.com/ws_jobs/<%= @ws_job.id %>?do_check=1");
 </script>
