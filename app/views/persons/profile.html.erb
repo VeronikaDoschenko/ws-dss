@@ -8,13 +8,12 @@
 <p>Реализованные в ws-dss методы:</p>
 <table border="1">
   <tr>
-    <th>Метод</th><th>Описание</th><th></th>
+    <th>Метод</th><th>Описание</th>
   </tr>
   <% @ws_methods.each do |ws| %>
   <tr>
     <td><%= ws.name %></td>
     <td><%= ws.descr %></td>
-    <td><%= link_to "Проверить", person_test_url(:method_id => ws) %></td>
   </tr>
   <% end %>
 </table>

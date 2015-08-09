@@ -15,10 +15,12 @@
         <td><%= ws_job.ws_method.name %></td>
         <td><%= ws_job.input[0..150] + (ws_job.input.size > 150 ? " ..." : "") %></td>
         <td><%= ws_job.error_code %>/<%= ws_job.for_check %>/<%= ws_job.do_check %></td>
-        <td><%= link_to 'Редактировать', edit_ws_job_path(ws_job) %></td>
-        <td><%= link_to 'Удалить', ws_job, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+        <% if ws_job.do_check==0 or current_user.admin? %>
+          <td><%= link_to 'Редактировать', edit_ws_job_path(ws_job) %></td>
+          <td><%= link_to 'Удалить', ws_job, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+        <% end %>
         <% unless ws_job.output.nil? %>
-          <td colspan="2"><%= link_to 'Показать результат', ws_job %></td>
+          <td><%= link_to 'Показать результат', ws_job %></td>
         <% end %>
       </tr>
     <% end %>

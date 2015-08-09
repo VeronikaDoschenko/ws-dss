@@ -54,26 +54,34 @@ class WsJobsController < ApplicationController
   # PATCH/PUT /ws_jobs/1
   # PATCH/PUT /ws_jobs/1.json
   def update
-    respond_to do |format|
-      if @ws_job.update(ws_job_params)
-        @ws_job.update(output: nil)
-        system "rake ws_dss:process_ws_jobs --trace 2>&1 >> #{Rails.root.join('log',"#{Rails.env}.log")} &"
-        format.html { redirect_to @ws_job, notice: 'Задача успешно обновлена' }
-        format.json { render :show, status: :ok, location: @ws_job }
-      else
-        format.html { render :edit }
-        format.json { render json: @ws_job.errors, status: :unprocessable_entity }
+    if @ws_job.do_check==0 or current_user.admin?
+      respond_to do |format|
+        if @ws_job.update(ws_job_params)
+          @ws_job.update(output: nil)
+          system "rake ws_dss:process_ws_jobs --trace 2>&1 >> #{Rails.root.join('log',"#{Rails.env}.log")} &"
+          format.html { redirect_to @ws_job, notice: 'Задача успешно обновлена' }
+          format.json { render :show, status: :ok, location: @ws_job }
+        else
+          format.html { render :edit }
+          format.json { render json: @ws_job.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to ws_jobs_url, notice: "Изменение задачи заблокировано" 
     end
   end
 
   # DELETE /ws_jobs/1
   # DELETE /ws_jobs/1.json
   def destroy
-      @ws_job.destroy
-      respond_to do |format|
-        format.html { redirect_to ws_jobs_url, notice: 'Задача успешно удалена' }
-        format.json { head :no_content }
+      if @ws_job.do_check==0 or current_user.admin?
+        @ws_job.destroy
+        respond_to do |format|
+          format.html { redirect_to ws_jobs_url, notice: 'Задача успешно удалена' }
+          format.json { head :no_content }
+        end
+      else
+        redirect_to ws_jobs_url, notice: 'Удаление задачи заблокировано' 
       end
   end
 

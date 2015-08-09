@@ -1,3 +1,10 @@
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 <div class="field">
   Метод: <%=  @ws_job.ws_method.name %>
 </div>
@@ -10,7 +17,11 @@
 </div>
 <div class="field">
   Выходные данные:<br/>
-  <%= content_tag('pre', @ws_job.output) %>
+  <% if @ws_job.ws_method.format_output == 'latex' and @ws_job.output %>
+    <%= '$' + @ws_job.output + '$' %>
+  <% else %>
+    <%= content_tag('pre', @ws_job.output) %>
+  <% end %>
 </div>
 
 <div class="field">

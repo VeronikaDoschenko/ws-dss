@@ -11,6 +11,10 @@
   <%= content_tag('pre', @ws_method.code) %>
 </div>
 <div class="field">
+  Формат вывода:<br/>
+  <%= content_tag('pre', @ws_method.format_output) %>
+</div>
+<div class="field">
   Пример вх. данных:<br/>
   <%= content_tag('pre', @ws_method.test_input) %>
 </div>
