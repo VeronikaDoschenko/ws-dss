@@ -25,14 +25,9 @@
 </div>
 
 <div class="field">
-  Код проверки: <%= @ws_job.for_check %>/<%= @ws_job.do_check %>
+  Код ошибки/проверки: <%= @ws_job.error_code %>/<%= @ws_job.for_check %>/<%= @ws_job.do_check %>
 </div>
 
-<% if @ws_job.error_code!=0 %>
-<div class="field">
-  Код ошибки: <%= @ws_job.error_code %>
-</div>
-<% end %>
 <div class="field">
   Создан: <%= @ws_job.created_at %>
 </div>
