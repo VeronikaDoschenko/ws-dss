@@ -48,40 +48,8 @@ namespace :deploy do
       # end
     end
   end
-
-end
-
-namespace :foreman do
-  desc 'Start server'
-  task :start do
-    on roles(:all) do
-      sudo "start #{application}"
-    end
-  end
-
-  desc 'Stop server'
-  task :stop do
-    on roles(:all) do
-      sudo "stop #{application}"
-    end
-  end
-
-  desc 'Restart server'
-  task :restart do
-    on roles(:all) do
-      sudo "restart #{application}"
-    end
-  end
-
-  desc 'Server status'
-  task :status do
-    on roles(:all) do
-      execute "initctl list | grep #{application}"
-    end
-  end
-end
-
-desc 'Setup'
+  
+  desc 'Setup'
   task :setup do
     on roles(:all) do
       #execute "mkdir  #{shared_path}/config/"
@@ -161,6 +129,39 @@ desc 'Setup'
   before :setup, 'deploy:starting'
   before :setup, 'deploy:updating'
   before :setup, 'bundler:install'
+end
+
+namespace :foreman do
+  desc 'Start server'
+  task :start do
+    on roles(:all) do
+      sudo "start #{application}"
+    end
+  end
+
+  desc 'Stop server'
+  task :stop do
+    on roles(:all) do
+      sudo "stop #{application}"
+    end
+  end
+
+  desc 'Restart server'
+  task :restart do
+    on roles(:all) do
+      sudo "restart #{application}"
+    end
+  end
+
+  desc 'Server status'
+  task :status do
+    on roles(:all) do
+      execute "initctl list | grep #{application}"
+    end
+  end
+end
+
+
 
 
 
