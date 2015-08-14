@@ -126,7 +126,7 @@ namespace :deploy do
       foreman_temp = "/var/www/tmp/foreman"
       execute  "mkdir -p #{foreman_temp}"
       # Создаем папку current для того, чтобы foreman создавал upstart файлы с правильными путями
-      execute "ln -s #{release_path} #{current_path}"
+      execute "ln -s releases/20150814145239 #{current_path}"
 
       within current_path do
         execute "cd #{current_path}"
