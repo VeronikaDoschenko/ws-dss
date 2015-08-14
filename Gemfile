@@ -55,3 +55,10 @@ gem 'royce'
 gem 'cancancan'
 
 gem 'nilify_blanks'
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
+end

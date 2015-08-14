@@ -1,1 +1,1 @@
-web: bundle exec unicorn -p $PORT -c ./config/unicorn.rb
+web: bundle exec unicorn_rails -c /var/www/apps/ws-dss/current/config/unicorn.rb -E production 
