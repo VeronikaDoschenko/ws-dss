@@ -38,6 +38,36 @@ set :rvm_ruby_version, '2.2.2p95'
 
 set :deploy_to, '/var/www/apps/ws-dss'
 
+namespace :foreman do
+  desc 'Start server'
+  task :start do
+    on roles(:all) do
+      sudo "start #{application}"
+    end
+  end
+
+  desc 'Stop server'
+  task :stop do
+    on roles(:all) do
+      sudo "stop #{application}"
+    end
+  end
+
+  desc 'Restart server'
+  task :restart do
+    on roles(:all) do
+      sudo "restart #{application}"
+    end
+  end
+
+  desc 'Server status'
+  task :status do
+    on roles(:all) do
+      execute "initctl list | grep #{application}"
+    end
+  end
+end
+
 namespace :deploy do
 
   after :restart, :clear_cache do
@@ -131,35 +161,7 @@ namespace :deploy do
   before :setup, 'bundler:install'
 end
 
-namespace :foreman do
-  desc 'Start server'
-  task :start do
-    on roles(:all) do
-      sudo "start #{application}"
-    end
-  end
 
-  desc 'Stop server'
-  task :stop do
-    on roles(:all) do
-      sudo "stop #{application}"
-    end
-  end
-
-  desc 'Restart server'
-  task :restart do
-    on roles(:all) do
-      sudo "restart #{application}"
-    end
-  end
-
-  desc 'Server status'
-  task :status do
-    on roles(:all) do
-      execute "initctl list | grep #{application}"
-    end
-  end
-end
 
 
 
