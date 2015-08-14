@@ -8,7 +8,7 @@ set :repo_url, 'git@github.com:sudakov/ws-dss.git'
 
 application = 'ws-dss'
 set :rvm_type, :user
-set :rvm_ruby_version, '2.2.2p95'
+set :rvm_ruby_version, '2.2.2'
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, '/var/www/my_app_name'
@@ -83,9 +83,9 @@ namespace :deploy do
   task :setup do
     on roles(:all) do
       #execute "mkdir  #{shared_path}/config/"
-      execute "mkdir  /var/www/apps/#{application}/run/"
-      execute "mkdir  /var/www/apps/#{application}/log/"
-      execute "mkdir  /var/www/apps/#{application}/socket/"
+      #execute "mkdir  /var/www/apps/#{application}/run/"
+      #execute "mkdir  /var/www/apps/#{application}/log/"
+      #execute "mkdir  /var/www/apps/#{application}/socket/"
       #execute "mkdir #{shared_path}/system"
       sudo "ln -s /var/log/upstart /var/www/log/upstart"
 
@@ -145,26 +145,19 @@ namespace :deploy do
     end
   end
 
-  after :finishing, 'deploy:cleanup'
-  after :finishing, 'deploy:restart'
+#  after :finishing, 'deploy:cleanup'
+#  after :finishing, 'deploy:restart'
 
-  after :updating, 'deploy:symlink'
+#  after :updating, 'deploy:symlink'
 
-  after :setup, 'deploy:foreman_init'
+#  after :setup, 'deploy:foreman_init'
 
-  after :foreman_init, 'foreman:start'
+#  after :foreman_init, 'foreman:start'
 
-  before :foreman_init, 'rvm:hook'
+#  before :foreman_init, 'rvm:hook'
 
   before :setup, 'deploy:starting'
   before :setup, 'deploy:updating'
   before :setup, 'bundler:install'
 end
-
-
-
-
-
-
-
 

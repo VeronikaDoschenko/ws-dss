@@ -22,9 +22,8 @@ test:
 
 production:
   <<: *default
-  database: ws-dss_production
-  username: ws-dss
-  password: <%= ENV['WS-DSS_DATABASE_PASSWORD'] %>
+  database: wsdss_production
+
 
 
   
