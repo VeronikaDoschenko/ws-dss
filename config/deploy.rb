@@ -1,6 +1,11 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
+puts "toto"
+set :user, "deployer"
+set :deploy_user, "deployer"
+set :use_sudo, true
+
 set :application, 'ws-dss'
 set :repo_url, 'git@github.com:sudakov/ws-dss.git'
 # Default branch is :master
