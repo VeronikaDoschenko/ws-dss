@@ -20,10 +20,14 @@
 </div>
 <div class="field">
   Выходные данные:<br/>
-  <% if @ws_job.ws_method.format_output == 'latex' and @ws_job.output %>
-    <%= '$' + @ws_job.output + '$' %>
+  <% if @ws_job.output %>
+    <% if @ws_job.ws_method.format_output == 'latex' and @ws_job.output %>
+      <%= '$' + @ws_job.output + '$' %>
+    <% else %>
+      <%= content_tag('pre', @ws_job.output) %>
+    <% end %>
   <% else %>
-    <%= content_tag('pre', @ws_job.output) %>
+    <p>Результат пока не готов, обновите данную страницу через некоторое время....</p>
   <% end %>
 </div>
 
