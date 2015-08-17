@@ -1,9 +1,19 @@
+<script type="text/javascript">
+function toggle(el, el2) {
+  el.style.display = (el.style.display == 'none') ? '' : 'none';
+  if (el2.firstChild.data== 'Скрыть')
+    el2.firstChild.data = 'Показать'
+  else
+    el2.firstChild.data = 'Скрыть';
+}
+</script>
 <p><%= t(:welcome_profile) %></p>
-<table>
-  <tr>
-    <td><b><%= t(:your_token) %>:</b></td><td><%= current_user.authentication_token %></td> 
-  </tr>
-</table>
+
+<p>
+    <%= t(:your_token) %>:
+    <span id="my_token" style="display:none"> <%= current_user.authentication_token %> </span>
+    <button onclick="toggle(document.getElementById('my_token'), this);">Показать</button>
+</p>
 
 <p>Доступные методы:</p>
 <table border="1">
