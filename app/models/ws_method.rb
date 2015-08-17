@@ -19,4 +19,27 @@ class WsMethod < ActiveRecord::Base
     return x
   end
   
+  def do_calc (m_input)
+    error_code = 0
+    for_check = 0
+    exec_val = <<-WS_EOS
+      begin
+        ws_input_data = <<-WS_DATA
+          #{m_input}
+        WS_DATA
+        $stdin  = StringIO.new(ws_input_data)
+        $stdout = StringIO.new
+        #{self.code}
+        $stdout.string
+      rescue Exception => msg
+        error_code = 1
+        $stdout.string + "\n" + msg.to_s 
+      ensure
+        $stdin  = STDIN
+        $stdout = STDOUT
+      end
+    WS_EOS
+    s = eval(exec_val)
+    return [s, error_code, for_check]
+  end
 end

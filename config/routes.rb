@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'admin' => 'admin/admin#index'
   get 'admin/formula_tester' => 'admin/admin#formula_tester'
   get 'persons/profile', as: 'user_root'
-  get 'persons/test', as: 'person_test'
+  get 'persons/:id/test_output' => 'persons#test_output', as: :person_test_output
   devise_for :users, controllers: { sessions: "users/sessions",
                                     registrations: "users/registrations",
                                     confirmations: "users/confirmations",
@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   #  resource route (maps HTTP verbs to controller actions automatically):
     resources :ws_methods
+    get 'ws_methods/:id/test' => 'ws_methods#test', as: :test_ws_method
     resources :ws_jobs
   # Example resource route with options:
   #   resources :products do

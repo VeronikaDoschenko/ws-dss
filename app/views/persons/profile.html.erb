@@ -8,12 +8,13 @@
 <p>Доступные методы:</p>
 <table border="1">
   <tr>
-    <th>Метод</th><th>Описание</th>
+    <th>Метод</th><th>Описание</th><th>Пример вх. данных</th>
   </tr>
   <% @ws_methods.each do |ws| %>
   <tr>
     <td><%= ws.name %></td>
     <td><%= ws.descr %></td>
+    <td><%= link_to 'Показать', person_test_output_url(ws.id) %></td>
   </tr>
   <% end %>
 </table>

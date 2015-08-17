@@ -1,6 +1,6 @@
 class WsMethodsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_ws_method, only: [:show, :edit, :update, :destroy]
+  before_action :set_ws_method, only: [:show, :edit, :update, :destroy, :test]
 
   # GET /ws_methods
   # GET /ws_methods.json
@@ -13,6 +13,19 @@ class WsMethodsController < ApplicationController
   def show
   end
 
+  def test
+    a = @ws_method.do_calc(@ws_method.test_input)
+    s = a[0]
+    error_code = a[1]
+    for_check = a[2]
+    if s.gsub(/\s/,'') == @ws_method.test_output.gsub(/\s/,'')
+        s += "\nРезультаты тестового запуска совпали с ожидаемыми! #{error_code} #{for_check}"
+    else
+        s += "\nРезультаты тестового запуска не совпали с ожидаемыми! #{error_code} #{for_check}"
+    end
+    render plain: s
+  end
+  
   # GET /ws_methods/new
   def new
     @ws_method = WsMethod.new
