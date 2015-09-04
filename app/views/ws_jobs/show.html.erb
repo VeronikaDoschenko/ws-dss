@@ -2,12 +2,24 @@
 .test-page-break-inside {page-break-inside: avoid;}
 </style>
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+    "HTML-CSS": {
+      linebreaks: { automatic: true, width: "container" }          
+    }
+  });
 </script>
 <script type="text/javascript"
   src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-
+<style>
+.col {
+    background: #f0f0f0; 
+    width: 230px; 
+    padding: 10px; 
+    font-size: 1.5em; 
+    word-wrap: break-word; 
+}  
+</style>
 <div class="field">
   Метод: <%=  @ws_job.ws_method.name %>
 </div>
