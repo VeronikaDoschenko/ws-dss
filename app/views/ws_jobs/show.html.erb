@@ -33,8 +33,10 @@
 <div class="field">
   Выходные данные:<br/>
   <% if @ws_job.output %>
-    <% if @ws_job.ws_method.format_output == 'latex' and @ws_job.output %>
-      <%= '$' + @ws_job.output + '$' %>
+    <% if @ws_job.ws_method.format_output == 'latex' %>
+      <%= ('$' + @ws_job.output + '$').html_safe %>
+    <% elsif @ws_job.ws_method.format_output == 'html' %>
+      <%= @ws_job.output.html_safe %>
     <% else %>
       <%= content_tag('pre', @ws_job.output) %>
     <% end %>
