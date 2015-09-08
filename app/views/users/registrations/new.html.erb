@@ -20,8 +20,7 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
-  
-  <%= recaptcha_tags %>
+  <%= recaptcha_tags :display => { :theme => "clean" } %>
   
   <div class="actions">
     <%= f.submit t(:sign_up) %>
