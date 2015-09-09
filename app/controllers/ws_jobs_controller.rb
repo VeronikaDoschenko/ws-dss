@@ -61,7 +61,7 @@ class WsJobsController < ApplicationController
         if @ws_job.update(ws_job_params)
           @ws_job.update(output: nil)
           system "rake ws_dss:process_ws_jobs --trace 2>&1 >> #{Rails.root.join('log',"#{Rails.env}.log")} &"
-          sleep 2
+          sleep 3
           @ws_job.reload
           format.html { redirect_to @ws_job, notice: 'Задача успешно обновлена' }
           format.json { render :show, status: :ok, location: @ws_job }

@@ -48,7 +48,11 @@ class WsMethod < ActiveRecord::Base
     end
     return x
   end
-  
+
+  def self.ask_working
+    where("test_output is not null and code is not null").order("lower(name)")
+  end
+
   def do_calc (m_input)
     error_code = 0
     for_check = 0
