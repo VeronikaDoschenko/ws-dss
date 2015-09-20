@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906192325) do
+ActiveRecord::Schema.define(version: 20150920113136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,20 @@ ActiveRecord::Schema.define(version: 20150906192325) do
   end
 
   add_index "royce_role", ["name"], name: "index_royce_role_on_name", using: :btree
+
+  create_table "student_groups", force: :cascade do |t|
+    t.string  "name"
+    t.integer "year"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string  "name"
+    t.string  "mname"
+    t.string  "lname"
+    t.string  "serial"
+    t.string  "email"
+    t.integer "student_group_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -85,6 +99,7 @@ ActiveRecord::Schema.define(version: 20150906192325) do
 # Could not dump table "ws_methods" because of following StandardError
 #   Unknown type 'format_type' for column 'format_output'
 
+  add_foreign_key "students", "student_groups"
   add_foreign_key "ws_jobs", "users"
   add_foreign_key "ws_jobs", "ws_methods"
 end
