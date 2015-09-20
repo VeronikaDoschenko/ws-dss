@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150920113136) do
+ActiveRecord::Schema.define(version: 20150920183627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,17 +45,21 @@ ActiveRecord::Schema.define(version: 20150920113136) do
   add_index "royce_role", ["name"], name: "index_royce_role_on_name", using: :btree
 
   create_table "student_groups", force: :cascade do |t|
-    t.string  "name"
-    t.integer "year"
+    t.string   "name"
+    t.integer  "year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "students", force: :cascade do |t|
-    t.string  "name"
-    t.string  "mname"
-    t.string  "lname"
-    t.string  "serial"
-    t.string  "email"
-    t.integer "student_group_id"
+    t.string   "name"
+    t.string   "mname"
+    t.string   "lname"
+    t.string   "serial"
+    t.string   "email"
+    t.integer  "student_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|

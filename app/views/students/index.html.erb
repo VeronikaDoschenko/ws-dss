@@ -1,14 +1,12 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Students</h1>
+<h1>Список студентов</h1>
 
 <table border="1">
   <thead>
     <tr>
       <th>Группа</th>    
-      <th>Name</th>
-      <th>Lname</th>
-      <th>Serial</th>
+      <th>Имя</th>
+      <th>Фамилия</th>
+      <th>№</th>
       <th>Email</th>
       <th>Число задач</th>
       <th>Решено верно</th>
@@ -22,20 +20,19 @@
         <td><%= ((student.student_group)?(student.student_group.name):'') %></td>
         <td><%= student.name %></td>
         <td><%= student.lname %></td>
-        <td><%= student.serial %></td>
+        <td align="right"><%= student.serial %></td>
         <td><%= student.email %></td>
         <% u = student.get_user %>
         <% if u %>
           <td><%= link_to u.ws_jobs.size.to_s, ws_jobs_url(:user_id => u.id)  %></td>
-          <td><%= u.ws_jobs.select('DISTINCT ws_method_id').where("error_code=0 and for_check=1").to_a.size %></td>
-
+          <td><%= u.get_sloved %></td>
         <% else %>
           <td></td>
           <td></td>
         <% end %>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Показать', student %></td>
+        <td><%= link_to 'Редактировать', edit_student_path(student) %></td>
+        <td><%= link_to 'Удалить', student, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -43,7 +40,7 @@
 
 <br>
 
-<%= link_to 'New Student', new_student_path %>
+<%= link_to 'Новый студент', new_student_path %>
 
 
 <%= form_tag({controller: "students", action: "import"}, method: "post") do %>
@@ -52,7 +49,7 @@
     <%= text_area_tag(:input, "", size: "80x3") %>
   </div>
   <div class="actions">
-    <%= submit_tag "Сохранить" %>
+    <%= submit_tag "Импортировать" %>
   </div>
 <% end %>
 

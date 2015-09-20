@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
     self.authentication_token ||= generate_authentication_token
   end
 
+  def get_sloved
+    ws_jobs.where("error_code=0 and for_check=1").distinct.count(:ws_method_id)
+  end
+
   private
 
   def generate_authentication_token

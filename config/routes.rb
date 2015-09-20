@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :student_groups
+  resources :student_groups
   resources :students
   post 'students/import' => 'students#import'
   namespace :admin do

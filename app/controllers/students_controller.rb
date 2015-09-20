@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.order("(select name from student_groups where id = student_group_id)", :lname, :name)
+    @students = Student.includes(:student_group).references(:student_group).order("student_groups.name", :lname, :name)
   end
 
   # GET /students/1
@@ -86,6 +86,6 @@ class StudentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.require(:student).permit(:name, :mnane, :lname, :serial, :email)
+      params.require(:student).permit(:name, :mnane, :lname, :serial, :email, :student_group_id)
     end
 end
