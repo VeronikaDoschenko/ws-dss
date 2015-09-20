@@ -7,6 +7,6 @@ class AddTsStudentGroups < ActiveRecord::Migration
       t.timestamps
     end
     Student.update_all("created_at = now(), updated_at = now()")
-    StudentGroup.update_all("created_at = getdate(), updated_at = getdate()")
+    StudentGroup.update_all("created_at = now(), updated_at = now()")
   end
 end
