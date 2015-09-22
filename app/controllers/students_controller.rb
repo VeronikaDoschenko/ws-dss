@@ -6,6 +6,7 @@ class StudentsController < ApplicationController
   # GET /students.json
   def index
     @students = Student.includes(:student_group).references(:student_group).order("student_groups.name", :lname, :name)
+    @users_empty = User.where("email not in (select email from students)").order(:email)  
   end
 
   # GET /students/1

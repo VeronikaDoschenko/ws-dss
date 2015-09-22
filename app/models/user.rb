@@ -18,6 +18,12 @@ class User < ActiveRecord::Base
     ws_jobs.where("error_code=0 and for_check=1").distinct.count(:ws_method_id)
   end
 
+  def get_teams
+    r = ActiveRecord::Base.connection.execute "SELECT DISTINCT (input)::json->>'team' a
+           FROM ws_jobs WHERE (is_json(input)) and user_id=#{self.id}"
+    r.select{|x| x["a"]}.collect{|x| x['a']}
+  end
+
   private
 
   def generate_authentication_token

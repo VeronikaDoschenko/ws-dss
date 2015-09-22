@@ -17,12 +17,17 @@
   <tbody>
     <% @students.each do |student| %>
       <tr>
+        <% u = student.get_user %>
         <td><%= ((student.student_group)?(student.student_group.name):'') %></td>
         <td><%= student.name %></td>
         <td><%= student.lname %></td>
-        <td align="right"><%= student.serial %></td>
+        <td align="right"><%= student.serial %>
+        <% if u %>
+          <br/>
+          <%= u.get_teams.join('<br/>').html_safe %>
+        <% end %>        
+        </td>
         <td><%= student.email %></td>
-        <% u = student.get_user %>
         <% if u %>
           <td><%= link_to u.ws_jobs.size.to_s, ws_jobs_url(:user_id => u.id)  %></td>
           <td><%= u.get_sloved %></td>
@@ -35,6 +40,20 @@
         <td><%= link_to 'Удалить', student, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
       </tr>
     <% end %>
+    <% @users_empty.each do |u| %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td align="right"><%= u.get_teams.join('<br/>').html_safe %></td>
+        <td><%= u.email %></td>
+        <td><%= link_to u.ws_jobs.size.to_s, ws_jobs_url(:user_id => u.id)  %></td>
+        <td><%= u.get_sloved %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 
@@ -45,7 +64,7 @@
 
 <%= form_tag({controller: "students", action: "import"}, method: "post") do %>
   <div class="field">
-    <%= label_tag :input, "Импортируемый список" %><br/>
+    <%= label_tag :input, "Импортируемый список студентов" %><br/>
     <%= text_area_tag(:input, "", size: "80x3") %>
   </div>
   <div class="actions">
