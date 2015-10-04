@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'edu' => 'edu#index', as: 'edu_index'
+  resources :documents
+  get 'documents/:id/show_content' => 'documents#show_content', as: :show_content_document
+  resources :subjects
   resources :student_groups
   resources :student_groups
   resources :students
