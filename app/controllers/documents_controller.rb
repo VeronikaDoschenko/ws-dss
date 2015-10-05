@@ -3,9 +3,14 @@ class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :show_content, :edit, :update, :destroy]
 
   def show_content
-    send_data(@document.file_contents,
+    if @document.file_contents and @document.file_contents.size>0
+        send_data(@document.file_contents,
             type: @document.content_type,
             filename: @document.filename)
+    else
+      redirect_to :back
+    end
+    
   end
 
   # GET /documents

@@ -3,7 +3,12 @@
 <p>
 <%= s.name %>  
 </p>
-<table "border=1">
-
+<table border="1">
+  <%s.documents.each do |document|%>
+    <tr>
+      <td><%= document.name %></td>
+      <td><%= link_to 'Скачать', show_content_document_path(document) %></td>
+    </tr>
+  <% end %>
 </table>
 <% end %>

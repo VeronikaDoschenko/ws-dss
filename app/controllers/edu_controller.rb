@@ -1,6 +1,6 @@
 class EduController < ApplicationController
   def index
-    @subjects = Subject.all
+    @subjects = Subject.order(:name)
   end
  
 end
