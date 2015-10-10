@@ -23,11 +23,24 @@ class WsJobsController < ApplicationController
 
   # GET /ws_jobs/new
   def new
+    @json_edit = nil
     @ws_job = WsJob.new
   end
 
   # GET /ws_jobs/1/edit
   def edit
+    @json_edit = nil
+    if @ws_job.input
+      begin
+        h = JSON.parse(@ws_job.input)
+        if h['schema']
+          @json_edit = '{ schema:' + JSON.generate(h['schema'])
+          @json_edit +=  ",\nstartval:" + JSON.generate(h['startval']) if h['startval']
+          @json_edit += "}"
+        end
+      rescue Exception => msg
+      end
+    end
   end
 
   # POST /ws_jobs

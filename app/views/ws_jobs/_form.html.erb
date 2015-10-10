@@ -20,7 +20,12 @@
     <%= f.label :input, "Входные данные" %><br/>
     <%= f.text_area :input, autocomplete: "off", cols: 100, rows: 30 %>
   </div>
-
+  <div id='editor_holder'></div>
+  <% if @json_edit %>
+  <script>
+    var editor = new JSONEditor(document.getElementById('editor_holder'), <%=@json_edit.html_safe %> )
+  </script>
+  <% end %>
   <div class="actions">
     <%= f.submit "Сохранить" %>
   </div>
