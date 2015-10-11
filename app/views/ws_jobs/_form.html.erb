@@ -16,17 +16,36 @@
     <%= f.collection_select(:ws_method_id, WsMethod.ask_working, :id, :name) %>
   </div>
 
-  <div class="field">
-    <%= f.label :input, "Входные данные" %><br/>
-    <%= f.text_area :input, autocomplete: "off", cols: 100, rows: 30 %>
-  </div>
-  <div id='editor_holder'></div>
   <% if @json_edit %>
-  <script>
-    var editor = new JSONEditor(document.getElementById('editor_holder'), <%=@json_edit.html_safe %> )
-  </script>
+    <div id='editor_holder'></div>
+  <% else %>
+    <div class="field">
+      <%= f.label :input, "Входные данные" %><br/>
+      <%= f.text_area :input, autocomplete: "off", cols: 100, rows: 30 %>
+    </div>
   <% end %>
   <div class="actions">
     <%= f.submit "Сохранить" %>
   </div>
+  <% if @json_edit %>
+    <%= f.text_area :input, autocomplete: "off", cols: 100, rows: 2, style: "display:none" %>
+    <button type="button" onclick="toggle(document.getElementById('ws_job_input'), this);">Показать JSON</button>
+    <script>
+      function toggle(el, el2) {
+        el.style.display = (el.style.display == 'none') ? '' : 'none';
+        if (el2.firstChild.data == 'Скрыть JSON')
+          el2.firstChild.data = 'Показать JSON'
+        else
+          el2.firstChild.data = 'Скрыть JSON';
+      };
+      var editor = new JSONEditor(document.getElementById('editor_holder'), <%=@json_edit.html_safe %> );
+      // Hook up the submit button
+      document.getElementsByName('commit')[0].addEventListener('click',function() {
+        // Get the value from the editor
+        var v = JSON.parse(document.getElementById('ws_job_input').value);
+        v.startval = editor.getValue();
+        document.getElementById('ws_job_input').value = JSON.stringify(v,null,2);
+      });
+    </script>
+  <% end %>
 <% end %>
