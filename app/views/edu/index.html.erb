@@ -4,7 +4,7 @@
 <%= s.name %>  
 </p>
 <table border="1">
-  <%s.documents.each do |document|%>
+  <%s.documents.order(:name).each do |document|%>
     <tr>
       <td><%= document.name %></td>
       <td><%= link_to 'Скачать', show_content_document_path(document) %></td>
