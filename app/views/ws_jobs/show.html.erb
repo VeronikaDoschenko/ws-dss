@@ -30,6 +30,7 @@
   Входные данные:<br/>
   <%= content_tag('pre', @ws_job.input) %>
 </div>
+
 <div class="field">
   Выходные данные:<br/>
   <% if @ws_job.output %>
@@ -37,6 +38,14 @@
       <%= ('$' + @ws_job.output + '$').html_safe %>
     <% elsif @ws_job.ws_method.format_output == 'html' %>
       <%= @ws_job.output.html_safe %>
+    <% elsif @ws_job.ws_method.format_output == 'graph' %>
+      <div id="mynetwork"></div>
+      <script type="text/javascript">   
+        // create a network
+        var container = document.getElementById('mynetwork');
+        var options = {layout:{randomSeed:1}};
+        var network = new vis.Network(container, <%= @ws_job.output.html_safe %>, options);
+      </script>        
     <% else %>
       <%= content_tag('pre', @ws_job.output) %>
     <% end %>

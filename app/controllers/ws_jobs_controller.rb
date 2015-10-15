@@ -39,6 +39,7 @@ class WsJobsController < ApplicationController
           @json_edit += "}"
         end
       rescue Exception => msg
+        puts msg
       end
     end
   end
