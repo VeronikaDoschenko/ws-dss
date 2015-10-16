@@ -41,42 +41,57 @@
   ga('send', 'pageview');
 
 </script>
+<style>
+.navbar-nav > li > a, .navbar-brand {
+    padding-top:4px !important; 
+    padding-bottom:0 !important;
+    height: 28px;
+}
+.navbar {min-height:28px !important;}
+</style>
 </head>
 <body>
-<% if notice or alert%>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-<% else %>
-  <p>
-  <%= link_to_unless I18n.locale == :ru, "Русский", url_for(params.merge(locale: :ru)) %>
-  |
-  <%= link_to_unless I18n.locale == :en, "English", url_for(params.merge(locale: :en)) %>
-  </p>
-<% end %>
+  <div class='container'>
+    <% if notice %>
+      <div class="alert alert-success"><%= notice %></div>
+    <% end %>
+    <% if alert%>
+      <div class="alert alert-info"><%= alert %></div>
+    <% end %>
+    <% if not notice and not alert %>
+      <p class="text-right small">
+      <% if user_signed_in? %>
+        Пользователь: <%= current_user.email %>&nbsp;&nbsp;
+      <% end %> 
+      <%= link_to_unless I18n.locale == :ru, "Русский", url_for(params.merge(locale: :ru)) %>
+      |
+      <%= link_to_unless I18n.locale == :en, "English", url_for(params.merge(locale: :en)) %>
+      </p>
+    <% end %>
+    
+    <nav class="navbar navbar-default">
+    <ul class="nav nav-pills">
+      <li role="presentation"><%= link_to t(:main_page), root_url %></li>
+      <% if user_signed_in? %>
+        <li role="presentation"><%= link_to t(:profile), user_root_url %></li>
+        <li role="presentation"><%= link_to "Учебные материалы", edu_index_url %></li>
+        <li role="presentation"><%= link_to "Задачи", ws_jobs_url %></li>
+        <% if current_user.admin? %>
+          <li role="presentation"><%= link_to "Администрирование", admin_url %></li>
+        <% end %>
+        <li role="presentation"><%= link_to t(:logout), destroy_user_session_path, :method => :delete %></li>
+      <% else %>
+        <li role="presentation"><%= link_to( t(:login), new_user_session_path) %></li>
+        <li role="presentation"><%= link_to( t(:sign_up), new_user_registration_path) %></li>
+      <% end %>
+    </ul>
 
-<p>
-  
-<span><%= link_to t(:main_page), root_url %></span>&nbsp;&nbsp;&nbsp;&nbsp
-<% if user_signed_in? %>
-  <span><%= t(:hello) + ' ' + current_user.email %></span>&nbsp;&nbsp;
-  <%= link_to t(:profile), user_root_url %>&nbsp;&nbsp;
-  <%= link_to "Учебные материалы", edu_index_url %>&nbsp;&nbsp;
-  <%= link_to "Задачи", ws_jobs_url %>&nbsp;&nbsp;
-  <% if current_user.admin? %>
-    <%= link_to "Администрирование", admin_url %>&nbsp;&nbsp;
-  <% end %>
-  <%= link_to t(:logout), destroy_user_session_path, :method => :delete %>
-<% else %>
-  <%= link_to( t(:login), new_user_session_path) + ' ' + t(:or) + ' ' + link_to( t(:sign_up), new_user_registration_path) %>
-<% end %>
 
-</p>
-
-<%= yield %>
-
-
-<p>
-  <%= t(:copyright) %>
-</p>
+</nav>
+    <%= yield %>
+    <p>
+      <%= t(:copyright) %>
+    </p>
+  </div>
 </body>
 </html>

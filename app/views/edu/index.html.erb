@@ -1,9 +1,9 @@
-<h2>Учебные материалы</h2>
+<h3>Учебные материалы</h3>
 <% @subjects.each do |s|%>
 <p>
 <%= s.name %>  
 </p>
-<table border="1">
+<table class="table">
   <%s.documents.order(:name).each do |document|%>
     <tr>
       <td><%= document.name %></td>

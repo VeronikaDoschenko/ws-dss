@@ -1,26 +1,35 @@
-<h1>Список задач</h1>
+<h3>Список задач</h3>
 
-<table border="1">
+<table class="table">
   <col width="90">
   <thead>
     <tr>
-      <th>Дата/Время</th><th>Метод</th><th>Входные данные</th><th>Код ошибки/проверки</th><th colspan="3"></th>
+      <th>Дата/Время</th><th>Метод</th><th>Входные данные</th><th>Код ошибки</th><th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @ws_jobs.each do |ws_job| %>
       <tr>
-        <td><small><%= ws_job.updated_at %></small></td>
+        <td><small><%= l ws_job.updated_at %></small></td>
         <td><%= ws_job.ws_method.name %></td>
         <td><%= ws_job.input[0..150] + (ws_job.input.size > 150 ? " ..." : "") %></td>
         <td><%= ws_job.error_code %>/<%= ws_job.for_check %>/<%= ws_job.do_check %></td>
         <% if ws_job.do_check==0 or current_user.admin? %>
-          <td><%= link_to 'Редактировать', edit_ws_job_path(ws_job) %></td>
-          <td><%= link_to 'Удалить', ws_job, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+          <td><%= link_to  edit_ws_job_path(ws_job), class: "btn btn-default", title: "Редактировать" do %>
+                <i class="glyphicon glyphicon-pencil"></i>
+              <% end %>
+          </td>
+          <td><%= link_to ws_job, class: "btn btn-default", method: :delete, title: "Удалить", data: { confirm: 'Вы уверены?' } do %>
+                <i class="glyphicon glyphicon-trash"></i>
+              <% end %>
+          </td>
         <% end %>
         <% unless ws_job.output.nil? %>
-          <td><%= link_to 'Показать результат', ws_job %></td>
+          <td><%= link_to ws_job, class: "btn btn-default", title: "Посмотреть результат" do %>
+                <i class="glyphicon glyphicon-zoom-in"></i>
+              <% end %>
+          </td>
         <% end %>
       </tr>
     <% end %>
