@@ -25,7 +25,12 @@
     <%= f.label :code, "Код метода" %><br/>
     <%= f.text_area :code, autocomplete: "off", cols: 100, rows: 7 %>
   </div>
-
+  
+  <div class="field">
+    <%= f.label :input, "Вх. данные" %><br/>
+    <%= f.text_area :input, autocomplete: "off", cols: 100, rows: 7 %>
+  </div>
+  
   <div class="field">
     <%= f.label :format_output, "Формат вывода" %><br/>
     <%= f.text_field :format_output, default: 'text', cols: 100, rows: 7 %>

@@ -83,6 +83,6 @@ class WsMethodsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ws_method_params
-      params[:ws_method].permit(:name, :descr, :code, :test_input, :test_output, :format_output)
+      params[:ws_method].permit(:name, :descr, :code, :test_input, :test_output, :format_output, :input)
     end
 end

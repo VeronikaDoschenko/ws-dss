@@ -49,20 +49,27 @@ class WsJobsController < ApplicationController
   def create
     @ws_job = WsJob.new(ws_job_params)
     @ws_job.user = current_user
-    respond_to do |format|
-      if current_user.ws_jobs.size < current_user.numjobs or current_user.admin?
-        if @ws_job.save
-          system "rake ws_dss:process_ws_jobs --trace 2>&1 >> #{Rails.root.join('log',"#{Rails.env}.log")} &"
-          sleep 2
-          @ws_job.reload
-          format.html { redirect_to @ws_job, notice: 'Задача успешно создана' }
-          format.json { render :show, status: :created, location: @ws_job }
+    if (@ws_job.input.nil? or @ws_job.input == '') and not @ws_job.ws_method.input.nil? 
+      @ws_job.input = @ws_job.ws_method.input
+      @ws_job.output = '{}'
+      @ws_job.save
+      redirect_to edit_ws_job_path(@ws_job) 
+    else
+      respond_to do |format|
+        if current_user.ws_jobs.size < current_user.numjobs or current_user.admin?
+          if @ws_job.save
+            system "rake ws_dss:process_ws_jobs --trace 2>&1 >> #{Rails.root.join('log',"#{Rails.env}.log")} &"
+            sleep 2
+            @ws_job.reload
+            format.html { redirect_to @ws_job, notice: 'Задача успешно создана' }
+            format.json { render :show, status: :created, location: @ws_job }
+          else
+            format.html { render :new }
+            format.json { render json: @ws_job.errors, status: :unprocessable_entity }
+          end
         else
-          format.html { render :new }
-          format.json { render json: @ws_job.errors, status: :unprocessable_entity }
+          format.html { render :new, notice: "Превышен лимит на число задач #{current_user.numjobs}" }
         end
-      else
-        format.html { render :new, notice: "Превышен лимит на число задач #{current_user.numjobs}" }
       end
     end
   end
