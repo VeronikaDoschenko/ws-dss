@@ -64,3 +64,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rvm'
 end
+
+group :development, :test do
+    gem 'railroady'
+end
