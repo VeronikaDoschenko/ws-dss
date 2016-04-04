@@ -85,13 +85,13 @@
         <li role="presentation"><%= link_to( t(:sign_up), new_user_registration_path) %></li>
       <% end %>
     </ul>
-
-
-</nav>
+    </nav>
     <%= yield %>
-    <p>
-      <%= t(:copyright) %>
-    </p>
+    <div class="footer navbar-fixed-bottom">
+       <div class="col-md-11">
+        <p class="text-right small"><%= t(:copyright) %></p>
+       </div>
+    </div>
   </div>
 </body>
 </html>
