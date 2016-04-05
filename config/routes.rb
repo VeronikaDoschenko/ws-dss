@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :ws_models
   get 'edu' => 'edu#index', as: 'edu_index'
   resources :documents
   get 'documents/:id/show_content' => 'documents#show_content', as: :show_content_document

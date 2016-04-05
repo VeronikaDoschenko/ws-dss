@@ -11,7 +11,8 @@ class Ability
       can :show_content, Document
     end
     if user.model_creator?
-      can :index, :modeling 
+      can :index, :modeling
+      can :manage, WsModel
     end
     #
     # The first argument to `can` is the action you are giving the user

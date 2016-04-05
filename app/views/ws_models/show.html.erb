@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Название:</strong>
+  <%= @ws_model.name %>
+</p>
+
+<p>
+  <strong>Описание:</strong>
+  <%= @ws_model.descr %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @ws_model.url %>
+</p>
+
+<%= link_to 'Редактировать', edit_ws_model_path(@ws_model) %> |
+<%= link_to 'Назад', ws_models_path %>

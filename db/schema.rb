@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151031143344) do
+ActiveRecord::Schema.define(version: 20160405143446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,14 @@ ActiveRecord::Schema.define(version: 20151031143344) do
 
 # Could not dump table "ws_methods" because of following StandardError
 #   Unknown type 'format_type' for column 'format_output'
+
+  create_table "ws_models", force: :cascade do |t|
+    t.string   "name"
+    t.string   "descr"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   add_foreign_key "students", "student_groups"
   add_foreign_key "ws_jobs", "users"
