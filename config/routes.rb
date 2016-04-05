@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :users
   end
   get 'admin' => 'admin/admin#index'
-  get 'admin/formula_tester' => 'admin/admin#formula_tester'
+  get 'modeling' => 'modeling#index'
   get 'persons/profile', as: 'user_root'
   get 'persons/:id/test_output' => 'persons#test_output', as: :person_test_output
   devise_for :users, controllers: { sessions: "users/sessions",

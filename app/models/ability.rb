@@ -10,6 +10,9 @@ class Ability
     else
       can :show_content, Document
     end
+    if user.model_creator?
+      can :index, :modeling 
+    end
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
