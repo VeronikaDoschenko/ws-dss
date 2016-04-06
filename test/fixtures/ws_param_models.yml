@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ws_model_id: 
+  ws_param_id: 
+  is_reqired: false
+
+two:
+  ws_model_id: 
+  ws_param_id: 
+  is_reqired: false

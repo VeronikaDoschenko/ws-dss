@@ -70,6 +70,7 @@ class WsModelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ws_model_params
-      params.require(:ws_model).permit(:name, :descr, :url)
+      params.require(:ws_model).permit(:name, :descr, :url,
+        :ws_param_models_attributes => [:ws_param_id, :is_required, :_destroy, :id])
     end
 end

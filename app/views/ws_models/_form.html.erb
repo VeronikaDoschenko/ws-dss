@@ -24,6 +24,11 @@
     <%= f.url_field :url, size: 100 %>
   </div>
   <br/>
+  <%= f.fields_for :ws_param_models do |builder| %>
+    <%= render "ws_param_model_fields", :f => builder %>
+  <% end %>
+  <p><%= link_to_add_fields "Добавить параметр", f, :ws_param_models %></p>
+  <br/>
   <div class="actions">
     <%= f.submit "Сохранить" %>
   </div>

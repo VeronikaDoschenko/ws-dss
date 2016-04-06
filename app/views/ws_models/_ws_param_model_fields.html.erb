@@ -1,0 +1,8 @@
+<p>
+  <%= f.label :ws_param_id, "Параметр:" %>
+  <%= f.collection_select(:ws_param_id, WsParam.all, :id, :name, include_blank: 'выберите параметр...') %>
+  <%= f.label :is_reqired, "Обязательный" %>
+  <%= f.check_box :is_required %>
+  <%= f.label :_destroy, "Удалить" %>
+  <%= f.check_box :_destroy %>
+</p>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406111259) do
+ActiveRecord::Schema.define(version: 20160406124558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,6 +151,17 @@ ActiveRecord::Schema.define(version: 20160406111259) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "ws_param_models", force: :cascade do |t|
+    t.integer  "ws_model_id"
+    t.integer  "ws_param_id"
+    t.boolean  "is_required"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "ws_param_models", ["ws_model_id"], name: "index_ws_param_models_on_ws_model_id", using: :btree
+  add_index "ws_param_models", ["ws_param_id"], name: "index_ws_param_models_on_ws_param_id", using: :btree
+
   create_table "ws_params", force: :cascade do |t|
     t.string   "name"
     t.string   "descr"
@@ -167,4 +178,6 @@ ActiveRecord::Schema.define(version: 20160406111259) do
   add_foreign_key "ws_jobs", "ws_methods"
   add_foreign_key "ws_model_runs", "ws_model_statuses"
   add_foreign_key "ws_model_runs", "ws_models"
+  add_foreign_key "ws_param_models", "ws_models"
+  add_foreign_key "ws_param_models", "ws_params"
 end

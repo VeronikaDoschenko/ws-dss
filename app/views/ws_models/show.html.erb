@@ -13,5 +13,46 @@
   <%= @ws_model.url %>
 </p>
 
+<p>Параметры модели</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Описание</th>
+      <th>Целочисл.</th>
+      <th>Число измер.</th>
+      <th>Мин.знач.</th>
+      <th>Макс.знач.</th>
+      <th>Обязательный</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ws_model.ws_param_models.each do |pm|%>
+      <tr>
+        <% if pm.ws_param %>
+          <td><%= pm.ws_param.name %></td>
+          <td><%= pm.ws_param.descr %></td>
+          <td>
+            <%= ((pm.ws_param.is_int)?"Да":"Нет") %>
+          </td>
+          <td><%= pm.ws_param.dim %></td>
+          <td><%= pm.ws_param.min_val %></td>
+          <td><%= pm.ws_param.max_val %></td>
+        <% else %>
+          <td/><td/><td/><td/><td/><td/>
+        <% end %>        
+        <td>
+            <%= ((pm.is_required)?"Да":"Нет") %>        
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  
+
+  
+
+
 <%= link_to 'Редактировать', edit_ws_model_path(@ws_model) %> |
 <%= link_to 'Назад', ws_models_path %>
