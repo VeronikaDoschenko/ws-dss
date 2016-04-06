@@ -14,6 +14,8 @@ class Ability
       can :index, :modeling
       can :manage, WsModel
       can :manage, WsParam
+      can :read, WsModelStatus
+      can :manage, WsModelRun
     end
     #
     # The first argument to `can` is the action you are giving the user

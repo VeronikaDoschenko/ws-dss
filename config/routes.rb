@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :ws_model_runs
+  resources :ws_model_statuses
   resources :ws_params
   resources :ws_models
   get 'edu' => 'edu#index', as: 'edu_index'

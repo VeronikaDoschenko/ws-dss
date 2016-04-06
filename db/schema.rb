@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406072453) do
+ActiveRecord::Schema.define(version: 20160406111259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,24 @@ ActiveRecord::Schema.define(version: 20160406072453) do
 # Could not dump table "ws_methods" because of following StandardError
 #   Unknown type 'format_type' for column 'format_output'
 
+  create_table "ws_model_runs", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "ws_model_id"
+    t.integer  "ws_model_status_id"
+    t.text     "trace"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "ws_model_runs", ["ws_model_id"], name: "index_ws_model_runs_on_ws_model_id", using: :btree
+  add_index "ws_model_runs", ["ws_model_status_id"], name: "index_ws_model_runs_on_ws_model_status_id", using: :btree
+
+  create_table "ws_model_statuses", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ws_models", force: :cascade do |t|
     t.string   "name"
     t.string   "descr"
@@ -147,4 +165,6 @@ ActiveRecord::Schema.define(version: 20160406072453) do
   add_foreign_key "students", "student_groups"
   add_foreign_key "ws_jobs", "users"
   add_foreign_key "ws_jobs", "ws_methods"
+  add_foreign_key "ws_model_runs", "ws_model_statuses"
+  add_foreign_key "ws_model_runs", "ws_models"
 end

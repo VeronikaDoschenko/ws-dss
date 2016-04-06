@@ -1,0 +1,22 @@
+<p>
+  <strong>Название:</strong>
+  <%= @ws_model_run.name %>
+</p>
+
+<p>
+  <strong>Модель:</strong>
+  <%= @ws_model_run.ws_model.name %>
+</p>
+
+<p>
+  <strong>Статус прогона:</strong>
+  <%= @ws_model_run.ws_model_status.name %>
+</p>
+
+<p>
+  <strong>Трассировочная печать:</strong>
+  <%= @ws_model_run.trace %>
+</p>
+
+<%= link_to 'Редактировать', edit_ws_model_run_path(@ws_model_run) %> |
+<%= link_to 'Назад', ws_model_runs_path %>

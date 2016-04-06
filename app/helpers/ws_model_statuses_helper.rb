@@ -1,0 +1,2 @@
+module WsModelStatusesHelper
+end
