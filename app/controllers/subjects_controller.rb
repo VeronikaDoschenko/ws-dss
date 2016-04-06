@@ -43,8 +43,6 @@ class SubjectsController < ApplicationController
   # PATCH/PUT /subjects/1.json
   def update
     params[:subject][:document_ids] ||= []
-    puts "-"*10
-    p subject_params
     respond_to do |format|
       if @subject.update(subject_params)
         format.html { redirect_to @subject, notice: 'Subject was successfully updated.' }
