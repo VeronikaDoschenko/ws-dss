@@ -13,6 +13,7 @@ class Ability
     if user.model_creator?
       can :index, :modeling
       can :manage, WsModel
+      can :manage, WsParam
     end
     #
     # The first argument to `can` is the action you are giving the user

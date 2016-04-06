@@ -1,7 +1,7 @@
 <%= form_for(@ws_model) do |f| %>
   <% if @ws_model.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@ws_model.errors.count, "Ошибка") %> prohibited this ws_model from being saved:</h2>
+      <h2><%= pluralize(@ws_model.errors.count, "Ошибка") %>Не возможно сохранение данной модели:</h2>
 
       <ul>
       <% @ws_model.errors.full_messages.each do |message| %>

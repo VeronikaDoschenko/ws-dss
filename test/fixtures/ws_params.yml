@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  descr: MyString
+  is_int: false
+  dim: 1
+  min_val: 9.99
+  max_val: 9.99
+
+two:
+  name: MyString
+  descr: MyString
+  is_int: false
+  dim: 1
+  min_val: 9.99
+  max_val: 9.99
