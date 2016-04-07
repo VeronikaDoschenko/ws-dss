@@ -23,22 +23,27 @@
     <%= f.label :ws_model_status_id, "Статус прогона" %><br>
     <%= f.collection_select(:ws_model_status_id, WsModelStatus.all, :id, :name) %>
   </div>
-  <h4>Параметры</h4>
   <table class="table">
     <thead>
       <tr>
         <th>Параметр</th>
         <th>Значение до прогона</th>
-        <th>Значение после прогона</th>
       </tr>
     </thead>
     <tbody>
       <% @ws_model_run.ws_model.ws_param_models.each do |pm| %>
+        <% if pm.ws_param %>
         <tr>
-          <td><%= pm.try(:ws_param).try(:name) %></td>
-          <td></td>
-          <td></td>
+          <td><%= pm.ws_param.name %></td>
+          <% pv = @ws_model_run.ws_param_values.find_by_ws_param_id(pm.ws_param.id) %>
+          <% pv = @ws_model_run.ws_param_values.new(ws_param_id: pm.ws_param.id) unless pv %>          
+          <%= f.fields_for :ws_param_values, pv do |pm_fields| %>
+            <td><%= pm_fields.text_area :old_value, autocomplete: "off", cols: 50, rows: 3 %>
+                <%= pm_fields.hidden_field :ws_param_id  %>
+            </td>
+          <% end %>
         </tr>
+        <% end %>
       <% end %>
     </tbody>  
   </table>

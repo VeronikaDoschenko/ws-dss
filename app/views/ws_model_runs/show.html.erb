@@ -15,8 +15,28 @@
 
 <p>
   <strong>Трассировочная печать:</strong>
-  <%= @ws_model_run.trace %>
+  <pre><%= @ws_model_run.trace %></pre>
 </p>
+
+<strong>Значения параметров</strong>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Значение до прогона</th>
+      <th>Значение после прогона</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ws_model_run.ws_param_values.each do |pv|%>
+      <tr>
+          <td><%= pv.ws_param.name %></td>
+          <td><%= pv.old_value %></td>
+          <td><%= pv.new_value %></td> 
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Редактировать', edit_ws_model_run_path(@ws_model_run) %> |
 <%= link_to 'Назад', ws_model_runs_path %>

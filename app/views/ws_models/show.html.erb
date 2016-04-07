@@ -41,7 +41,7 @@
           <td><%= pm.ws_param.max_val %></td>
         <% else %>
           <td/><td/><td/><td/><td/><td/>
-        <% end %>        
+        <% end %>
         <td>
             <%= ((pm.is_required)?"Да":"Нет") %>        
         </td>
@@ -49,10 +49,5 @@
     <% end %>
   </tbody>
 </table>
-  
-
-  
-
-
 <%= link_to 'Редактировать', edit_ws_model_path(@ws_model) %> |
 <%= link_to 'Назад', ws_models_path %>
