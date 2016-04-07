@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ws_param_id: 
+  ws_model_run_id: 
+  old_value: MyString
+  new_value: MyString
+
+two:
+  ws_param_id: 
+  ws_model_run_id: 
+  old_value: MyString
+  new_value: MyString

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Ws Param Values</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ws param</th>
+      <th>Ws model run</th>
+      <th>Old value</th>
+      <th>New value</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ws_param_values.each do |ws_param_value| %>
+      <tr>
+        <td><%= ws_param_value.ws_param %></td>
+        <td><%= ws_param_value.ws_model_run %></td>
+        <td><%= ws_param_value.old_value %></td>
+        <td><%= ws_param_value.new_value %></td>
+        <td><%= link_to 'Show', ws_param_value %></td>
+        <td><%= link_to 'Edit', edit_ws_param_value_path(ws_param_value) %></td>
+        <td><%= link_to 'Destroy', ws_param_value, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ws param value', new_ws_param_value_path %>

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ws param:</strong>
+  <%= @ws_param_value.ws_param %>
+</p>
+
+<p>
+  <strong>Ws model run:</strong>
+  <%= @ws_param_value.ws_model_run %>
+</p>
+
+<p>
+  <strong>Old value:</strong>
+  <%= @ws_param_value.old_value %>
+</p>
+
+<p>
+  <strong>New value:</strong>
+  <%= @ws_param_value.new_value %>
+</p>
+
+<%= link_to 'Edit', edit_ws_param_value_path(@ws_param_value) %> |
+<%= link_to 'Back', ws_param_values_path %>

@@ -1,0 +1,33 @@
+<%= form_for(@ws_param_value) do |f| %>
+  <% if @ws_param_value.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ws_param_value.errors.count, "error") %> prohibited this ws_param_value from being saved:</h2>
+
+      <ul>
+      <% @ws_param_value.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ws_param_id %><br>
+    <%= f.text_field :ws_param_id %>
+  </div>
+  <div class="field">
+    <%= f.label :ws_model_run_id %><br>
+    <%= f.text_field :ws_model_run_id %>
+  </div>
+  <div class="field">
+    <%= f.label :old_value %><br>
+    <%= f.text_field :old_value %>
+  </div>
+  <div class="field">
+    <%= f.label :new_value %><br>
+    <%= f.text_field :new_value %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

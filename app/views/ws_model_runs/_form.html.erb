@@ -23,10 +23,25 @@
     <%= f.label :ws_model_status_id, "Статус прогона" %><br>
     <%= f.collection_select(:ws_model_status_id, WsModelStatus.all, :id, :name) %>
   </div>
-  <div class="field">
-    <%= f.label :trace, "Трассировочная печать" %><br>
-    <%= f.text_area :trace, readonly: true, cols: 103, rows: 3 %>
-  </div>
+  <h4>Параметры</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Параметр</th>
+        <th>Значение до прогона</th>
+        <th>Значение после прогона</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @ws_model_run.ws_model.ws_param_models.each do |pm| %>
+        <tr>
+          <td><%= pm.try(:ws_param).try(:name) %></td>
+          <td></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>  
+  </table>
   <div class="actions">
     <%= f.submit "Сохранить" %>
   </div>
