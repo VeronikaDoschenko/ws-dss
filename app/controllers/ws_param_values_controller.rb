@@ -5,7 +5,7 @@ class WsParamValuesController < ApplicationController
   # GET /ws_param_values
   # GET /ws_param_values.json
   def index
-    @ws_param_values = WsParamValue.all
+    @ws_param_values = ( (params[:q]) ? WsParamValue.ransack(params[:q]).result : WsParamValue.all )
   end
 
   # GET /ws_param_values/1

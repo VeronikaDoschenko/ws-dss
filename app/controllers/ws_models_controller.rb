@@ -5,7 +5,7 @@ class WsModelsController < ApplicationController
   # GET /ws_models
   # GET /ws_models.json
   def index
-    @ws_models = WsModel.all
+    @ws_models = ( (params[:q]) ? WsModel.ransack(params[:q]).result : WsModel.all )
   end
 
   # GET /ws_models/1
@@ -70,7 +70,7 @@ class WsModelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ws_model_params
-      params.require(:ws_model).permit(:name, :descr, :url,
+      params.require(:ws_model).permit(:name, :descr, :model_url,
         :ws_param_models_attributes => [:ws_param_id, :is_required, :_destroy, :id])
     end
 end

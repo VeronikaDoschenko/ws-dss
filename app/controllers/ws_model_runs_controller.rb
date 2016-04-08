@@ -5,7 +5,7 @@ class WsModelRunsController < ApplicationController
   # GET /ws_model_runs
   # GET /ws_model_runs.json
   def index
-    @ws_model_runs = WsModelRun.all
+    @ws_model_runs = ( (params[:q]) ? WsModelRun.ransack(params[:q]).result : WsModelRun.all )
   end
 
   # GET /ws_model_runs/1

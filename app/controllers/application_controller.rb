@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user_from_token!
   # This is Devise's authentication
   before_action :authenticate_user!
- 
+  skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
+  
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end
@@ -19,7 +20,7 @@ class ApplicationController < ActionController::Base
   private
   
   def authenticate_user_from_token!
-    user_token = params[:user_token].presence
+    user_token = request.headers["HTTP_USER_TOKEN"].presence
     user       = user_token && User.find_by_authentication_token(user_token.to_s)
     if user
       # Notice we are passing store false, so the user is not

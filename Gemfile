@@ -50,9 +50,11 @@ gem 'unicorn'
 
 gem 'devise'
 
-gem "recaptcha", :require => "recaptcha/rails"
+gem 'recaptcha', :require => 'recaptcha/rails'
 
 gem 'royce'
+
+gem 'ransack'
 
 gem 'cancancan'
 

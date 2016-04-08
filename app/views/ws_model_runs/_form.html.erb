@@ -17,12 +17,13 @@
   </div>
   <div class="field">
     <%= f.label :ws_model_id, "Модель" %><br>
-    <%= f.collection_select(:ws_model_id, WsModel.all, :id, :name) %>
+    <%= f.collection_select(:ws_model_id, WsModel.all, :id, :name, include_blank: 'выберите модель...') %>
   </div>
   <div class="field">
     <%= f.label :ws_model_status_id, "Статус прогона" %><br>
     <%= f.collection_select(:ws_model_status_id, WsModelStatus.all, :id, :name) %>
   </div>
+  <% if @ws_model_run.ws_model %>
   <table class="table">
     <thead>
       <tr>
@@ -47,6 +48,7 @@
       <% end %>
     </tbody>  
   </table>
+  <% end %>
   <div class="actions">
     <%= f.submit "Сохранить" %>
   </div>
