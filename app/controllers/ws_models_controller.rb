@@ -26,7 +26,7 @@ class WsModelsController < ApplicationController
   # POST /ws_models.json
   def create
     @ws_model = WsModel.new(ws_model_params)
-
+    @ws_model.user = current_user
     respond_to do |format|
       if @ws_model.save
         format.html { redirect_to @ws_model, notice: 'Модель успешно создана' }

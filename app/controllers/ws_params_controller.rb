@@ -26,7 +26,8 @@ class WsParamsController < ApplicationController
   # POST /ws_params.json
   def create
     @ws_param = WsParam.new(ws_param_params)
-
+    @ws_param.user = current_user
+    
     respond_to do |format|
       if @ws_param.save
         format.html { redirect_to @ws_param, notice: 'Ws param was successfully created.' }

@@ -26,7 +26,7 @@ class WsModelRunsController < ApplicationController
   # POST /ws_model_runs.json
   def create
     @ws_model_run = WsModelRun.new(ws_model_run_params)
-
+    @ws_model_run.user = current_user
     respond_to do |format|
       if @ws_model_run.save
         format.html { redirect_to @ws_model_run, notice: 'Ws model run was successfully created.' }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408075454) do
+ActiveRecord::Schema.define(version: 20160408123950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,8 +132,10 @@ ActiveRecord::Schema.define(version: 20160408075454) do
     t.text     "trace"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "user_id"
   end
 
+  add_index "ws_model_runs", ["user_id"], name: "index_ws_model_runs_on_user_id", using: :btree
   add_index "ws_model_runs", ["ws_model_id"], name: "index_ws_model_runs_on_ws_model_id", using: :btree
   add_index "ws_model_runs", ["ws_model_status_id"], name: "index_ws_model_runs_on_ws_model_status_id", using: :btree
 
@@ -149,7 +151,10 @@ ActiveRecord::Schema.define(version: 20160408075454) do
     t.string   "model_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
+
+  add_index "ws_models", ["user_id"], name: "index_ws_models_on_user_id", using: :btree
 
   create_table "ws_param_models", force: :cascade do |t|
     t.integer  "ws_model_id"
@@ -160,6 +165,7 @@ ActiveRecord::Schema.define(version: 20160408075454) do
   end
 
   add_index "ws_param_models", ["ws_model_id"], name: "index_ws_param_models_on_ws_model_id", using: :btree
+  add_index "ws_param_models", ["ws_param_id", "ws_model_id"], name: "index_ws_param_models_on_ws_param_id_and_ws_model_id", unique: true, using: :btree
   add_index "ws_param_models", ["ws_param_id"], name: "index_ws_param_models_on_ws_param_id", using: :btree
 
   create_table "ws_param_values", force: :cascade do |t|
@@ -172,26 +178,33 @@ ActiveRecord::Schema.define(version: 20160408075454) do
   end
 
   add_index "ws_param_values", ["ws_model_run_id"], name: "index_ws_param_values_on_ws_model_run_id", using: :btree
+  add_index "ws_param_values", ["ws_param_id", "ws_model_run_id"], name: "index_ws_param_values_on_ws_param_id_and_ws_model_run_id", unique: true, using: :btree
   add_index "ws_param_values", ["ws_param_id"], name: "index_ws_param_values_on_ws_param_id", using: :btree
 
   create_table "ws_params", force: :cascade do |t|
     t.string   "name"
     t.string   "descr"
     t.boolean  "is_int"
-    t.integer  "dim"
+    t.integer  "dim",        default: 0
     t.decimal  "min_val"
     t.decimal  "max_val"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "user_id"
   end
+
+  add_index "ws_params", ["user_id"], name: "index_ws_params_on_user_id", using: :btree
 
   add_foreign_key "students", "student_groups"
   add_foreign_key "ws_jobs", "users"
   add_foreign_key "ws_jobs", "ws_methods"
+  add_foreign_key "ws_model_runs", "users"
   add_foreign_key "ws_model_runs", "ws_model_statuses"
   add_foreign_key "ws_model_runs", "ws_models"
+  add_foreign_key "ws_models", "users"
   add_foreign_key "ws_param_models", "ws_models"
   add_foreign_key "ws_param_models", "ws_params"
   add_foreign_key "ws_param_values", "ws_model_runs"
   add_foreign_key "ws_param_values", "ws_params"
+  add_foreign_key "ws_params", "users"
 end
