@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411170736) do
+ActiveRecord::Schema.define(version: 20160411181521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,13 +40,6 @@ ActiveRecord::Schema.define(version: 20160411170736) do
   end
 
   add_index "documents_subjects", ["subject_id", "document_id"], name: "index_documents_subjects_on_subject_id_and_document_id", using: :btree
-
-  create_table "model_runs_set_model_runs", id: false, force: :cascade do |t|
-    t.integer "model_run_id",     null: false
-    t.integer "set_model_run_id", null: false
-  end
-
-  add_index "model_runs_set_model_runs", ["set_model_run_id", "model_run_id"], name: "index_set_model_run_link", using: :btree
 
   create_table "royce_connector", force: :cascade do |t|
     t.integer  "roleable_id",   null: false
@@ -145,6 +138,13 @@ ActiveRecord::Schema.define(version: 20160411170736) do
   add_index "ws_model_runs", ["user_id"], name: "index_ws_model_runs_on_user_id", using: :btree
   add_index "ws_model_runs", ["ws_model_id"], name: "index_ws_model_runs_on_ws_model_id", using: :btree
   add_index "ws_model_runs", ["ws_model_status_id"], name: "index_ws_model_runs_on_ws_model_status_id", using: :btree
+
+  create_table "ws_model_runs_set_model_runs", id: false, force: :cascade do |t|
+    t.integer "ws_model_run_id",     null: false
+    t.integer "ws_set_model_run_id", null: false
+  end
+
+  add_index "ws_model_runs_set_model_runs", ["ws_set_model_run_id", "ws_model_run_id"], name: "index_set_model_run_link", using: :btree
 
   create_table "ws_model_statuses", force: :cascade do |t|
     t.string   "name"

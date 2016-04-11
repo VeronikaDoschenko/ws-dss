@@ -5,8 +5,32 @@
 
 <p>
   <strong>Описание:</strong>
-  <%= @ws_set_model_run.descr %>
+  <pre><%= @ws_set_model_run.descr %></pre>
 </p>
+
+<h4>Прогоны модели</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Модель</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ws_set_model_run.ws_model_runs.each do |mr|%>
+      <tr>
+          <td><%= mr.name %></td>
+          <td><%= mr.ws_model.name %></td>
+          <td><%= link_to mr, class: "btn btn-default", title: "Показать" do %>
+                <i class="glyphicon glyphicon-zoom-in"></i>
+              <% end %>
+          </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Редактировать', edit_ws_set_model_run_path(@ws_set_model_run) %> |
 <%= link_to 'Назад', ws_set_model_runs_path %>

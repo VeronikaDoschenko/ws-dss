@@ -15,10 +15,19 @@
     <%= f.label :name, "Название" %><br>
     <%= f.text_field :name, size: 50 %>
   </div>
+  
   <div class="field">
     <%= f.label :descr, "Описание" %><br>
     <%= f.text_area :descr, autocomplete: "off", cols: 103, rows: 6 %>
   </div>
+  
+  <% WsModelRun.all.each do |mr| %>
+    <div>
+      <%= check_box_tag "ws_set_model_run[ws_model_run_ids][]", mr.id, @ws_set_model_run.ws_model_runs.include?(mr) %>
+      <%= mr.name + ' (' + mr.ws_model.name + ')' %>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit "Сохранить" %>
   </div>
