@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411161055) do
+ActiveRecord::Schema.define(version: 20160411170736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(version: 20160411161055) do
   end
 
   add_index "documents_subjects", ["subject_id", "document_id"], name: "index_documents_subjects_on_subject_id_and_document_id", using: :btree
+
+  create_table "model_runs_set_model_runs", id: false, force: :cascade do |t|
+    t.integer "model_run_id",     null: false
+    t.integer "set_model_run_id", null: false
+  end
+
+  add_index "model_runs_set_model_runs", ["set_model_run_id", "model_run_id"], name: "index_set_model_run_link", using: :btree
 
   create_table "royce_connector", force: :cascade do |t|
     t.integer  "roleable_id",   null: false
