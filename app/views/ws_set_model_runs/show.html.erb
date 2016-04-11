@@ -1,0 +1,12 @@
+<p>
+  <strong>Название:</strong>
+  <%= @ws_set_model_run.name %>
+</p>
+
+<p>
+  <strong>Описание:</strong>
+  <%= @ws_set_model_run.descr %>
+</p>
+
+<%= link_to 'Редактировать', edit_ws_set_model_run_path(@ws_set_model_run) %> |
+<%= link_to 'Назад', ws_set_model_runs_path %>

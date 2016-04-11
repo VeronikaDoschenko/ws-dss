@@ -1,0 +1,25 @@
+<%= form_for(@ws_set_model_run) do |f| %>
+  <% if @ws_set_model_run.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ws_set_model_run.errors.count, "error") %> Не возможно сохранение множества:</h2>
+
+      <ul>
+      <% @ws_set_model_run.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, "Название" %><br>
+    <%= f.text_field :name, size: 50 %>
+  </div>
+  <div class="field">
+    <%= f.label :descr, "Описание" %><br>
+    <%= f.text_area :descr, autocomplete: "off", cols: 103, rows: 6 %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Сохранить" %>
+  </div>
+<% end %>

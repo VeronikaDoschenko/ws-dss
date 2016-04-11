@@ -18,6 +18,7 @@ class Ability
       can :manage, WsModelRun
       can :manage, WsParamModel
       can :manage, WsParamValue
+      can :manage, WsSetModelRun
     end
     #
     # The first argument to `can` is the action you are giving the user

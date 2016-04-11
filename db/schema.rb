@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408123950) do
+ActiveRecord::Schema.define(version: 20160411161055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -194,6 +194,13 @@ ActiveRecord::Schema.define(version: 20160408123950) do
   end
 
   add_index "ws_params", ["user_id"], name: "index_ws_params_on_user_id", using: :btree
+
+  create_table "ws_set_model_runs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "descr"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   add_foreign_key "students", "student_groups"
   add_foreign_key "ws_jobs", "users"
