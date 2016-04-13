@@ -70,6 +70,8 @@ class WsParamValuesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ws_param_value_params
-      params.require(:ws_param_value).permit(:ws_param_id, :ws_model_run_id, :old_value, :new_value)
+      params.require(:ws_param_value).permit(:ws_param_id, :ws_model_run_id,
+                                             :old_value, :new_value,
+                                             :ws_set_model_run_id)
     end
 end

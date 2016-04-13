@@ -19,6 +19,12 @@
     <%= f.label :ws_model_run_id %><br>
     <%= f.text_field :ws_model_run_id %>
   </div>
+  
+  <div class="field">
+    <%= f.label :ws_set_model_run_id, "Множетсво прогонов" %><br>
+    <%= f.collection_select(:ws_set_model_run_id, WsSetModelRun.all, :id, :name, include_blank: 'выберите множество...') %>
+  </div>
+
   <div class="field">
     <%= f.label :old_value %><br>
     <%= f.text_field :old_value %>

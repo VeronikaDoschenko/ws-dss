@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411181521) do
+ActiveRecord::Schema.define(version: 20160413144050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -180,13 +180,15 @@ ActiveRecord::Schema.define(version: 20160411181521) do
     t.integer  "ws_model_run_id"
     t.string   "old_value"
     t.string   "new_value"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "ws_set_model_run_id"
   end
 
   add_index "ws_param_values", ["ws_model_run_id"], name: "index_ws_param_values_on_ws_model_run_id", using: :btree
   add_index "ws_param_values", ["ws_param_id", "ws_model_run_id"], name: "index_ws_param_values_on_ws_param_id_and_ws_model_run_id", unique: true, using: :btree
   add_index "ws_param_values", ["ws_param_id"], name: "index_ws_param_values_on_ws_param_id", using: :btree
+  add_index "ws_param_values", ["ws_set_model_run_id"], name: "index_ws_param_values_on_ws_set_model_run_id", using: :btree
 
   create_table "ws_params", force: :cascade do |t|
     t.string   "name"
@@ -220,5 +222,6 @@ ActiveRecord::Schema.define(version: 20160411181521) do
   add_foreign_key "ws_param_models", "ws_params"
   add_foreign_key "ws_param_values", "ws_model_runs"
   add_foreign_key "ws_param_values", "ws_params"
+  add_foreign_key "ws_param_values", "ws_set_model_runs"
   add_foreign_key "ws_params", "users"
 end

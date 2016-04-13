@@ -1,14 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Ws Param Values</h1>
+<h1>Список источников значений параметров</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Ws param</th>
-      <th>Ws model run</th>
-      <th>Old value</th>
-      <th>New value</th>
+      <th>Модель</th>      
+      <th>Прогон</th>
+      <th>Параметр</th>
+      <th>Источник вх.значения</th>
+      <th>Вх.значение</th>
+      <th>Вых.значение</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,13 +18,24 @@
   <tbody>
     <% @ws_param_values.each do |ws_param_value| %>
       <tr>
-        <td><%= ws_param_value.ws_param %></td>
-        <td><%= ws_param_value.ws_model_run %></td>
+        <td><%= ws_param_value.ws_model_run.ws_model.name %></td>
+        <td><%= ws_param_value.ws_model_run.name %></td>
+        <td><%= ws_param_value.ws_param.name %></td>
+        <td>???</td>
         <td><%= ws_param_value.old_value %></td>
         <td><%= ws_param_value.new_value %></td>
-        <td><%= link_to 'Show', ws_param_value %></td>
-        <td><%= link_to 'Edit', edit_ws_param_value_path(ws_param_value) %></td>
-        <td><%= link_to 'Destroy', ws_param_value, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to ws_param_value, class: "btn btn-default", title: "Показать" do %>
+              <i class="glyphicon glyphicon-zoom-in"></i>
+            <% end %>
+        </td>
+        <td><%= link_to edit_ws_param_value_path(ws_param_value), class: "btn btn-default", title: "Редактировать" do %>
+              <i class="glyphicon glyphicon-pencil"></i>
+            <% end %>
+        </td>
+        <td><%= link_to ws_param_value, class: "btn btn-default", method: :delete, title: "Удалить", data: { confirm: 'Вы уверены?' } do %>
+              <i class="glyphicon glyphicon-trash"></i>
+            <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +43,4 @@
 
 <br>
 
-<%= link_to 'New Ws param value', new_ws_param_value_path %>
+<%= link_to 'Новый источник значений параметров', new_ws_param_value_path %>
