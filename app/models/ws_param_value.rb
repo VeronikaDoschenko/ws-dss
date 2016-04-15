@@ -3,4 +3,5 @@ class WsParamValue < ActiveRecord::Base
   belongs_to :ws_param
   belongs_to :ws_model_run
   belongs_to :ws_set_model_run
+  has_and_belongs_to_many :source_ws_params, class_name: 'WsParam'
 end

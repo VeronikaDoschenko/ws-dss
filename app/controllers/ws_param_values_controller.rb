@@ -41,6 +41,7 @@ class WsParamValuesController < ApplicationController
   # PATCH/PUT /ws_param_values/1
   # PATCH/PUT /ws_param_values/1.json
   def update
+    params[:ws_param_value][:source_ws_param_ids] ||= []
     respond_to do |format|
       if @ws_param_value.update(ws_param_value_params)
         format.html { redirect_to @ws_param_value, notice: 'Ws param value was successfully updated.' }
@@ -72,6 +73,7 @@ class WsParamValuesController < ApplicationController
     def ws_param_value_params
       params.require(:ws_param_value).permit(:ws_param_id, :ws_model_run_id,
                                              :old_value, :new_value,
-                                             :ws_set_model_run_id)
+                                             :ws_set_model_run_id,
+                                             :source_ws_param_ids => [])
     end
 end

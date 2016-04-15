@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413144050) do
+ActiveRecord::Schema.define(version: 20160415113654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,6 +189,13 @@ ActiveRecord::Schema.define(version: 20160413144050) do
   add_index "ws_param_values", ["ws_param_id", "ws_model_run_id"], name: "index_ws_param_values_on_ws_param_id_and_ws_model_run_id", unique: true, using: :btree
   add_index "ws_param_values", ["ws_param_id"], name: "index_ws_param_values_on_ws_param_id", using: :btree
   add_index "ws_param_values", ["ws_set_model_run_id"], name: "index_ws_param_values_on_ws_set_model_run_id", using: :btree
+
+  create_table "ws_param_values_params", id: false, force: :cascade do |t|
+    t.integer "ws_param_id",       null: false
+    t.integer "ws_param_value_id", null: false
+  end
+
+  add_index "ws_param_values_params", ["ws_param_value_id", "ws_param_id"], name: "index_param_value_source_link", using: :btree
 
   create_table "ws_params", force: :cascade do |t|
     t.string   "name"

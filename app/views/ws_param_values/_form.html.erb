@@ -1,4 +1,4 @@
-<%= form_for(@ws_param_value) do |f| %>
+<%= form_for(@ws_param_value, :html => {:class => 'form-horizontal'}) do |f| %>
   <% if @ws_param_value.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@ws_param_value.errors.count, "error") %> prohibited this ws_param_value from being saved:</h2>
@@ -10,30 +10,39 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :ws_param_id %><br>
-    <%= f.text_field :ws_param_id %>
+  <div class="form-group">
+    <%= f.label :ws_model_run_id, "Прогон модели", class: "col-md-3 control-label" %>
+    <%= f.collection_select(:ws_model_run_id, WsModelRun.all, :id, :name, {include_blank: 'выберите прогон...'}, {class: "col-md-3"}) %>
+    <%= f.label :ws_param_id, "Параметр прогона", class: "col-md-3 control-label" %>
+    <%= f.collection_select(:ws_param_id, WsParam.all, :id, :name, {include_blank: 'выберите параметр...'}, {class: "col-md-3"}) %>    
   </div>
-  <div class="field">
-    <%= f.label :ws_model_run_id %><br>
-    <%= f.text_field :ws_model_run_id %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :ws_set_model_run_id, "Множетсво прогонов" %><br>
-    <%= f.collection_select(:ws_set_model_run_id, WsSetModelRun.all, :id, :name, include_blank: 'выберите множество...') %>
-  </div>
-
-  <div class="field">
-    <%= f.label :old_value %><br>
-    <%= f.text_field :old_value %>
-  </div>
-  <div class="field">
-    <%= f.label :new_value %><br>
-    <%= f.text_field :new_value %>
-  </div>
+  <fieldset>
+    <legend>Источник значений:</legend>
+      <div class="field">
+       <%= f.label :ws_set_model_run_id, "Множетсво прогонов" %><br>
+       <%= f.collection_select(:ws_set_model_run_id, WsSetModelRun.all, :id, :name, include_blank: 'выберите множество...') %>
+      </div>
+      <% if @ws_param_value.ws_set_model_run %>
+      <% @ws_param_value.ws_set_model_run.ws_model_runs.joins(ws_model: [ws_param_models: :ws_param]).distinct.select('ws_params.id,ws_params.name').order(2).each do |d| %>
+        <div>
+          <%= check_box_tag "ws_param_value[source_ws_param_ids][]", d.id, @ws_param_value.source_ws_params.find_by_id(d.id) %>
+          <%= d.name %>
+        </div>
+      <% end %>
+      <% end %>
+  </fieldset>
+  <br/>
+  <fieldset>
+    <legend>Значения:</legend>
+    <div class="form-group">
+      <%= f.label :old_value, "Значение до прогона", class: "col-md-3 control-label" %>
+      <%= f.text_area :old_value, autocomplete: "off", cols: 50, rows: 3, class: "col-md-3" %>
+      <%= f.label :new_value, "Значение после прогона", class: "col-md-3 control-label" %>
+      <%= f.text_area :new_value, autocomplete: "off", cols: 50, rows: 3, class: "col-md-3" %>
+    </div>
+  </fieldset>
+  <br/>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Сохранить"%>
   </div>
 <% end %>
