@@ -1,4 +1,5 @@
 class WsJob < ActiveRecord::Base
+  nilify_blanks
   belongs_to :ws_method
   belongs_to :user
 

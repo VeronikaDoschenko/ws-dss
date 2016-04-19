@@ -13,7 +13,7 @@
       <tr>
         <td><small><%= l ws_job.updated_at %></small></td>
         <td><%= ws_job.ws_method.name %></td>
-        <td><%= ws_job.input[0..150] + (ws_job.input.size > 150 ? " ..." : "") %></td>
+        <td><%= (ws_job.input ? ((ws_job.input[0..150] + (ws_job.input.size > 150 ? " ..." : ""))):"") %></td>
         <td><%= ws_job.error_code %>/<%= ws_job.for_check %>/<%= ws_job.do_check %></td>
         <% if ws_job.do_check==0 or current_user.admin? %>
           <td><%= link_to  edit_ws_job_path(ws_job), class: "btn btn-default", title: "Редактировать" do %>

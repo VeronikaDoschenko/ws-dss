@@ -1,33 +1,3 @@
-class TrueClass
-	def impl( other )
-	  other 
-	end
-	def equviv( other )
-	  other
-	end
-	def pirs( other )
-	  false 
-	end
-	def sheph( other )
-	  not other
-	end
-end
-
-class FalseClass
-	def impl( other )
-	  true
-	end
-	def equviv( other )
-	  not other 
-	end
-	def pirs( other )
-	  not other 
-	end
-	def sheph( other )
-	  true
-	end
-end
-
 class WsMethod < ActiveRecord::Base
   nilify_blanks
   
@@ -50,30 +20,34 @@ class WsMethod < ActiveRecord::Base
   end
 
   def self.ask_working
-    where("test_output is not null and code is not null").order("lower(name)")
+    where("test_output is not null").order("lower(name)")
   end
 
   def do_calc (m_input)
-    error_code = 0
+	error_code = 0
     for_check = 0
-    exec_val = <<-WS_EOS
-      begin
-        ws_input_data = <<-WS_DATA
-          #{m_input}
-        WS_DATA
-        $stdin  = StringIO.new(ws_input_data)
-        $stdout = StringIO.new
-        #{self.code}
-        $stdout.string
-      rescue Exception => msg
-        error_code = 1
-        $stdout.string + "\n" + msg.to_s 
-      ensure
-        $stdin  = STDIN
-        $stdout = STDOUT
-      end
-    WS_EOS
-    s = eval(exec_val)
+	if m_input and self.code   
+		exec_val = <<-WS_EOS
+		  begin
+			ws_input_data = <<-WS_DATA
+			  #{m_input}
+			WS_DATA
+			$stdin  = StringIO.new(ws_input_data)
+			$stdout = StringIO.new
+			#{self.code}
+			$stdout.string
+		  rescue Exception => msg
+			error_code = 1
+			$stdout.string + "\n" + msg.to_s 
+		  ensure
+			$stdin  = STDIN
+			$stdout = STDOUT
+		  end
+		WS_EOS
+		s = eval(exec_val)
+	else
+		s = {trace: ( self.code ? "no input" : "no code" ) }.to_json
+	end
     return [s, error_code, for_check]
   end
 end

@@ -14,7 +14,7 @@
         <td><%= ws_method.descr %></td>
         <td><%= link_to 'Показать', ws_method %></td>
         <td><%= link_to 'Редактировать', edit_ws_method_path(ws_method) %></td>
-        <td><% if ws_method.test_input && ws_method.test_output && ws_method.code %>
+        <td><% if ws_method.test_output %>
               <%= link_to 'Проверить', test_ws_method_path(ws_method) %>
             <% end %>
         </td>
