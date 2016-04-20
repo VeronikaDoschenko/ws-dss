@@ -1,22 +1,30 @@
 <p>
-  <strong>Ws param:</strong>
-  <%= @ws_param_value.ws_param %>
+  <strong>Модель:</strong>
+  <%= @ws_param_value.ws_model_run.ws_model.name %>
 </p>
-
 <p>
-  <strong>Ws model run:</strong>
-  <%= @ws_param_value.ws_model_run %>
+  <strong>Прогон:</strong>
+  <%= @ws_param_value.ws_model_run.name %>
 </p>
-
 <p>
-  <strong>Old value:</strong>
-  <%= @ws_param_value.old_value %>
+  <strong>Параметр:</strong>
+  <%= @ws_param_value.ws_param.name %>
 </p>
-
 <p>
-  <strong>New value:</strong>
-  <%= @ws_param_value.new_value %>
+  <strong>Источник:</strong>
+  <% if @ws_param_value.ws_set_model_run %>
+    <%= @ws_param_value.ws_set_model_run.name %>
+    <br/>
+    <%= @ws_param_value.source_ws_params.map{|x| "<li>#{x.name}</li>"}.join.html_safe %>
+    <br/>
+  <% end %>
+<p>
+  <strong>Входное значение:</strong>
+  <pre><%= @ws_param_value.old_value %></pre>
 </p>
-
-<%= link_to 'Edit', edit_ws_param_value_path(@ws_param_value) %> |
-<%= link_to 'Back', ws_param_values_path %>
+<p>
+  <strong>Выходное значение:</strong>
+  <pre><%= @ws_param_value.new_value %></pre>
+</p>
+<%= link_to 'Редактировать', edit_ws_param_value_path(@ws_param_value) %> |
+<%= link_to 'Назад', ws_param_values_path %>

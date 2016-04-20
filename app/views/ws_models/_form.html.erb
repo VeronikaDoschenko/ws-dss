@@ -23,6 +23,10 @@
     <%= f.label :model_url, "URL-адрес веб-сервиса модели" %><br>
     <%= f.url_field :model_url, size: 100 %>
   </div>
+  <div class="field">
+    <%= f.label :ws_method_id, "Внутренний метод" %><br>
+    <%= f.collection_select(:ws_method_id, WsMethod.ask_working, :id, :name, include_blank: 'выберите метод...') %>
+  </div>
   <br/>
   <%= f.fields_for :ws_param_models do |builder| %>
     <%= render "ws_param_model_fields", :f => builder %>

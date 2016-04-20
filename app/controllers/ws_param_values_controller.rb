@@ -5,7 +5,11 @@ class WsParamValuesController < ApplicationController
   # GET /ws_param_values
   # GET /ws_param_values.json
   def index
-    @ws_param_values = ( (params[:q]) ? WsParamValue.ransack(params[:q]).result : WsParamValue.all )
+    if params[:q]
+      @ws_param_values = WsParamValue.ransack(params[:q]).result
+    else
+      @ws_param_values = WsParamValue.joins([{ws_model_run: :ws_model}, :ws_param]).order('ws_models.name, ws_model_runs.name, ws_params.name') 
+    end
   end
 
   # GET /ws_param_values/1

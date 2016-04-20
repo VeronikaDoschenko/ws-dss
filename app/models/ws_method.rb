@@ -3,7 +3,8 @@ class WsMethod < ActiveRecord::Base
   
   has_many :descriptions, as: :rec, dependent: :destroy
   has_many :ws_jobs, dependent: :restrict_with_exception
-
+  has_many :ws_models
+  
   def descr
     d = self.descriptions.where(:locale => I18n.locale).first
     return d ? d.descr : ""

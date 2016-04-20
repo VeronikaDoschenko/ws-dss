@@ -13,6 +13,11 @@
   <%= @ws_model.model_url %>
 </p>
 
+<p>
+  <strong>Внутренний метод:</strong>
+  <%= @ws_model.try(:ws_method).try(:name) %>
+</p>
+
 <p>Параметры модели</p>
 <table class="table">
   <thead>

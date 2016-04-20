@@ -19,9 +19,13 @@
         <td><%= ws_param_value.ws_model_run.ws_model.name %></td>
         <td><%= ws_param_value.ws_model_run.name %></td>
         <td><%= ws_param_value.ws_param.name %></td>
-        <td>???</td>
-        <td><%= ws_param_value.old_value %></td>
-        <td><%= ws_param_value.new_value %></td>
+        <td> <% if ws_param_value.ws_set_model_run %>
+               <%= ws_param_value.ws_set_model_run.name %>
+               (<%= ws_param_value.source_ws_params.map{|x| x.name}.join(', ') %>)
+             <% end %>
+        </td>
+        <td><%= ws_param_value.old_value.try{ |p| (p.size > 256)?(p[0..255]+'...'):p } %></td>
+        <td><%= ws_param_value.new_value.try{ |p| (p.size > 256)?(p[0..255]+'...'):p } %></td>
         <td><%= link_to ws_param_value, class: "btn btn-default", title: "Показать" do %>
               <i class="glyphicon glyphicon-zoom-in"></i>
             <% end %>

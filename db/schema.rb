@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415113654) do
+ActiveRecord::Schema.define(version: 20160420095736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -156,12 +156,14 @@ ActiveRecord::Schema.define(version: 20160415113654) do
     t.string   "name"
     t.string   "descr"
     t.string   "model_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "user_id"
+    t.integer  "ws_method_id"
   end
 
   add_index "ws_models", ["user_id"], name: "index_ws_models_on_user_id", using: :btree
+  add_index "ws_models", ["ws_method_id"], name: "index_ws_models_on_ws_method_id", using: :btree
 
   create_table "ws_param_models", force: :cascade do |t|
     t.integer  "ws_model_id"
@@ -225,6 +227,7 @@ ActiveRecord::Schema.define(version: 20160415113654) do
   add_foreign_key "ws_model_runs", "ws_model_statuses"
   add_foreign_key "ws_model_runs", "ws_models"
   add_foreign_key "ws_models", "users"
+  add_foreign_key "ws_models", "ws_methods"
   add_foreign_key "ws_param_models", "ws_models"
   add_foreign_key "ws_param_models", "ws_params"
   add_foreign_key "ws_param_values", "ws_model_runs"
