@@ -41,7 +41,6 @@ class WsSetModelRunsController < ApplicationController
   # PATCH/PUT /ws_set_model_runs/1
   # PATCH/PUT /ws_set_model_runs/1.json
   def update
-    params[:ws_set_model_run][:ws_model_run_ids] ||= []
     respond_to do |format|
       if @ws_set_model_run.update(ws_set_model_run_params)
         format.html { redirect_to @ws_set_model_run, notice: 'Множетсво прогонов успешно обновлено.' }
@@ -71,6 +70,13 @@ class WsSetModelRunsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ws_set_model_run_params
-      params.require(:ws_set_model_run).permit(:name, :descr, :ws_model_run_ids => [])
+      params['ws_set_model_run']['ws_model_runs_set_model_runs_attributes'].each do |k,v|
+        if v['ord']==''
+          params['ws_set_model_run']['ws_model_runs_set_model_runs_attributes'][k]['_destroy']='1'
+        end
+      end
+      params.require(:ws_set_model_run).permit(:name, :descr,
+        :ws_model_runs_set_model_runs_attributes => [:ws_model_run_id, :ord, :_destroy, :id]                             
+                                               )
     end
 end

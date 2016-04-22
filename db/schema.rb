@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420095736) do
+ActiveRecord::Schema.define(version: 20160422151713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,9 +139,10 @@ ActiveRecord::Schema.define(version: 20160420095736) do
   add_index "ws_model_runs", ["ws_model_id"], name: "index_ws_model_runs_on_ws_model_id", using: :btree
   add_index "ws_model_runs", ["ws_model_status_id"], name: "index_ws_model_runs_on_ws_model_status_id", using: :btree
 
-  create_table "ws_model_runs_set_model_runs", id: false, force: :cascade do |t|
+  create_table "ws_model_runs_set_model_runs", force: :cascade do |t|
     t.integer "ws_model_run_id",     null: false
     t.integer "ws_set_model_run_id", null: false
+    t.integer "ord"
   end
 
   add_index "ws_model_runs_set_model_runs", ["ws_set_model_run_id", "ws_model_run_id"], name: "index_set_model_run_link", using: :btree

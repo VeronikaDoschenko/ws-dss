@@ -21,13 +21,32 @@
     <%= f.text_area :descr, autocomplete: "off", cols: 103, rows: 6 %>
   </div>
   
-  <% WsModelRun.all.each do |mr| %>
-    <div>
-      <%= check_box_tag "ws_set_model_run[ws_model_run_ids][]", mr.id, @ws_set_model_run.ws_model_runs.include?(mr) %>
-      <%= mr.name + ' (' + mr.ws_model.name + ')' %>
-    </div>
-  <% end %>
-
+  
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Модель</th>
+        <th>Прогон</th>
+        <th>Порядковый номер</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% WsModelRun.all.each do |mr| %>
+        <tr>
+          <td><%= mr.ws_model.name %></td>
+          <td><%= mr.name %></td>
+          <% msm = @ws_set_model_run.ws_model_runs_set_model_runs.find_by_ws_model_run_id(mr.id) %>
+          <% msm = @ws_set_model_run.ws_model_runs_set_model_runs.new(ws_model_run_id: mr.id) unless msm %>          
+          <%= f.fields_for :ws_model_runs_set_model_runs, msm do |msm_fields| %>
+            <td><%= msm_fields.text_field :ord, size: 10 %>
+                <%= msm_fields.hidden_field :ws_model_run_id  %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>  
+  </table>
   <div class="actions">
     <%= f.submit "Сохранить" %>
   </div>

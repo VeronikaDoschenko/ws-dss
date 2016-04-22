@@ -19,7 +19,7 @@
   </thead>
 
   <tbody>
-    <% @ws_set_model_run.ws_model_runs.each do |mr|%>
+    <% @ws_set_model_run.ws_model_runs.order('ws_model_runs_set_model_runs.ord').each do |mr|%>
       <tr>
           <td><%= mr.name %></td>
           <td><%= mr.ws_model.name %></td>
