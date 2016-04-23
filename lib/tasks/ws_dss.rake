@@ -6,4 +6,11 @@ namespace :ws_dss do
         job.do_job
     end
   end
+  
+  desc "proccess one model run based on method"  
+  task :process_ws_model_run, [:ws_model_run_id] => :environment do |t, args|
+    mr = WsModelRun.find(args[:ws_model_run_id])
+    p t
+    puts "Running Model #{mr.name}"
+  end
 end

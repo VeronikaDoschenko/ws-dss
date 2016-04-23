@@ -11,7 +11,7 @@ class WsModelRun < ActiveRecord::Base
   
   after_save do |mr|
     if mr.ws_model.ws_method and mr.ws_model_status.id == 2
-
+      system "rake ws_dss:process_ws_model_run[#{mr.id}] --trace 2>&1 >> #{Rails.root.join('log',"#{Rails.env}.log")} &"
     end
   end
 end
