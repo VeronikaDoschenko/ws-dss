@@ -17,7 +17,7 @@
         <td><%= ws_model_run.name %></td>
         <td><%= ws_model_run.ws_model.name %></td>
         <td><%= ws_model_run.ws_model_status.name %></td>
-        <td><%= ws_model_run.trace %></td>
+        <td><%= ws_model_run.trace.try{|t| (t.size < 100 ? t : t[0..100]+'...')} %></td>
         <td><%= link_to ws_model_run, class: "btn btn-default", title: "Показать" do %>
               <i class="glyphicon glyphicon-zoom-in"></i>
             <% end %>
