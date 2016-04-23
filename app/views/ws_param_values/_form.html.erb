@@ -23,12 +23,28 @@
        <%= f.collection_select(:ws_set_model_run_id, WsSetModelRun.all, :id, :name, include_blank: 'выберите множество...') %>
       </div>
       <% if @ws_param_value.ws_set_model_run %>
-      <% @ws_param_value.ws_set_model_run.ws_model_runs.joins(ws_model: [ws_param_models: :ws_param]).distinct.select('ws_params.id,ws_params.name').order(2).each do |d| %>
-        <div>
-          <%= check_box_tag "ws_param_value[source_ws_param_ids][]", d.id, @ws_param_value.source_ws_params.find_by_id(d.id) %>
-          <%= d.name %>
-        </div>
-      <% end %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Параметр</th>
+              <th>Порядковый номер</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @ws_param_value.ws_set_model_run.ws_model_runs.joins(ws_model: [ws_param_models: :ws_param]).distinct.select('ws_params.id,ws_params.name').order(2).each do |d| %>
+              <tr>
+                <td><%= d.name %></td>
+                <% pvp = @ws_param_value.ws_param_values_params.find_by_ws_param_id(d.id) %>
+                <% pvp = @ws_param_value.ws_param_values_params.new(ws_param_id: d.id) unless pvp %>          
+                <%= f.fields_for :ws_param_values_params, pvp do |pvp_fields| %>
+                  <td><%= pvp_fields.text_field :ord, size: 10 %>
+                      <%= pvp_fields.hidden_field :ws_param_id  %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>  
+        </table>      
       <% end %>
   </fieldset>
   <br/>

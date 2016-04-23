@@ -70,9 +70,11 @@ class WsSetModelRunsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ws_set_model_run_params
-      params['ws_set_model_run']['ws_model_runs_set_model_runs_attributes'].each do |k,v|
-        if v['ord']==''
-          params['ws_set_model_run']['ws_model_runs_set_model_runs_attributes'][k]['_destroy']='1'
+      if params[:ws_set_model_run][:ws_model_runs_set_model_runs_attributes]      
+        params[:ws_set_model_run][:ws_model_runs_set_model_runs_attributes].each do |k,v|
+          if v[:ord].blank?
+            params[:ws_set_model_run][:ws_model_runs_set_model_runs_attributes][k][:_destroy]=1
+          end
         end
       end
       params.require(:ws_set_model_run).permit(:name, :descr,

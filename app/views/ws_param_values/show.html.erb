@@ -15,7 +15,7 @@
   <% if @ws_param_value.ws_set_model_run %>
     <%= @ws_param_value.ws_set_model_run.name %>
     <br/>
-    <%= @ws_param_value.source_ws_params.map{|x| "<li>#{x.name}</li>"}.join.html_safe %>
+    <%= @ws_param_value.source_ws_params.order('ws_param_values_params.ord').map{|x| "<li>#{x.name}</li>"}.join.html_safe %>
     <br/>
   <% end %>
 <p>

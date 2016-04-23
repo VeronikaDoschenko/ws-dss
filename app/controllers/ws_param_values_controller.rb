@@ -75,9 +75,16 @@ class WsParamValuesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ws_param_value_params
+      if params[:ws_param_value][:ws_param_values_params_attributes]      
+        params[:ws_param_value][:ws_param_values_params_attributes].each do |k,v|
+          if v[:ord].blank?
+            params[:ws_param_value][:ws_param_values_params_attributes][k][:_destroy]=1
+          end
+        end
+      end
       params.require(:ws_param_value).permit(:ws_param_id, :ws_model_run_id,
-                                             :old_value, :new_value,
-                                             :ws_set_model_run_id,
-                                             :source_ws_param_ids => [])
+                    :old_value, :new_value,
+                    :ws_set_model_run_id,
+                    :ws_param_values_params_attributes => [:ws_param_id, :ord, :_destroy, :id])
     end
 end
