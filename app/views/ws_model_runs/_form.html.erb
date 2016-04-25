@@ -38,11 +38,16 @@
           <td><%= pm.ws_param.name %></td>
           <% pv = @ws_model_run.ws_param_values.find_by_ws_param_id(pm.ws_param.id) %>
           <% pv = @ws_model_run.ws_param_values.new(ws_param_id: pm.ws_param.id) unless pv %>          
-          <%= f.fields_for :ws_param_values, pv do |pm_fields| %>
-            <td><%= pm_fields.text_area :old_value, autocomplete: "off", cols: 50, rows: 3, maxlength: 10000 %>
+          <td>
+            <% if pv.old_value.blank? or pv.old_value.size < 10000 %>
+              <%= f.fields_for :ws_param_values, pv do |pm_fields| %>
+                <%= pm_fields.text_area :old_value, autocomplete: "off", cols: 50, rows: 3, maxlength: 10000 %>
                 <%= pm_fields.hidden_field :ws_param_id  %>
-            </td>
-          <% end %>
+              <% end %>
+            <% else %>
+              Редактирование недоступно
+            <% end %>
+          </td>
         </tr>
         <% end %>
       <% end %>
