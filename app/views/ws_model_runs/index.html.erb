@@ -3,6 +3,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Дата/Время обновления</th>
       <th>Название</th>
       <th>Модель</th>
       <th>Статус</th>
@@ -12,12 +13,13 @@
   </thead>
 
   <tbody>
-    <% @ws_model_runs.each do |ws_model_run| %>
+    <% @ws_model_runs.order(updated_at: :desc).each do |ws_model_run| %>
       <tr>
+        <td><%= ws_model_run.updated_at %></td>
         <td><%= ws_model_run.name %></td>
         <td><%= ws_model_run.ws_model.name %></td>
         <td><%= ws_model_run.ws_model_status.name %></td>
-        <td><%= ws_model_run.trace.try{|t| (t.size < 100 ? t : t[0..100]+'...')} %></td>
+        <td><%= long_string(ws_model_run.trace) %></td>
         <td><%= link_to ws_model_run, class: "btn btn-default", title: "Показать" do %>
               <i class="glyphicon glyphicon-zoom-in"></i>
             <% end %>

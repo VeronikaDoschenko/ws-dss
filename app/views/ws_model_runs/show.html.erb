@@ -31,8 +31,8 @@
     <% @ws_model_run.ws_param_values.each do |pv|%>
       <tr>
           <td><%= pv.ws_param.name %></td>
-          <td><%= pv.old_value.try{|d| d[0..255]} %></td>
-          <td><%= pv.new_value.try{|d| d[0..255]} %></td> 
+          <td><%= long_string(pv.old_value) %></td>
+          <td><%= long_string(pv.new_value) %></td> 
       </tr>
     <% end %>
   </tbody>

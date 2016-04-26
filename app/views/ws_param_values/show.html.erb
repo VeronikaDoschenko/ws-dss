@@ -20,11 +20,11 @@
   <% end %>
 <p>
   <strong>Входное значение:</strong>
-  <pre><%= @ws_param_value.old_value.try{|d| d[0..255]} %></pre>
+  <pre><%= long_string(@ws_param_value.old_value) %></pre>
 </p>
 <p>
   <strong>Выходное значение:</strong>
-  <pre><%= @ws_param_value.new_value.try{|d| d[0..255]} %></pre>
+  <pre><%= long_string(@ws_param_value.new_value) %></pre>
 </p>
 <%= link_to 'Редактировать', edit_ws_param_value_path(@ws_param_value) %> |
 <%= link_to 'Назад', ws_param_values_path %>

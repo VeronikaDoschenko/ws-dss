@@ -14,7 +14,7 @@
   </thead>
 
   <tbody>
-    <% @ws_param_values.each do |ws_param_value| %>
+    <% @ws_param_values.includes([{ws_model_run: :ws_model}, :ws_param]).order('ws_models.name, ws_model_runs.name, ws_params.name').each do |ws_param_value| %>
       <tr>
         <td><%= ws_param_value.ws_model_run.ws_model.name %></td>
         <td><%= ws_param_value.ws_model_run.name %></td>
@@ -24,8 +24,8 @@
                (<%= ws_param_value.source_ws_params.map{|x| x.name}.join(', ') %>)
              <% end %>
         </td>
-        <td><%= ws_param_value.old_value.try{ |p| (p.size > 256)?(p[0..255]+'...'):p } %></td>
-        <td><%= ws_param_value.new_value.try{ |p| (p.size > 256)?(p[0..255]+'...'):p } %></td>
+        <td><%= long_string(ws_param_value.old_value) %></td>
+        <td><%= long_string(ws_param_value.new_value) %></td>
         <td><%= link_to ws_param_value, class: "btn btn-default", title: "Показать" do %>
               <i class="glyphicon glyphicon-zoom-in"></i>
             <% end %>
