@@ -33,13 +33,17 @@ class WsModelRun < ActiveRecord::Base
       when 7
         prep_model_run( mr )
       when 4
-        # transfer param_values if all set
-        # and run models if they are waiting and can run
+        mr.ws_set_model_runs.each do |ms|
+          ms.ws_param_values.joins(:ws_model_run).where('ws_model_runs.ws_model_status_id = 7').each do |pv|
+            prep_model_run(pv.ws_model_run)
+          end
+        end
       end      
     end
   end
   private
     def prep_model_run( mr )
+      mr.with_lock do
       can_run = true
       mr.ws_param_values.where("exists(select 1
                                     from   ws_param_models
@@ -81,13 +85,15 @@ class WsModelRun < ActiveRecord::Base
               when 6
                 mr.trace += "\nError in source model run #{smr.name} for param #{pv.ws_param.name}"
                 can_run = false
+              else
+                can_run = false
               end
             end
           end
-          if can_run   
+          if can_run
             pov = pov[0] if pov.size == 1
-            pov.map!{|x| (x.size == 1)?x[0]:x }
-            pv.update( old_value: pov.to_s )
+            pov.map!{|x| (x.kind_of?(Array) and x.size == 1)?x[0]:x }
+            pv.update( old_value: JSON.pretty_generate(pov) )
           end
         end
       end
@@ -95,5 +101,6 @@ class WsModelRun < ActiveRecord::Base
           mr.update_columns(trace: mr.trace)
       end
       mr.update(ws_model_status_id: 2) if can_run   
+      end
     end
 end
