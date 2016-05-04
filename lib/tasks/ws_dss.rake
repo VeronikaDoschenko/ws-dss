@@ -21,7 +21,7 @@ namespace :ws_dss do
       end
       input = {}
       mr.ws_param_values.each do |pv|
-        input[pv.ws_param.name] = JSON.parse(pv.old_value) unless pv.old_value.blank?
+        input[pv.ws_param.name] = JSON.parse("[#{pv.old_value}]")[0] unless pv.old_value.blank?
       end
       a = mr.ws_model.ws_method.do_calc(input.to_json)
       output = JSON.parse(a[0])
