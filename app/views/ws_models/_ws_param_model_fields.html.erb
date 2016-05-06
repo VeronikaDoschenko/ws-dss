@@ -3,6 +3,8 @@
   <%= f.collection_select(:ws_param_id, WsParam.all, :id, :name, include_blank: 'выберите параметр...') %>
   <%= f.label :is_reqired, "Обязательный" %>
   <%= f.check_box :is_required %>
+  <%= f.label :is_copy, "Копирование" %>
+  <%= f.check_box :is_copy %>
   <%= f.label :_destroy, "Удалить" %>
   <%= f.check_box :_destroy %>
 </p>

@@ -33,6 +33,12 @@ class WsModelRun < ActiveRecord::Base
       when 7
         prep_model_run( mr )
       when 4
+        mr.ws_param_values.each do |pv|
+          if pv.new_value.blank? and
+             mr.ws_model.ws_param_models.find_by_ws_param_id(pv.ws_param_id).is_copy
+            pv.update(new_value: pv.old_value)
+          end
+        end
         mr.ws_set_model_runs.each do |ms|
           ms.ws_param_values.joins(:ws_model_run).where('ws_model_runs.ws_model_status_id = 7').each do |pv|
             prep_model_run(pv.ws_model_run)
