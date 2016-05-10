@@ -47,6 +47,27 @@ class WsModelRun < ActiveRecord::Base
       end      
     end
   end
+  
+  def make_copy(star_seed, end_seed, ws_method)
+    for seed in (star_seed..end_seed) do
+      mr = WsModelRun.create(name:"#{self.name} #{seed}",
+                             ws_model: self.ws_model,
+                             ws_model_status_id: 1 # draft
+                            )
+      m_input = JSON.parse(ws_method.input)
+      self.ws_param_values.each do |pv| 
+        m_input[pv.ws_param.name] = JSON.parse("[#{pv.old_value}]")[0] unless pv.old_value.blank?
+      end
+      m_input[:seed]  = seed
+      ss = ws_method.do_calc(JSON.pretty_generate(m_input))
+      h = JSON.parse(ss[0])
+      self.ws_param_values.each do |pv| 
+        mr.ws_param_values.create(ws_param: pv.ws_param,
+                                  old_value: (h[pv.ws_param.name]||pv.old_value))
+      end
+    end
+  end
+  
   private
     def prep_model_run( mr )
       mr.with_lock do
