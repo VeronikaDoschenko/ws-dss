@@ -14,6 +14,11 @@
 </p>
 
 <p>
+  <strong>Описание:</strong>
+  <pre><%= @ws_model_run.descr %></pre>
+</p>
+
+<p>
   <strong>Трассировочная печать:</strong>
   <pre><%= @ws_model_run.trace %></pre>
 </p>
@@ -30,7 +35,7 @@
   <tbody>
     <% @ws_model_run.ws_param_values.each do |pv|%>
       <tr>
-          <td><%= pv.ws_param.name %></td>
+          <td><%= link_to pv.ws_param.name, pv %></td>
           <td><%= long_string(pv.old_value) %></td>
           <td><%= long_string(pv.new_value) %></td> 
       </tr>

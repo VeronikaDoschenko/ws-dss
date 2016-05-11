@@ -32,7 +32,7 @@
       </tr>
     </thead>
     <tbody>
-      <% WsModelRun.all.each do |mr| %>
+      <% WsModelRun.includes(:ws_model).order('ws_models.name, ws_model_runs.name').each do |mr| %>
         <tr>
           <td><%= mr.ws_model.name %></td>
           <td><%= mr.name %></td>

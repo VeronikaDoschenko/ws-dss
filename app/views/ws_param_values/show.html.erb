@@ -13,7 +13,7 @@
 <p>
   <strong>Источник:</strong>
   <% if @ws_param_value.ws_set_model_run %>
-    <%= @ws_param_value.ws_set_model_run.name %>
+    <%=  link_to @ws_param_value.ws_set_model_run.name, @ws_param_value.ws_set_model_run %>
     <br/>
     <%= @ws_param_value.source_ws_params.order('ws_param_values_params.ord').map{|x| "<li>#{x.name}</li>"}.join.html_safe %>
     <br/>
