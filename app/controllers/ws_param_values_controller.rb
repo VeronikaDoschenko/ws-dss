@@ -82,7 +82,7 @@ class WsParamValuesController < ApplicationController
           end
         end
       end
-      params.require(:ws_param_value).permit(:ws_param_id, :ws_model_run_id,
+      params.require(:ws_param_value).permit(:ws_param_id, :ws_model_run_id, :formula,
                     :old_value, :new_value,
                     :ws_set_model_run_id,
                     :ws_param_values_params_attributes => [:ws_param_id, :ord, :_destroy, :id])

@@ -3,6 +3,8 @@ class WsModelRun < ActiveRecord::Base
   belongs_to :ws_model
   belongs_to :ws_model_status
   belongs_to :user
+  belongs_to :ws_set_model_run
+  belongs_to :target_ws_model, class_name: 'WsModel'
   has_many :ws_model_runs_set_model_runs
   has_many :ws_set_model_runs, through: :ws_model_runs_set_model_runs
   validates  :ws_model, :ws_model_status, presence: true
@@ -100,11 +102,12 @@ class WsModelRun < ActiveRecord::Base
                 can_run = false
               when 4
                 spv = smr.ws_param_values.find_by_ws_param_id(sp.id)
-                if spv.nil? or spv.new_value.blank?
+                if spv.nil? or (spv.new_value.blank? and spv.old_value.blank? )
                   mr.trace += "\nCan not find source for param #{pv.ws_param.name} in #{smr.name}"
                   can_run = false
                 else
-                  pov[j][i]=JSON.parse("[#{spv.new_value}]")[0]
+                  vv = spv.new_value || spv.old_value
+                  pov[j][i]=JSON.parse("[#{vv}]")[0]
                 end
               when 5
                 mr.trace += "\nError value in source model run #{smr.name} for param #{pv.ws_param.name}"
@@ -120,7 +123,8 @@ class WsModelRun < ActiveRecord::Base
           if can_run
             pov = pov[0] if pov.size == 1
             pov.map!{|x| (x.kind_of?(Array) and x.size == 1)?x[0]:x }
-            pv.update( old_value: JSON.pretty_generate(pov) )
+            pov = pov[0] if pov.kind_of?(Array) and pov.size == 1
+            pv.update( old_value: (pov.kind_of?(Array)?JSON.pretty_generate(pov):pov) )
           end
         end
       end

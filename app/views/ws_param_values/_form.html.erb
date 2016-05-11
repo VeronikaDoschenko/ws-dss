@@ -22,6 +22,11 @@
        <%= f.label :ws_set_model_run_id, "Множетсво прогонов" %><br>
        <%= f.collection_select(:ws_set_model_run_id, WsSetModelRun.all, :id, :name, include_blank: 'выберите множество...') %>
       </div>
+      <br/>
+      <div class="field">
+       <%= f.label :formula, "Формула расчета значений" %><br>
+       <%= f.text_field :formula, size: 100 %>
+      </div>
       <% if @ws_param_value.ws_set_model_run %>
         <table class="table">
           <thead>

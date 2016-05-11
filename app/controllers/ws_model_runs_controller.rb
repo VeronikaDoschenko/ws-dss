@@ -71,6 +71,7 @@ class WsModelRunsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ws_model_run_params
       params.require(:ws_model_run).permit(:name, :ws_model_id, :ws_model_status_id, :trace, :descr,
+                                           :ws_set_model_run_id, :target_ws_model_id,
                                            :ws_param_values_attributes =>
                                               [:ws_param_id, :old_value, :new_value, :_destroy, :id]
                                           )

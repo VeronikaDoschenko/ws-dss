@@ -58,6 +58,15 @@
     </tbody>  
   </table>
   <% end %>
+  <div class="field">
+    <%= f.label :ws_set_model_run_id, "Множество для записи результатов прогонов" %><br>
+    <%= f.collection_select(:ws_set_model_run_id, WsSetModelRun.order(:name), :id, :name, include_blank: 'выберите множество...') %>
+  </div>
+  <div class="field">
+    <%= f.label :target_ws_model_id, "Модель для записи результатов прогонов" %><br>
+    <%= f.collection_select(:target_ws_model_id, WsModel.order(:name), :id, :name, include_blank: 'выберите модель...') %>
+  </div>
+  <br/>
   <div class="actions">
     <%= f.submit "Сохранить" %>
   </div>

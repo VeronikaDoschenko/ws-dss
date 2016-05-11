@@ -42,6 +42,13 @@
     <% end %>
   </tbody>
 </table>
-
+<p>
+  <strong>Множество для записи результатов прогонов:</strong>
+  <%= @ws_model_run.ws_set_model_run.try{ |s| s.name } %>
+</p>
+<p>
+  <strong>Модель для записи результатов прогонов:</strong>
+  <%= @ws_model_run.target_ws_model.try{ |s| s.name } %>
+</p>
 <%= link_to 'Редактировать', edit_ws_model_run_path(@ws_model_run) %> |
 <%= link_to 'Назад', ws_model_runs_path %>

@@ -11,6 +11,10 @@
   <%= @ws_param_value.ws_param.name %>
 </p>
 <p>
+  <strong>Формула:</strong>
+  <%= @ws_param_value.formula %>
+</p>
+<p>
   <strong>Источник:</strong>
   <% if @ws_param_value.ws_set_model_run %>
     <%=  link_to @ws_param_value.ws_set_model_run.name, @ws_param_value.ws_set_model_run %>
