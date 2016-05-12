@@ -5,8 +5,10 @@ class WsModelRun < ActiveRecord::Base
   belongs_to :user
   belongs_to :ws_set_model_run
   belongs_to :target_ws_model, class_name: 'WsModel'
-  has_many :ws_model_runs_set_model_runs
-  has_many :ws_set_model_runs, through: :ws_model_runs_set_model_runs
+  belongs_to :goal_ws_model_run, class_name: 'WsModelRun'
+  has_many   :solver_ws_model_runs, foreign_key: "goal_ws_model_run_id", class_name: 'WsModelRun'
+  has_many   :ws_model_runs_set_model_runs
+  has_many   :ws_set_model_runs, through: :ws_model_runs_set_model_runs
   validates  :ws_model, :ws_model_status, presence: true
   has_many   :ws_param_values, :dependent => :destroy
   accepts_nested_attributes_for :ws_param_values, allow_destroy: true
