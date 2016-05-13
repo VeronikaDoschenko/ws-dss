@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160512132144) do
+ActiveRecord::Schema.define(version: 20160513092136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,16 +130,16 @@ ActiveRecord::Schema.define(version: 20160512132144) do
     t.integer  "ws_model_id"
     t.integer  "ws_model_status_id"
     t.text     "trace"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.integer  "user_id"
     t.string   "descr"
     t.integer  "ws_set_model_run_id"
     t.integer  "target_ws_model_id"
-    t.integer  "goal_ws_model_run_id"
+    t.integer  "goal_ws_param_value_id"
   end
 
-  add_index "ws_model_runs", ["goal_ws_model_run_id"], name: "index_ws_model_runs_on_goal_ws_model_run_id", using: :btree
+  add_index "ws_model_runs", ["goal_ws_param_value_id"], name: "index_ws_model_runs_on_goal_ws_param_value_id", using: :btree
   add_index "ws_model_runs", ["target_ws_model_id"], name: "index_ws_model_runs_on_target_ws_model_id", using: :btree
   add_index "ws_model_runs", ["user_id"], name: "index_ws_model_runs_on_user_id", using: :btree
   add_index "ws_model_runs", ["ws_model_id"], name: "index_ws_model_runs_on_ws_model_id", using: :btree
@@ -235,10 +235,10 @@ ActiveRecord::Schema.define(version: 20160512132144) do
   add_foreign_key "ws_jobs", "users"
   add_foreign_key "ws_jobs", "ws_methods"
   add_foreign_key "ws_model_runs", "users"
-  add_foreign_key "ws_model_runs", "ws_model_runs", column: "goal_ws_model_run_id"
   add_foreign_key "ws_model_runs", "ws_model_statuses"
   add_foreign_key "ws_model_runs", "ws_models"
   add_foreign_key "ws_model_runs", "ws_models", column: "target_ws_model_id"
+  add_foreign_key "ws_model_runs", "ws_param_values", column: "goal_ws_param_value_id"
   add_foreign_key "ws_model_runs", "ws_set_model_runs"
   add_foreign_key "ws_models", "users"
   add_foreign_key "ws_models", "ws_methods"

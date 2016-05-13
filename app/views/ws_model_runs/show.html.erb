@@ -50,5 +50,9 @@
   <strong>Модель для записи результатов прогонов:</strong>
   <%= @ws_model_run.target_ws_model.try{ |s| s.name } %>
 </p>
+<p>
+  <strong>Целевой параметр прогона:</strong>
+  <%= @ws_model_run.goal_ws_param_value.try{ |s| "#{s.ws_model_run.ws_model.name}/#{s.ws_model_run.name}/#{s.ws_param.name}"} %>
+</p>
 <%= link_to 'Редактировать', edit_ws_model_run_path(@ws_model_run) %> |
 <%= link_to 'Назад', ws_model_runs_path %>

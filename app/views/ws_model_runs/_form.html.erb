@@ -66,6 +66,11 @@
     <%= f.label :target_ws_model_id, "Модель для записи результатов прогонов" %><br>
     <%= f.collection_select(:target_ws_model_id, WsModel.order(:name), :id, :name, include_blank: 'выберите модель...') %>
   </div>
+  <div class="field">
+    <%= f.label :goal_ws_param_value_id, "Целевой параметр погона" %><br>
+    <%= f.collection_select(:goal_ws_param_value_id, WsParamValue.full_info.select("ws_param_values.id,
+          (ws_models.name || '/' || ws_model_runs.name || '/' || ws_params.name) as name"), :id, :name, include_blank: 'выберите параметр...') %>
+  </div>
   <br/>
   <div class="actions">
     <%= f.submit "Сохранить" %>
