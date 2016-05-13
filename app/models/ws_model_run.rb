@@ -6,7 +6,7 @@ class WsModelRun < ActiveRecord::Base
   belongs_to :ws_set_model_run
   belongs_to :target_ws_model, class_name: 'WsModel'
   belongs_to :goal_ws_param_value, class_name: 'WsParamValue'
-  has_many   :ws_model_runs_set_model_runs
+  has_many   :ws_model_runs_set_model_runs, :dependent => :destroy
   has_many   :ws_set_model_runs, through: :ws_model_runs_set_model_runs
   validates  :ws_model, :ws_model_status, presence: true
   has_many   :ws_param_values, :dependent => :destroy
@@ -42,6 +42,7 @@ class WsModelRun < ActiveRecord::Base
             pv.update(new_value: pv.old_value)
           end
         end
+        store_res(mr) if mr.ws_set_model_run
         mr.ws_set_model_runs.each do |ms|
           ms.ws_param_values.joins(:ws_model_run).where('ws_model_runs.ws_model_status_id = 7').each do |pv|
             prep_model_run(pv.ws_model_run)
@@ -51,24 +52,45 @@ class WsModelRun < ActiveRecord::Base
     end
   end
   
-  def make_copy(star_seed, end_seed, ws_method)
-    for seed in (star_seed..end_seed) do
-      mr = WsModelRun.create(name:"#{self.name} #{seed}",
-                             ws_model: self.ws_model,
-                             ws_model_status_id: 1 # draft
-                            )
-      m_input = JSON.parse(ws_method.input)
-      self.ws_param_values.each do |pv| 
-        m_input[pv.ws_param.name] = JSON.parse("[#{pv.old_value}]")[0] unless pv.old_value.blank?
-      end
-      m_input[:seed]  = seed
-      ss = ws_method.do_calc(JSON.pretty_generate(m_input))
-      h = JSON.parse(ss[0])
-      self.ws_param_values.each do |pv| 
-        mr.ws_param_values.create(ws_param: pv.ws_param,
-                                  old_value: (h[pv.ws_param.name]||pv.old_value))
+  def store_res mr
+    mname = mr.name
+    need_next = false
+    h = {}
+    i = 0
+    mr.ws_param_values.each do |pv|
+      if pv.formula
+        a = eval(pv.formula)
+        i = a.index(pv.old_value.to_i)
+        if i
+          mname += ' ' + pv.old_value
+          i += 1
+          if i < a.size
+            need_next = true
+            h[pv.id] = { old_value: a[i].to_s }
+          end
+        end
       end
     end
+    
+    nmr = WsModelRun.create( name:               mname,
+                             ws_model:           mr.target_ws_model,
+                             ws_model_status_id: 1 # draft
+                           )
+    
+    nn = mr.ws_set_model_run.ws_model_runs_set_model_runs.size + 1
+    
+    mr.ws_set_model_run.ws_model_runs_set_model_runs.create(ord: nn, ws_model_run: nmr)
+    
+    mr.target_ws_model.ws_param_models.each do |pm|
+      pv  = nmr.ws_param_values.create(ws_param: pm.ws_param)
+      spv = mr.ws_param_values.find_by_ws_param_id( pv.ws_param_id )   
+      pv.update(old_value: (spv.new_value || spv.old_value)) if spv
+    end
+    
+    if need_next
+        WsParamValue.update(h.keys, h.values)
+        mr.update(ws_model_status_id: 2)
+    end 
   end
   
   private
