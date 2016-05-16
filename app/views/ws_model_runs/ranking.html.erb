@@ -1,0 +1,13 @@
+<p>
+  <strong>
+  <%= @ws_model_run.goal_ws_param_value.ws_model_run.name %>
+  </strong>
+</p>
+<p>Результат ранжирования</p>
+<% @rank.each_with_index do |r,i| %>
+  <p>
+    <%= r[0] %>
+    <%= WsModelRun.find(r[1]).name %>
+  </p>
+<% end %>
+<%= link_to 'Назад', @ws_model_run %>

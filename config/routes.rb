@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :ws_set_model_runs
   resources :ws_param_values
   resources :ws_model_runs
+  get 'ws_model_runs/:id/ranking' => 'ws_model_runs#ranking', as: :show_model_runs_ranking
   resources :ws_model_statuses
   resources :ws_params
   resources :ws_models

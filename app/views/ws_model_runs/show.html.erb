@@ -42,6 +42,7 @@
     <% end %>
   </tbody>
 </table>
+<% if @ws_model_run.ws_set_model_run %>
 <p>
   <strong>Множество для записи результатов прогонов:</strong>
   <%= @ws_model_run.ws_set_model_run.try{ |s| link_to(s.name, s) } %>
@@ -53,6 +54,11 @@
 <p>
   <strong>Целевой параметр прогона:</strong>
   <%= @ws_model_run.goal_ws_param_value.try{ |s| link_to(s.full_name,s)} %>
+  <% if @ws_model_run.goal_ws_param_value %>
+    <%= link_to 'Ранжирование', show_model_runs_ranking_path(@ws_model_run) %>
+  <% end %>
 </p>
+<% end %>
+
 <%= link_to 'Редактировать', edit_ws_model_run_path(@ws_model_run) %> |
 <%= link_to 'Назад', ws_model_runs_path %>
