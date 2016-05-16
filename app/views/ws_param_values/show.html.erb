@@ -1,14 +1,14 @@
 <p>
   <strong>Модель:</strong>
-  <%= @ws_param_value.ws_model_run.ws_model.name %>
+  <%= @ws_param_value.ws_model_run.ws_model.try{|s| link_to(s.name, s)} %>
 </p>
 <p>
   <strong>Прогон:</strong>
-  <%= @ws_param_value.ws_model_run.name %>
+  <%= @ws_param_value.ws_model_run.try{|s| link_to(s.name, s)} %>
 </p>
 <p>
   <strong>Параметр:</strong>
-  <%= @ws_param_value.ws_param.name %>
+  <%= @ws_param_value.ws_param.try{|s| link_to(s.name, s)} %>
 </p>
 <p>
   <strong>Формула:</strong>
@@ -19,7 +19,7 @@
   <% if @ws_param_value.ws_set_model_run %>
     <%=  link_to @ws_param_value.ws_set_model_run.name, @ws_param_value.ws_set_model_run %>
     <br/>
-    <%= @ws_param_value.source_ws_params.order('ws_param_values_params.ord').map{|x| "<li>#{x.name}</li>"}.join.html_safe %>
+    <%= @ws_param_value.source_ws_params.order('ws_param_values_params.ord').map{|x| "<li>#{link_to(x.name,x)}</li>"}.join.html_safe %>
     <br/>
   <% end %>
 <p>

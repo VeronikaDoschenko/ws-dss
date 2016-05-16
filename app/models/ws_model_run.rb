@@ -42,7 +42,7 @@ class WsModelRun < ActiveRecord::Base
             pv.update(new_value: pv.old_value)
           end
         end
-        store_res(mr) if mr.ws_set_model_run
+        store_res(mr) if mr.ws_set_model_run and mr.target_ws_model
         mr.ws_set_model_runs.each do |ms|
           ms.ws_param_values.joins(:ws_model_run).where('ws_model_runs.ws_model_status_id = 7').each do |pv|
             prep_model_run(pv.ws_model_run)
@@ -55,6 +55,7 @@ class WsModelRun < ActiveRecord::Base
   def store_res mr
     mname = mr.name
     need_next = false
+    need_goal = false
     h = {}
     i = 0
     mr.ws_param_values.each do |pv|
@@ -62,24 +63,32 @@ class WsModelRun < ActiveRecord::Base
         a = eval(pv.formula)
         i = a.index(pv.old_value.to_i)
         if i
+          if i == 0
+            mr.ws_set_model_run.ws_model_runs.where("ws_model_runs.name in
+                   ("+a.collect{|t| "'#{mr.name} #{t}'"}.join(', ')+")").destroy_all
+          end
           mname += ' ' + pv.old_value
           i += 1
           if i < a.size
             need_next = true
             h[pv.id] = { old_value: a[i].to_s }
+          elsif i == a.size
+            need_goal = true
           end
         end
       end
     end
-    
+        
     nmr = WsModelRun.create( name:               mname,
                              ws_model:           mr.target_ws_model,
-                             ws_model_status_id: 1 # draft
+                             descr:              mr.trace, 
+                             ws_model_status_id: 7 
                            )
     
-    nn = mr.ws_set_model_run.ws_model_runs_set_model_runs.size + 1
-    
-    mr.ws_set_model_run.ws_model_runs_set_model_runs.create(ord: nn, ws_model_run: nmr)
+    mr.ws_set_model_run.with_lock do
+      nn = mr.ws_set_model_run.ws_model_runs_set_model_runs.size + 1
+      mr.ws_set_model_run.ws_model_runs_set_model_runs.create(ord: nn, ws_model_run: nmr)
+    end
     
     mr.target_ws_model.ws_param_models.each do |pm|
       pv  = nmr.ws_param_values.create(ws_param: pm.ws_param)
@@ -87,9 +96,12 @@ class WsModelRun < ActiveRecord::Base
       pv.update(old_value: (spv.new_value || spv.old_value)) if spv
     end
     
+
     if need_next
-        WsParamValue.update(h.keys, h.values)
-        mr.update(ws_model_status_id: 2)
+      WsParamValue.update(h.keys, h.values)
+      mr.update(ws_model_status_id: 2)
+    elsif need_goal and mr.goal_ws_param_value
+      mr.goal_ws_param_value.ws_model_run.update(ws_model_status_id: 7) # prep to run
     end 
   end
   

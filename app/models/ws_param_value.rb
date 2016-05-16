@@ -13,4 +13,7 @@ class WsParamValue < ActiveRecord::Base
   scope :full_info,-> do
     joins([{ws_model_run: :ws_model}, :ws_param]).order('ws_models.name, ws_model_runs.name, ws_params.name')
   end
+  def full_name
+    "#{ws_model_run.ws_model.name}/#{ws_model_run.name}/#{ws_param.name}"
+  end
 end
