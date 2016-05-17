@@ -18,9 +18,9 @@ class WsModelRunsController < ApplicationController
     pv = @ws_model_run.goal_ws_param_value
     
     rr = JSON.parse("[#{pv.new_value}]")[0] unless pv.new_value.blank?
-    alt = @ws_model_run.ws_set_model_run.ws_model_runs.order('ws_model_runs_set_model_runs.ord').pluck(:id)
+    alt = @ws_model_run.ws_set_model_run.ws_model_runs.order('ws_model_runs_set_model_runs.ord')
     @rank = []
-    if rr.kind_of?(Array) and alt.kind_of?(Array) and rr.size == alt.size
+    if rr.kind_of?(Array) and rr.size == alt.size
       @rank = rr.collect.with_index{|r,i| [r,alt[i]]}
       @rank.sort!{|x,y| y[0]<=>x[0]}
     end

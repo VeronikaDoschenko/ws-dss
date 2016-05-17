@@ -3,11 +3,31 @@
   <%= @ws_model_run.goal_ws_param_value.ws_model_run.name %>
   </strong>
 </p>
-<p>Результат ранжирования</p>
-<% @rank.each_with_index do |r,i| %>
-  <p>
-    <%= r[0] %>
-    <%= WsModelRun.find(r[1]).name %>
-  </p>
-<% end %>
+<p class="text-center">Результат ранжирования</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>№</th>
+      <th>Название</th>
+      <th>Описание</th>
+      <th>Ранг</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% i = 0 %>
+    <% old_r = 0.0 %>
+    <% @rank.each do |r| %>
+      <tr>
+          <% if old_r != r[0] or i == 0 %>
+            <% i += 1 %>
+            <% old_r = r[0] %>
+          <% end %>
+          <td><%= i %></td>
+          <td><%= link_to r[1].name, r[1] %></td>
+          <td><%= r[1].descr %></td>
+          <td><%= r[0] %></td> 
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <%= link_to 'Назад', @ws_model_run %>
