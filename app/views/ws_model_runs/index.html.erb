@@ -37,6 +37,10 @@
   </tbody>
 </table>
 
-<br>
+<% unless params[:q] %>
+  <%= paginate @ws_model_runs %>
+<% end %>
+
+<br/>
 
 <%= link_to 'Создать новый прогон модели', new_ws_model_run_path %>

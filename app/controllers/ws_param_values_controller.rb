@@ -8,7 +8,7 @@ class WsParamValuesController < ApplicationController
     if params[:q]
       @ws_param_values = WsParamValue.ransack(params[:q]).result
     else
-      @ws_param_values = WsParamValue.full_info 
+      @ws_param_values = WsParamValue.full_info.page(params[:page]) 
     end
   end
 

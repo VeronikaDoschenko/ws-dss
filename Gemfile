@@ -60,6 +60,8 @@ gem 'cancancan'
 
 gem 'nilify_blanks'
 
+gem 'kaminari'
+
 group :development do
   gem 'capistrano'
   gem 'capistrano-rails'

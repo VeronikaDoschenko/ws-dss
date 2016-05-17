@@ -43,6 +43,10 @@
   </tbody>
 </table>
 
-<br>
+<% unless params[:q] %>
+  <%= paginate @ws_param_values %>
+<% end %>
+
+<br/>
 
 <%= link_to 'Новый источник значений параметров', new_ws_param_value_path %>

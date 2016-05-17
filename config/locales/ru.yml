@@ -1,4 +1,16 @@
 ru:
+  views:
+    pagination:
+      truncate:
+        ...
+      next:
+        Следующая
+      last:
+        Последняя
+      first:
+        Первая
+      previous:
+        Предыдущая
   your_token:
     Ваш токен
   welcome_profile:
