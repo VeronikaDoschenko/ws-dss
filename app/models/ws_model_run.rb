@@ -142,6 +142,10 @@ class WsModelRun < ActiveRecord::Base
                   can_run = false
                 else
                   vv = spv.new_value || spv.old_value
+                  if (not vv['"']) and vv['e ']
+                    vv['e '] = 'e'
+                  end
+                  
                   pov[j][i]=JSON.parse("[#{vv}]")[0]
                 end
               when 5
