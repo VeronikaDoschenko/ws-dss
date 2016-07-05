@@ -4,6 +4,8 @@
   <tr>
     <th>email</th>
     <th>jbc</th>
+    <th></th>
+    <th></th>
     <th>reset_password_sent_at</th>
     <th>remember_created_at</th>
     <th>sign_in_count</th>
@@ -17,14 +19,14 @@
     <th>confirmation_sent_at</th>
     <th>unconfirmed_email</th>
     <th>authentication_token</th>
-    <th></th>
-    <th></th>
   </tr>
  
 <% @users.each do |user| %>
   <tr>
     <td><%= user.email %></td>
     <td><%= link_to user.ws_jobs.size.to_s, ws_jobs_url(:user_id => user.id)  %></td>
+    <td><%= link_to "Edit", edit_admin_user_path(user) %></td>
+    <td><%= link_to "Remove", admin_user_path(user), method: :delete, data: { confirm: "Are you sure?" } %></td>
     <td><%= user.reset_password_sent_at %></td>
     <td><%= user.remember_created_at %></td>
     <td><%= user.sign_in_count %></td>
@@ -38,8 +40,6 @@
     <td><%= user.confirmation_sent_at %></td>
     <td><%= user.unconfirmed_email %></td>
     <td><%= user.authentication_token %></td>
-    <td><%= link_to "Edit", edit_admin_user_path(user) %></td>
-    <td><%= link_to "Remove", admin_user_path(user), method: :delete, data: { confirm: "Are you sure?" } %></td>
   </tr>
 <% end %>
 </table>

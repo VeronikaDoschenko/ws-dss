@@ -1,0 +1,30 @@
+<%= form_for(@admin_user, url: admin_user_path) do |f| %>
+
+  <% if @admin_user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @admin_user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p><%= @admin_user.email %> </p> 
+  <div class="field">
+    <%= f.label :authentication_token %><br>
+    <%= f.text_field :authentication_token %>
+  </div>
+  <% Royce::Role.all.each do |r| %>
+    <div>
+      <%= check_box_tag "user[role_ids][]", r.id, @admin_user.roles.include?(r) %>
+      <%= r.name %>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= f.submit "Сохранить" %>
+  </div>
+  
+<% end %>
+
