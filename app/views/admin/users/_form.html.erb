@@ -16,7 +16,7 @@
     <%= f.label :authentication_token %><br>
     <%= f.text_field :authentication_token %>
   </div>
-  <% Royce::Role.all.each do |r| %>
+  <% User.available_roles.each do |r| %>
     <div>
       <%= check_box_tag "user[role_ids][]", r.id, @admin_user.roles.include?(r) %>
       <%= r.name %>
