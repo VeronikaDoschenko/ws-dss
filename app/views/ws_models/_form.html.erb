@@ -28,6 +28,14 @@
     <%= f.collection_select(:ws_method_id, WsMethod.ask_working, :id, :name, include_blank: 'выберите метод...') %>
   </div>
   <br/>
+  <% WsModel.available_roles.each do |r| %>
+    <div>
+      <%= f.label :role_ids, "Доступность модели" %>
+      <%= check_box_tag "ws_model[role_ids][]", r.id, @ws_model.roles.include?(r) %>
+      <%= r.name %>
+    </div>
+  <% end %>
+  <br/>  
   <%= f.fields_for :ws_param_models do |builder| %>
     <%= render "ws_param_model_fields", :f => builder %>
   <% end %>

@@ -41,6 +41,7 @@ class WsModelsController < ApplicationController
   # PATCH/PUT /ws_models/1
   # PATCH/PUT /ws_models/1.json
   def update
+    params[:ws_model][:role_ids] ||= []
     respond_to do |format|
       if @ws_model.update(ws_model_params)
         format.html { redirect_to @ws_model, notice: 'Модель успешно изменена' }
@@ -70,7 +71,7 @@ class WsModelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ws_model_params
-      params.require(:ws_model).permit(:name, :descr, :model_url, :ws_method_id,
+      params.require(:ws_model).permit(:name, :descr, :model_url, :ws_method_id, :role_ids => [],
         :ws_param_models_attributes => [:ws_param_id, :is_required, :is_copy, :_destroy, :id])
     end
 end

@@ -12,6 +12,8 @@ class WsModelRun < ActiveRecord::Base
   has_many   :ws_param_values, :dependent => :destroy
   accepts_nested_attributes_for :ws_param_values, allow_destroy: true
   
+  royce_roles %w[ public ]
+  
   before_save do |mr|
     if mr.ws_model_status_id_changed? 
       case mr.ws_model_status_id

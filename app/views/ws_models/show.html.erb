@@ -18,6 +18,11 @@
   <%= @ws_model.try(:ws_method).try(:name) %>
 </p>
 
+<p>
+  <strong>Доступность:</strong>
+  <%= @ws_model.role_list.join(', ') %>
+</p>
+
 <p>Параметры модели</p>
 <table class="table">
   <thead>

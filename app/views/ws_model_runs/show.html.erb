@@ -23,6 +23,11 @@
   <pre><%= @ws_model_run.trace %></pre>
 </p>
 
+<p>
+  <strong>Доступность:</strong>
+  <%= @ws_model_run.role_list.join(', ') %>
+</p>
+
 <strong>Значения параметров</strong>
 <table class="table">
   <thead>

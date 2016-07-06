@@ -17,6 +17,7 @@ class Admin::UsersController < ApplicationController
     # PATCH/PUT /documents/1
   # PATCH/PUT /documents/1.json
   def update
+    params[:user][:role_ids] ||= []
     respond_to do |format|
       if @admin_user.update(user_params)
         format.html { redirect_to edit_admin_user_url(@admin_user), notice: 'User was successfully updated.' }

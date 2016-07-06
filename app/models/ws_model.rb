@@ -8,4 +8,6 @@ class WsModel < ActiveRecord::Base
   
   validates :name, presence: true
   
+  royce_roles %w[ public ]
+  
 end

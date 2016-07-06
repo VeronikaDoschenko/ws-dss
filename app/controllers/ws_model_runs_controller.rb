@@ -55,6 +55,7 @@ class WsModelRunsController < ApplicationController
   # PATCH/PUT /ws_model_runs/1
   # PATCH/PUT /ws_model_runs/1.json
   def update
+    params[:ws_model_run][:role_ids] ||= []
     respond_to do |format|
       if @ws_model_run.update(ws_model_run_params)
         format.html { redirect_to @ws_model_run, notice: 'Ws model run was successfully updated.' }
@@ -86,7 +87,7 @@ class WsModelRunsController < ApplicationController
     def ws_model_run_params
       params.require(:ws_model_run).permit(:name, :ws_model_id, :ws_model_status_id, :trace, :descr,
                                            :ws_set_model_run_id, :target_ws_model_id,
-                                           :goal_ws_param_value_id,
+                                           :goal_ws_param_value_id, :role_ids => [],
                                            :ws_param_values_attributes =>
                                               [:ws_param_id, :old_value, :new_value, :_destroy, :id]
                                           )
