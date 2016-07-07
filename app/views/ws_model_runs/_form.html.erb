@@ -29,12 +29,14 @@
   </div>
  
   <% if @ws_model_run.ws_model %>
-  <% WsModelRun.available_roles.each do |r| %>
-    <div class="field">
-      <%= f.label :role_ids, "Доступность прогона" %>
-      <%= check_box_tag "ws_model_run[role_ids][]", r.id, @ws_model_run.roles.include?(r) %>
-      <%= r.name %>
-    </div>
+  <% if can? :set_model_permission, @ws_model_run %>
+    <% WsModelRun.available_roles.each do |r| %>
+      <div class="field">
+        <%= f.label :role_ids, "Доступность прогона" %>
+        <%= check_box_tag "ws_model_run[role_ids][]", r.id, @ws_model_run.roles.include?(r) %>
+        <%= r.name %>
+      </div>
+    <% end %>
   <% end %>
   <table class="table">
     <thead>

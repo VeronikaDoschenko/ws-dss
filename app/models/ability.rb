@@ -9,16 +9,20 @@ class Ability
       can :manage, :all
     else
       can :show_content, Document
+      can :update, WsModelRun, :user_id => user.id
+      can :read, WsModelRun, :user_id => user.id
     end
     if user.model_creator?
       can :index, :modeling
       can :manage, WsModel
       can :manage, WsParam
       can :read,   WsModelStatus
-      can :manage, WsModelRun
       can :manage, WsParamModel
       can :manage, WsParamValue
       can :manage, WsSetModelRun
+      can :read,   WsModelRun
+      can :manage, WsSetModelRun, :user_id => user.id
+      can :set_model_permission, WsModelRun 
     end
     #
     # The first argument to `can` is the action you are giving the user
