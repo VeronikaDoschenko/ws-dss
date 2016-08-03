@@ -28,11 +28,13 @@
     <%= f.collection_select(:ws_method_id, WsMethod.ask_working, :id, :name, include_blank: 'выберите метод...') %>
   </div>
   <br/>
-  <% WsModel.available_roles.each do |r| %>
+  <% if can? :set_model_permission, @ws_model %>
     <div>
       <%= f.label :role_ids, "Доступность модели" %>
-      <%= check_box_tag "ws_model[role_ids][]", r.id, @ws_model.roles.include?(r) %>
-      <%= r.name %>
+      <% WsModel.available_roles.each do |r| %>
+        <%= check_box_tag "ws_model[role_ids][]", r.id, @ws_model.roles.include?(r) %>
+        <%= r.name %>
+      <% end %>
     </div>
   <% end %>
   <br/>  

@@ -13,30 +13,38 @@
 
   <tbody>
     <% @ws_models.each do |ws_model| %>
-      <tr>
-        <td><%= ws_model.name %></td>
-        <td><small><%= ws_model.descr %></small></td>
-        <td><%= ws_model.model_url %></td>
-        <td>
-          <%= link_to ws_model, class: "btn btn-default", title: "Показать" do %>
-            <i class="glyphicon glyphicon-zoom-in"></i>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to  edit_ws_model_path(ws_model), class: "btn btn-default", title: "Редактировать" do %>
-            <i class="glyphicon glyphicon-pencil"></i>
-          <% end %>        
-        </td>
-        <td>
-          <%= link_to ws_model, class: "btn btn-default", method: :delete, title: "Удалить", data: { confirm: 'Вы уверены?' } do %>
+      <% if can? :read, ws_model %>
+        <tr>
+          <td><%= ws_model.name %></td>
+          <td><small><%= ws_model.descr %></small></td>
+          <td><%= ws_model.model_url %></td>
+          <td>
+            <%= link_to ws_model, class: "btn btn-default", title: "Показать" do %>
+              <i class="glyphicon glyphicon-zoom-in"></i>
+            <% end %>
+          </td>
+          <td>
+            <% if can? :update, ws_model %>
+              <%= link_to  edit_ws_model_path(ws_model), class: "btn btn-default", title: "Редактировать" do %>
+                <i class="glyphicon glyphicon-pencil"></i>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% if can? :destroy, ws_model %>
+              <%= link_to ws_model, class: "btn btn-default", method: :delete, title: "Удалить", data: { confirm: 'Вы уверены?' } do %>
                 <i class="glyphicon glyphicon-trash"></i>
-          <% end %>
-        </td>
-      </tr>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<br/>
 
-<%= link_to 'Создать модель', new_ws_model_path %>
+<% if can? :create, WsModel %>  
+  <%= link_to 'Создать модель', new_ws_model_path %>
+<% end %>

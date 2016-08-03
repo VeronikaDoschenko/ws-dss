@@ -77,9 +77,7 @@ td { word-wrap: break-word;max-width:200px;}
         <li role="presentation"><%= link_to t(:profile), user_root_url %></li>
         <li role="presentation"><%= link_to "Учебные материалы", edu_index_url %></li>
         <li role="presentation"><%= link_to "Задачи", ws_jobs_url %></li>
-        <% if current_user.admin? or current_user.model_creator? %>
-          <li role="presentation"><%= link_to "Модели", modeling_url %></li>
-        <% end %>
+        <li role="presentation"><%= link_to "Модели", modeling_url %></li>
         <% if current_user.admin? %>
           <li role="presentation"><%= link_to "Администрирование", admin_url %></li>
         <% end %>

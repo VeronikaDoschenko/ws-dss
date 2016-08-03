@@ -8,6 +8,6 @@ class WsModel < ActiveRecord::Base
   
   validates :name, presence: true
   
-  royce_roles %w[ public ]
+  royce_roles %w[ public ] + User.available_roles.collect{|s| s.name}
   
 end

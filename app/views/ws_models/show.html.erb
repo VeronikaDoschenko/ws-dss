@@ -39,29 +39,38 @@
   </thead>
 
   <tbody>
-    <% @ws_model.ws_param_models.each do |pm|%>
+    <% @ws_model.ws_param_models.each do |pm| %>
       <tr>
         <% if pm.ws_param %>
           <td><%= pm.ws_param.name %></td>
           <td><%= pm.ws_param.descr %></td>
           <td>
-            <%= ((pm.ws_param.is_int)?"Да":"Нет") %>
+            <%= ( (pm.ws_param.is_int) ? "Да": "Нет" ) %>   
           </td>
-          <td><%= pm.ws_param.dim %></td>
-          <td><%= pm.ws_param.min_val %></td>
-          <td><%= pm.ws_param.max_val %></td>
+          <td>
+            <%= pm.ws_param.dim %>
+          </td>
+          <td>
+            <%= pm.ws_param.min_val %>
+          </td>
+          <td>
+            <%= pm.ws_param.max_val %>
+          </td>
         <% else %>
           <td/><td/><td/><td/><td/><td/>
         <% end %>
         <td>
-            <%= ((pm.is_required)?"Да":"Нет") %>        
+            <%= ((pm.is_required) ? "Да" : "Нет" ) %>        
         </td>
         <td>
-            <%= ((pm.is_copy)?"Да":"Нет") %>        
+            <%= ((pm.is_copy) ? "Да" : "Нет" ) %>        
         </td>        
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= link_to 'Редактировать', edit_ws_model_path(@ws_model) %> |
+
+<% if can? :update, @ws_model %>
+  <%= link_to 'Редактировать', edit_ws_model_path(@ws_model) %> |
+<% end %>
 <%= link_to 'Назад', ws_models_path %>
