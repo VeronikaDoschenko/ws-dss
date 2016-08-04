@@ -9,6 +9,9 @@ class Ability
       can :show_content, Document
       
       can :index, :modeling
+      can :index, :ws_model_runs
+      can :index, :ws_set_model_runs
+      can :index, :ws_param_values
       
       can :update, WsModelRun, :user_id => user.id
       can :read, WsModelRun, :user_id => user.id
@@ -19,18 +22,32 @@ class Ability
         b = ws_model.roles.collect{|x| x.name}
         (a & b).size > 0
       end
+      
+      can [:update,:destroy,:read], WsParam, :user_id => user.id
+      can :read, WsParam do |ws_param|
+        a = user.roles.collect{|x| x.name} + %w[ public ]
+        b = WsModel.where(id:  WsParamModel.where(ws_param: ws_param).pluck(:ws_model_id)).
+                    collect{|m| m.roles.pluck(:name)}.flatten.uniq
+        (a & b).size > 0
+      end
+      
+      can :read, WsModelStatus
+ 
+      can :create, WsModelRun
+      can [:update,:destroy,:read], WsModelRun, :user_id => user.id
+       
+      can :create, WsSetModelRun 
+      can [:update,:destroy,:read], WsSetModelRun, :user_id => user.id #todo
+      
     end
     if user.model_creator?
-      
-      can :manage, WsParam
-      can :read,   WsModelStatus
       can :manage, WsParamModel
-      can :manage, WsParamValue
-      can :manage, WsSetModelRun
-      can :read,   WsModelRun
-      can :manage, WsSetModelRun, :user_id => user.id
       
+      can :manage, WsParamValue #todo
+
       can :create, WsModel
+      can :create, WsParam
+      can :index,  :ws_params
       can :set_model_permission, WsModelRun
       can :set_model_permission, WsModel
     end

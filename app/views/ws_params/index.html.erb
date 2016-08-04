@@ -15,10 +15,11 @@
 
   <tbody>
     <% @ws_params.each do |ws_param| %>
+      <% if can? :read, ws_param %>
       <tr>
         <td><%= ws_param.name %></td>
         <td><%= ws_param.descr %></td>
-        <td><%= ((ws_param.is_int)?"Да":"Нет") %></td>
+        <td><%= ((ws_param.is_int) ? "Да":"Нет") %></td>
         <td><%= ws_param.dim %></td>
         <td><%= ws_param.min_val %></td>
         <td><%= ws_param.max_val %></td>
@@ -26,19 +27,28 @@
               <i class="glyphicon glyphicon-zoom-in"></i>
             <% end %>
         </td>
-        <td><%= link_to edit_ws_param_path(ws_param), class: "btn btn-default", title: "Редактировать" do %>
+        <td>
+          <% if can? :update, ws_param %>
+            <%= link_to edit_ws_param_path(ws_param), class: "btn btn-default", title: "Редактировать" do %>
               <i class="glyphicon glyphicon-pencil"></i>
-            <% end %>        
+            <% end %>
+          <% end %>
         </td>
-        <td><%= link_to ws_param, class: "btn btn-default", method: :delete, title: "Удалить", data: { confirm: 'Вы уверены?' } do %>
+        <td>
+          <% if can? :destroy, ws_param %>
+            <%= link_to ws_param, class: "btn btn-default", method: :delete, title: "Удалить", data: { confirm: 'Вы уверены?' } do %>
                 <i class="glyphicon glyphicon-trash"></i>
             <% end %>
+          <% end %>
         </td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<br/>
 
+<% if can? :create, WsParam %>  
 <%= link_to 'Новый параметр', new_ws_param_path %>
+<% end %>
