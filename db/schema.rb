@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513092136) do
+ActiveRecord::Schema.define(version: 20160805135224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,7 +229,10 @@ ActiveRecord::Schema.define(version: 20160513092136) do
     t.string   "descr"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
+
+  add_index "ws_set_model_runs", ["user_id"], name: "index_ws_set_model_runs_on_user_id", using: :btree
 
   add_foreign_key "students", "student_groups"
   add_foreign_key "ws_jobs", "users"
@@ -248,4 +251,5 @@ ActiveRecord::Schema.define(version: 20160513092136) do
   add_foreign_key "ws_param_values", "ws_params"
   add_foreign_key "ws_param_values", "ws_set_model_runs"
   add_foreign_key "ws_params", "users"
+  add_foreign_key "ws_set_model_runs", "users"
 end

@@ -12,7 +12,7 @@ class WsModelRun < ActiveRecord::Base
   has_many   :ws_param_values, :dependent => :destroy
   accepts_nested_attributes_for :ws_param_values, allow_destroy: true
   
-  royce_roles %w[ public ]
+  royce_roles %w[ public ] + User.available_roles.collect{|s| s.name} - %w[ admin ]
   
   before_save do |mr|
     if mr.ws_model_status_id_changed? 
@@ -84,7 +84,8 @@ class WsModelRun < ActiveRecord::Base
     nmr = WsModelRun.create( name:               mname,
                              ws_model:           mr.target_ws_model,
                              descr:              mr.trace, 
-                             ws_model_status_id: 7 
+                             ws_model_status_id: 7,
+                             user_id:            mr.user_id
                            )
     
     mr.ws_set_model_run.with_lock do

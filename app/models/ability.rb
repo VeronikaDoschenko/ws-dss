@@ -35,11 +35,16 @@ class Ability
  
       can :create, WsModelRun
       can [:update,:destroy,:read], WsModelRun, :user_id => user.id
-       
+      #can :read, WsModelRun do |ws_model_run|
+      #  a = user.roles.collect{|x| x.name} + %w[ public ]
+      #  b = ws_model_run.roles.collect{|x| x.name}
+      #  (a & b).size > 0
+      #end
+            
       can :create, WsSetModelRun 
-      can [:update,:destroy,:read], WsSetModelRun, :user_id => user.id #todo
+      can [:update,:destroy,:read], WsSetModelRun, :user_id => user.id 
       
-    end
+    end   
     if user.model_creator?
       can :manage, WsParamModel
       

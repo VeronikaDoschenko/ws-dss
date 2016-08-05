@@ -33,7 +33,7 @@
             <% end %>
         </td>
       </tr>
-    <% end %>
+      <% end %>
   </tbody>
 </table>
 
@@ -42,5 +42,6 @@
 <% end %>
 
 <br/>
-
-<%= link_to 'Создать новый прогон модели', new_ws_model_run_path %>
+<% if can? :create, WsModelRun %>  
+  <%= link_to 'Создать новый прогон модели', new_ws_model_run_path %>
+<% end %>

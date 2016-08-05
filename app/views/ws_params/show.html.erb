@@ -10,7 +10,7 @@
 
 <p>
   <strong>Целочисленный:</strong>
-  <%= ((@ws_param.is_int)?"Да":"Нет") %>
+  <%= ((@ws_param.is_int) ? "Да":"Нет") %>
 </p>
 
 <p>
@@ -27,6 +27,7 @@
   <strong>Максимальное значение:</strong>
   <%= @ws_param.max_val %>
 </p>
-
-<%= link_to 'Редактировать', edit_ws_param_path(@ws_param) %> |
+<% if can? :update, @ws_param %>
+  <%= link_to 'Редактировать', edit_ws_param_path(@ws_param) %> |
+<% end %>
 <%= link_to 'Назад', ws_params_path %>
