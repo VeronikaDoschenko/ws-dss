@@ -62,6 +62,8 @@ gem 'nilify_blanks'
 
 gem 'kaminari'
 
+gem 'sidekiq'
+
 group :development do
   gem 'capistrano'
   gem 'capistrano-rails'
