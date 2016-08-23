@@ -21,7 +21,16 @@
     <%= f.text_area :descr, autocomplete: "off", cols: 103, rows: 6 %>
   </div>
   
-  
+  <% if can? :set_model_permission, @ws_set_model_run %>
+    <div class="field">
+      <%= f.label :role_ids, "Доступность множетсва" %>
+      <% WsSetModelRun.available_roles.each do |r| %>
+        <%= check_box_tag "ws_set_model_run[role_ids][]", r.id, @ws_set_model_run.roles.include?(r) %>
+        <%= r.name %>
+      <% end %>
+    </div>
+  <% end %>
+
   
   <table class="table">
     <thead>
@@ -32,7 +41,7 @@
       </tr>
     </thead>
     <tbody>
-      <% WsModelRun.includes(:ws_model).order('ws_models.name, ws_model_runs.name').each do |mr| %>
+      <% WsModelRun.accessible_by(current_ability).includes(:ws_model).order('ws_models.name, ws_model_runs.name').each do |mr| %>
         <tr>
           <td><%= mr.ws_model.name %></td>
           <td><%= mr.name %></td>

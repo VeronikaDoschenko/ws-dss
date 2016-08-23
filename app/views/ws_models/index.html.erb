@@ -13,7 +13,6 @@
 
   <tbody>
     <% @ws_models.each do |ws_model| %>
-      <% if can? :read, ws_model %>
         <tr>
           <td><%= ws_model.name %></td>
           <td><small><%= ws_model.descr %></small></td>
@@ -38,7 +37,6 @@
             <% end %>
           </td>
         </tr>
-      <% end %>
     <% end %>
   </tbody>
 </table>

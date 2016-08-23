@@ -15,7 +15,6 @@
 
   <tbody>
     <% @ws_params.each do |ws_param| %>
-      <% if can? :read, ws_param %>
       <tr>
         <td><%= ws_param.name %></td>
         <td><%= ws_param.descr %></td>
@@ -42,7 +41,6 @@
           <% end %>
         </td>
       </tr>
-      <% end %>
     <% end %>
   </tbody>
 </table>

@@ -5,10 +5,11 @@ class WsParamValuesController < ApplicationController
   # GET /ws_param_values
   # GET /ws_param_values.json
   def index
+    wpv = WsParamValue.accessible_by(current_ability)
     if params[:q]
-      @ws_param_values = WsParamValue.ransack(params[:q]).result
+      @ws_param_values = wpv.ransack(params[:q]).result
     else
-      @ws_param_values = WsParamValue.full_info.page(params[:page]) 
+      @ws_param_values = wpv.full_info.page(params[:page]) 
     end
   end
 

@@ -64,6 +64,7 @@
   <% end %>
 </p>
 <% end %>
-
-<%= link_to 'Редактировать', edit_ws_model_run_path(@ws_model_run) %> |
+<% if can? :update, @ws_model_run %>
+  <%= link_to 'Редактировать', edit_ws_model_run_path(@ws_model_run) %> |
+<% end %>
 <%= link_to 'Назад', ws_model_runs_path %>

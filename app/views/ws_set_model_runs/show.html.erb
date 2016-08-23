@@ -8,6 +8,11 @@
   <pre><%= @ws_set_model_run.descr %></pre>
 </p>
 
+<p>
+  <strong>Доступность:</strong>
+  <%= @ws_set_model_run.role_list.join(', ') %>
+</p>
+
 <h4>Прогоны модели</h4>
 <table class="table">
   <thead>
@@ -32,5 +37,8 @@
   </tbody>
 </table>
 
-<%= link_to 'Редактировать', edit_ws_set_model_run_path(@ws_set_model_run) %> |
+<% if can? :update, @ws_set_model_run %>
+  <%= link_to 'Редактировать', edit_ws_set_model_run_path(@ws_set_model_run) %> | 
+<% end %>
+
 <%= link_to 'Назад', ws_set_model_runs_path %>

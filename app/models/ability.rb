@@ -26,13 +26,20 @@ class Ability
                         )").collect{|x| x["roleable_id"].to_i}   
       
       can [:update,:destroy,:read], WsParam, :user_id => user.id
-      can :read, WsParam do |ws_param|
-        a = user.roles.collect{|x| x.name} + %w[ public ]
-        b = WsModel.where(id:  WsParamModel.where(ws_param: ws_param).pluck(:ws_model_id)).
-                    collect{|m| m.roles.pluck(:name)}.flatten.uniq
-        (a & b).size > 0
-      end
-      
+      can :read, WsParam,
+          :id => ActiveRecord::Base.connection.execute(
+                 "select distinct wpm.ws_param_id
+                  from ws_param_models wpm  
+                       join ws_models wm on wm.id = wpm.ws_model_id
+                       left outer join royce_connector rc on wm.id = rc.roleable_id and rc.roleable_type = 'WsModel'
+                  where (rc.role_id = (select id from royce_role where name = 'public') or 
+                         rc.role_id in (select rcu.role_id
+					                    from   royce_connector rcu
+					                    where  rcu.roleable_type = 'User' and
+							            rcu.roleable_id = #{user.id}) or
+                         wm.user_id = #{user.id}
+                        )").collect{|x| x["ws_param_id"].to_i}
+          
       can :read, WsModelStatus
  
       can :create, WsModelRun
@@ -48,20 +55,43 @@ class Ability
                                          rcu.roleable_id=#{user.id})
                         )").collect{|x| x["roleable_id"].to_i}
           
-      can :create, WsSetModelRun 
-      can [:update,:destroy,:read], WsSetModelRun, :user_id => user.id 
       
+      can :create, WsParamValue
+      can [:update,:destroy,:read], WsParamValue,
+        :ws_model_run_id => WsModelRun.where(user_id: user.id).pluck(:id)
+	  can :read, WsParamValue,
+          :ws_model_run_id => ActiveRecord::Base.connection.execute(
+                 "select distinct rc.roleable_id from royce_connector rc
+                  where rc.roleable_type = 'WsModelRun' and 
+                        ( rc.role_id = (select id from royce_role where name = 'public') or 
+                          rc.role_id in (select rcu.role_id
+                                         from royce_connector rcu
+                                         where rcu.roleable_type = 'User' and
+                                         rcu.roleable_id=#{user.id})
+                        )").collect{|x| x["roleable_id"].to_i}
+          
+          
+	  can :create, WsSetModelRun 
+      can [:update,:destroy,:read], WsSetModelRun, :user_id => user.id
+      can :read, WsSetModelRun,
+          :id => ActiveRecord::Base.connection.execute(
+                 "select distinct rc.roleable_id from royce_connector rc
+                  where rc.roleable_type = 'WsSetModelRun' and 
+                        ( rc.role_id = (select id from royce_role where name = 'public') or 
+                          rc.role_id in (select rcu.role_id
+                                         from royce_connector rcu
+                                         where rcu.roleable_type = 'User' and
+                                         rcu.roleable_id=#{user.id})
+                        )").collect{|x| x["roleable_id"].to_i}
     end   
     if user.model_creator?
-      can :manage, WsParamModel
-      
-      can :manage, WsParamValue #todo
-
+      can :manage, WsParamModel 
       can :create, WsModel
       can :create, WsParam
       can :index,  :ws_params
       can :set_model_permission, WsModelRun
       can :set_model_permission, WsModel
+      can :set_model_permission, WsSetModelRun
     end
   end
 end

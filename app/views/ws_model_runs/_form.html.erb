@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :ws_model_id, "Модель" %><br>
-    <%= f.collection_select(:ws_model_id, WsModel.all, :id, :name, include_blank: 'выберите модель...') %>
+    <%= f.collection_select(:ws_model_id, WsModel.accessible_by(current_ability), :id, :name, include_blank: 'выберите модель...') %>
   </div>
   <div class="field">
     <%= f.label :ws_model_status_id, "Статус прогона" %><br>
@@ -30,13 +30,13 @@
  
   <% if @ws_model_run.ws_model %>
   <% if can? :set_model_permission, @ws_model_run %>
-    <% WsModelRun.available_roles.each do |r| %>
-      <div class="field">
-        <%= f.label :role_ids, "Доступность прогона" %>
+    <div class="field">
+      <%= f.label :role_ids, "Доступность прогона" %>
+      <% WsModelRun.available_roles.each do |r| %>
         <%= check_box_tag "ws_model_run[role_ids][]", r.id, @ws_model_run.roles.include?(r) %>
         <%= r.name %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   <% end %>
   <table class="table">
     <thead>
@@ -70,15 +70,15 @@
   <% end %>
   <div class="field">
     <%= f.label :ws_set_model_run_id, "Множество для записи результатов прогонов" %><br>
-    <%= f.collection_select(:ws_set_model_run_id, WsSetModelRun.order(:name), :id, :name, include_blank: 'выберите множество...') %>
+    <%= f.collection_select(:ws_set_model_run_id, WsSetModelRun.accessible_by(current_ability).order(:name), :id, :name, include_blank: 'выберите множество...') %>
   </div>
   <div class="field">
     <%= f.label :target_ws_model_id, "Модель для записи результатов прогонов" %><br>
-    <%= f.collection_select(:target_ws_model_id, WsModel.order(:name), :id, :name, include_blank: 'выберите модель...') %>
+    <%= f.collection_select(:target_ws_model_id, WsModel.accessible_by(current_ability).order(:name), :id, :name, include_blank: 'выберите модель...') %>
   </div>
   <div class="field">
     <%= f.label :goal_ws_param_value_id, "Целевой параметр погона" %><br>
-    <%= f.collection_select(:goal_ws_param_value_id, WsParamValue.full_info.select("ws_param_values.id,
+    <%= f.collection_select(:goal_ws_param_value_id, WsParamValue.full_info.accessible_by(current_ability).select("ws_param_values.id,
           (ws_models.name || '/' || ws_model_runs.name || '/' || ws_params.name) as name"), :id, :name, include_blank: 'выберите параметр...') %>
   </div>
   <br/>

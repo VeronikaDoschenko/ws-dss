@@ -5,7 +5,8 @@ class WsModelRunsController < ApplicationController
   # GET /ws_model_runs
   # GET /ws_model_runs.json
   def index
-    @ws_model_runs = ( (params[:q]) ? WsModelRun.accessible_by(current_ability).ransack(params[:q]).result : WsModelRun.accessible_by(current_ability).page(params[:page])  )
+    wmr = WsModelRun.accessible_by(current_ability)
+    @ws_model_runs = ( (params[:q]) ? wmr.ransack(params[:q]).result : wmr.page(params[:page])  )
   end
 
   # GET /ws_model_runs/1

@@ -30,5 +30,7 @@
   <strong>Выходное значение:</strong>
   <pre><%= long_string(@ws_param_value.new_value) %></pre>
 </p>
-<%= link_to 'Редактировать', edit_ws_param_value_path(@ws_param_value) %> |
+<% if can? :update, @ws_param_value %>
+  <%= link_to 'Редактировать', edit_ws_param_value_path(@ws_param_value) %> | 
+<% end %>
 <%= link_to 'Назад', ws_param_values_path %>

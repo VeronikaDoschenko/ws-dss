@@ -5,7 +5,8 @@ class WsModelsController < ApplicationController
   # GET /ws_models
   # GET /ws_models.json
   def index
-    @ws_models = ( (params[:q]) ? WsModel.ransack(params[:q]).result : WsModel.all )
+    wm = WsModel.accessible_by(current_ability)
+    @ws_models = ( (params[:q]) ? wm.ransack(params[:q]).result : wm )
   end
 
   # GET /ws_models/1

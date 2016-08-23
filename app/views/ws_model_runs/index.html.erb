@@ -24,13 +24,19 @@
               <i class="glyphicon glyphicon-zoom-in"></i>
             <% end %>
         </td>
-        <td><%= link_to edit_ws_model_run_path(ws_model_run), class: "btn btn-default", title: "Редактировать" do %>
+        <td>
+          <% if can? :update, ws_model_run %>
+            <%= link_to edit_ws_model_run_path(ws_model_run), class: "btn btn-default", title: "Редактировать" do %>
               <i class="glyphicon glyphicon-pencil"></i>
             <% end %>
+          <% end %>
         </td>
-        <td><%= link_to ws_model_run , class: "btn btn-default", method: :delete, title: "Удалить", data: { confirm: 'Вы уверены?' } do %>
+        <td>
+          <% if can? :destroy, ws_model_run %>
+            <%= link_to ws_model_run , class: "btn btn-default", method: :delete, title: "Удалить", data: { confirm: 'Вы уверены?' } do %>
               <i class="glyphicon glyphicon-trash"></i>
             <% end %>
+          <% end %>
         </td>
       </tr>
       <% end %>

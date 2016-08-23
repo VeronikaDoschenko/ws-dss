@@ -5,7 +5,8 @@ class WsParamsController < ApplicationController
   # GET /ws_params
   # GET /ws_params.json
   def index
-    @ws_params = ( (params[:q]) ? WsParam.ransack(params[:q]).result : WsParam.all )
+    wp = WsParam.accessible_by(current_ability)
+    @ws_params = ( (params[:q]) ? wp.ransack(params[:q]).result : wp )
   end
 
   # GET /ws_params/1

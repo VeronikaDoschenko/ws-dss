@@ -12,15 +12,15 @@
   <% end %>
   <div class="form-group">
     <%= f.label :ws_model_run_id, "Прогон модели", class: "col-md-3 control-label" %>
-    <%= f.collection_select(:ws_model_run_id, WsModelRun.all, :id, :name, {include_blank: 'выберите прогон...'}, {class: "col-md-3"}) %>
+    <%= f.collection_select(:ws_model_run_id, WsModelRun.accessible_by(current_ability), :id, :name, {include_blank: 'выберите прогон...'}, {class: "col-md-3"}) %>
     <%= f.label :ws_param_id, "Параметр прогона", class: "col-md-3 control-label" %>
-    <%= f.collection_select(:ws_param_id, WsParam.all, :id, :name, {include_blank: 'выберите параметр...'}, {class: "col-md-3"}) %>    
+    <%= f.collection_select(:ws_param_id, WsParam.accessible_by(current_ability), :id, :name, {include_blank: 'выберите параметр...'}, {class: "col-md-3"}) %>    
   </div>
   <fieldset>
     <legend>Источник значений:</legend>
       <div class="field">
        <%= f.label :ws_set_model_run_id, "Множетсво прогонов" %><br>
-       <%= f.collection_select(:ws_set_model_run_id, WsSetModelRun.all, :id, :name, include_blank: 'выберите множество...') %>
+       <%= f.collection_select(:ws_set_model_run_id, WsSetModelRun.accessible_by(current_ability), :id, :name, include_blank: 'выберите множество...') %>
       </div>
       <br/>
       <div class="field">

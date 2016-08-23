@@ -5,7 +5,7 @@ class WsSetModelRunsController < ApplicationController
   # GET /ws_set_model_runs
   # GET /ws_set_model_runs.json
   def index
-    @ws_set_model_runs = WsSetModelRun.all
+    @ws_set_model_runs = WsSetModelRun.accessible_by(current_ability)
   end
 
   # GET /ws_set_model_runs/1
@@ -41,6 +41,7 @@ class WsSetModelRunsController < ApplicationController
   # PATCH/PUT /ws_set_model_runs/1
   # PATCH/PUT /ws_set_model_runs/1.json
   def update
+    params[:ws_set_model_run][:role_ids] ||= []
     respond_to do |format|
       if @ws_set_model_run.update(ws_set_model_run_params)
         format.html { redirect_to @ws_set_model_run, notice: 'Множетсво прогонов успешно обновлено.' }
@@ -78,6 +79,7 @@ class WsSetModelRunsController < ApplicationController
         end
       end
       params.require(:ws_set_model_run).permit(:name, :descr,
+        ((can? :set_model_permission, @ws_set_model_run)?({:role_ids => []}):nil),
         :ws_model_runs_set_model_runs_attributes => [:ws_model_run_id, :ord, :_destroy, :id]                             
                                                )
     end
