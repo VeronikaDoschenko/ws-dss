@@ -58,7 +58,7 @@ class WsJobsController < ApplicationController
       respond_to do |format|
         if current_user.ws_jobs.size < current_user.numjobs or current_user.admin?
           if @ws_job.save
-            system "rake ws_dss:process_ws_jobs --trace 2>&1 >> #{Rails.root.join('log',"#{Rails.env}.log")} &"
+            CalcWsJobWorker.perform_async( @ws_job.id )
             sleep 2
             @ws_job.reload
             format.html { redirect_to @ws_job, notice: 'Задача успешно создана' }

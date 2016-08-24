@@ -24,13 +24,16 @@
                 <i class="glyphicon glyphicon-trash"></i>
               <% end %>
           </td>
+        <% else %>
+          <td></td><td></td>
         <% end %>
-        <% unless ws_job.output.nil? %>
-          <td><%= link_to ws_job, class: "btn btn-default", title: "Посмотреть результат" do %>
+          <td>
+            <% unless ws_job.output.nil? %>
+              <%= link_to ws_job, class: "btn btn-default", title: "Посмотреть результат" do %>
                 <i class="glyphicon glyphicon-zoom-in"></i>
               <% end %>
+            <% end %>
           </td>
-        <% end %>
       </tr>
     <% end %>
   </tbody>
