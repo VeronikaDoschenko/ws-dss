@@ -33,7 +33,7 @@ class WsModelRun < ActiveRecord::Base
         mr.update_columns(trace: nil)
       when 2
         if mr.ws_model.ws_method    
-          system "rake ws_dss:process_ws_model_run[#{mr.id}] --trace 2>&1 >> #{Rails.root.join('log',"#{Rails.env}.log")} &"
+          CalcWsModelRunWorker.perform_async( mr.id )
         end
       when 7
         prep_model_run( mr )
