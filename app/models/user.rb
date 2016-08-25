@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
   has_many :ws_jobs, dependent: :destroy
-
+  has_many :ws_model_runs, dependent: :destroy
+  
   before_save :ensure_authentication_token
 
   royce_roles %w[ admin model_creator transport tester ]

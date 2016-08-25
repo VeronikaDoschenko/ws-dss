@@ -43,12 +43,18 @@ class WsModelRunsController < ApplicationController
     @ws_model_run = WsModelRun.new(ws_model_run_params)
     @ws_model_run.user = current_user
     respond_to do |format|
-      if @ws_model_run.save
-        format.html { redirect_to @ws_model_run, notice: 'Ws model run was successfully created.' }
-        format.json { render :show, status: :created, location: @ws_model_run }
+      if current_user.ws_model_runs.size < current_user.numjobs or can?( :create, WsModel )       
+        if @ws_model_run.save
+          format.html { redirect_to @ws_model_run, notice: 'Ws model run was successfully created.' }
+          format.json { render :show, status: :created, location: @ws_model_run }
+        else
+          format.html { render :new }
+          format.json { render json: @ws_model_run.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :new }
-        format.json { render json: @ws_model_run.errors, status: :unprocessable_entity }
+          flash[:notice] = "Превышен лимит на число прогонов #{current_user.numjobs}"
+          format.html { render :new }
+          format.json { render json: {error: "Превышен лимит на число прогонов #{current_user.numjobs}"}, status: :unprocessable_entity }
       end
     end
   end
