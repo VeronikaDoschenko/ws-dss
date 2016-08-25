@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          
   has_many :ws_jobs, dependent: :destroy
   has_many :ws_model_runs, dependent: :destroy
+  has_many :ws_set_model_runs, dependent: :destroy
   
   before_save :ensure_authentication_token
 

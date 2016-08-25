@@ -28,12 +28,18 @@ class WsSetModelRunsController < ApplicationController
     @ws_set_model_run = WsSetModelRun.new(ws_set_model_run_params)
 
     respond_to do |format|
-      if @ws_set_model_run.save
-        format.html { redirect_to @ws_set_model_run, notice: 'Множетсво прогонов успешно создано.' }
-        format.json { render :show, status: :created, location: @ws_set_model_run }
+      if current_user.ws_set_model_runs.size < current_user.numjobs or can?( :create, WsModel )       
+        if @ws_set_model_run.save
+          format.html { redirect_to @ws_set_model_run, notice: 'Множетсво прогонов успешно создано.' }
+          format.json { render :show, status: :created, location: @ws_set_model_run }
+        else
+          format.html { render :new }
+          format.json { render json: @ws_set_model_run.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :new }
-        format.json { render json: @ws_set_model_run.errors, status: :unprocessable_entity }
+          flash[:notice] = "Превышен лимит на число множеств #{current_user.numjobs}"
+          format.html { render :new }
+          format.json { render json: {error: "Превышен лимит на число множеств #{current_user.numjobs}"}, status: :unprocessable_entity }
       end
     end
   end
