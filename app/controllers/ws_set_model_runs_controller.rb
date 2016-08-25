@@ -26,7 +26,7 @@ class WsSetModelRunsController < ApplicationController
   # POST /ws_set_model_runs.json
   def create
     @ws_set_model_run = WsSetModelRun.new(ws_set_model_run_params)
-
+    @ws_set_model_run.user = current_user
     respond_to do |format|
       if current_user.ws_set_model_runs.size < current_user.numjobs or can?( :create, WsModel )       
         if @ws_set_model_run.save
