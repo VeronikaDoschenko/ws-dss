@@ -22,6 +22,10 @@
   Пример вых. данных:<br/>
   <%= content_tag('pre', @ws_method.test_output) %>
 </div>
+<p>
+  <strong>Доступность:</strong>
+  <%= @ws_method.role_list.join(', ') %>
+</p>
 <div class="field">
   Создан:<br/>
   <%= content_tag('pre', @ws_method.created_at) %>

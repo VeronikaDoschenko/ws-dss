@@ -54,6 +54,7 @@ class WsMethodsController < ApplicationController
   # PATCH/PUT /ws_methods/1
   # PATCH/PUT /ws_methods/1.json
   def update
+    params[:ws_method][:role_ids] ||= []
     respond_to do |format|
       if @ws_method.update(ws_method_params)
         format.html { redirect_to @ws_method, notice: 'Метод успешно обновлен.' }
@@ -83,6 +84,8 @@ class WsMethodsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ws_method_params
-      params[:ws_method].permit(:name, :descr, :code, :test_input, :test_output, :format_output, :input)
+      params[:ws_method].permit(:name, :descr, :code, :test_input, :test_output,
+                                :format_output, :input, :role_ids => []
+                                )
     end
 end

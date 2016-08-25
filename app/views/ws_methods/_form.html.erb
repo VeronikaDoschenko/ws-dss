@@ -45,7 +45,15 @@
     <%= f.label :test_output, "Пример вых. данных" %><br/>
     <%= f.text_area :test_output, autocomplete: "off", cols: 100, rows: 7 %>
   </div>
-
+  
+  <div class="field">
+      <%= f.label :role_ids, "Доступность метода" %>
+      <% WsModelRun.available_roles.each do |r| %>
+        <%= check_box_tag "ws_method[role_ids][]", r.id, @ws_method.roles.include?(r) %>
+        <%= r.name %>
+      <% end %>
+  </div>
+  
   <div class="actions">
     <%= f.submit "Сохранить" %>
   </div>

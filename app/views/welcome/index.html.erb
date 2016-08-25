@@ -2,3 +2,33 @@
 <p>
   <%= t(:srv_descr) %>
 </p>
+
+<p>Основные доступные методы:</p>
+<table class="table">
+  <tr>
+    <th>Метод</th><th>Описание</th>
+  </tr>
+  <% WsMethod.order(:name).each do |ws| %>
+    <% if ws.public? %>
+    <tr>
+      <td><%= ws.name %></td>
+      <td><%= ws.descr %></td>
+    </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<p>Основные доступные  модели:</p>
+<table class="table">
+  <tr>
+    <th>Модель</th><th>Описание</th>
+  </tr>
+  <% WsModel.order(:name).each do |ws| %>
+    <% if ws.public? %>
+    <tr>
+      <td><%= ws.name %></td>
+      <td><%= ws.descr %></td>
+    </tr>
+    <% end %>
+  <% end %>
+</table>

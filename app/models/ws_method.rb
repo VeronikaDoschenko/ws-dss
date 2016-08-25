@@ -4,6 +4,7 @@ class WsMethod < ActiveRecord::Base
   has_many :descriptions, as: :rec, dependent: :destroy
   has_many :ws_jobs, dependent: :restrict_with_exception
   has_many :ws_models
+  royce_roles %w[ public ] + User.available_roles.collect{|s| s.name} - %w[ admin ]
   
   def descr
     d = self.descriptions.where(:locale => I18n.locale).first
@@ -20,7 +21,7 @@ class WsMethod < ActiveRecord::Base
     return x
   end
 
-  def self.ask_working
+  scope :ask_working,-> do 
     where("test_output is not null").order("lower(name)")
   end
 
