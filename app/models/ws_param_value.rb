@@ -9,6 +9,9 @@ class WsParamValue < ActiveRecord::Base
   
   has_and_belongs_to_many :source_ws_params, class_name: 'WsParam', through: :ws_param_values_params
   
+  validates  :ws_param_id, :ws_model_run_id, presence: true
+  validates_uniqueness_of :ws_param_id, :scope => [:ws_model_run_id]
+  
   accepts_nested_attributes_for :ws_param_values_params, :allow_destroy => true
   scope :full_info,-> do
     joins([{ws_model_run: :ws_model}, :ws_param]).order('ws_models.name, ws_model_runs.name, ws_params.name')
