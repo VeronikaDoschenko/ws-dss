@@ -4,7 +4,9 @@
   <col width="90">
   <thead>
     <tr>
-      <th>Дата/Время</th><th>Метод</th><th>Входные данные</th><th>Код ошибки</th><th colspan="3"></th>
+      <th>Дата/Время</th><th>Метод</th><th>Входные данные</th><th>Код ошибки</th>
+      <th>Вложение</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -15,6 +17,11 @@
         <td><%= ws_job.ws_method.name %></td>
         <td><%= (ws_job.input ? ((ws_job.input[0..150] + (ws_job.input.size > 150 ? " ..." : ""))):"") %></td>
         <td><%= ws_job.error_code %>/<%= ws_job.for_check %>/<%= ws_job.do_check %></td>
+        <td>
+          <% if ws_job.filename %>
+          <%= link_to ws_job.filename, show_content_ws_job_path(ws_job) %>
+          <% end %>
+        </td>
         <% if ws_job.do_check==0 or current_user.admin? %>
           <td><%= link_to  edit_ws_job_path(ws_job), class: "btn btn-default", title: "Редактировать" do %>
                 <i class="glyphicon glyphicon-pencil"></i>
@@ -34,6 +41,12 @@
               <% end %>
             <% end %>
           </td>
+          <td>
+            <%= link_to file_form_ws_job_path(ws_job), class: "btn btn-default", title: "Вложение" do %>
+              <i class="glyphicon glyphicon-paperclip"></i>
+            <% end %>
+          </td>
+          
       </tr>
     <% end %>
   </tbody>

@@ -1,6 +1,18 @@
 class WsJobsController < ApplicationController
 
-  before_action :set_ws_job, only: [:show, :edit, :update, :destroy]
+  before_action :set_ws_job, only: [:show, :edit, :update, :destroy,
+                                    :file_form, :file_save, :show_content]
+
+  def show_content
+    if @ws_job.file_contents and @ws_job.file_contents.size>0
+        send_data(@ws_job.file_contents,
+            type: @ws_job.content_type,
+            filename: @ws_job.filename)
+    else
+      redirect_to :back
+    end
+    
+  end
 
   # GET /ws_jobs
   # GET /ws_jobs.json
@@ -12,6 +24,23 @@ class WsJobsController < ApplicationController
     end
   end
 
+  def file_form
+    #code
+    
+  end
+  
+  def file_save    
+    respond_to do |format|
+      if params[:ws_job] and @ws_job.update(ws_job_params)
+        format.html { redirect_to @ws_job, notice: 'Вложение к задаче успешно сохранено' }
+        format.json { render :show, status: :ok, location: @ws_job }
+      else
+        format.html { render :file_form }
+        format.json { render json: @ws_job.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
   # GET /ws_jobs/1
   # GET /ws_jobs/1.json
   def show
@@ -121,6 +150,6 @@ class WsJobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ws_job_params
-      params[:ws_job].permit(:ws_method_id, :input )
+      params[:ws_job].permit(:ws_method_id, :input, :file)
     end
 end

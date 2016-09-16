@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160805135224) do
+ActiveRecord::Schema.define(version: 20160916132520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,13 +113,16 @@ ActiveRecord::Schema.define(version: 20160805135224) do
   create_table "ws_jobs", force: :cascade do |t|
     t.text     "input"
     t.text     "output"
-    t.integer  "ws_method_id",             null: false
-    t.integer  "user_id",                  null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "error_code",   default: 0, null: false
-    t.integer  "for_check",    default: 0, null: false
-    t.integer  "do_check",     default: 0, null: false
+    t.integer  "ws_method_id",              null: false
+    t.integer  "user_id",                   null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "error_code",    default: 0, null: false
+    t.integer  "for_check",     default: 0, null: false
+    t.integer  "do_check",      default: 0, null: false
+    t.string   "filename"
+    t.string   "content_type"
+    t.binary   "file_contents"
   end
 
 # Could not dump table "ws_methods" because of following StandardError

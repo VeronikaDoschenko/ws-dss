@@ -44,7 +44,16 @@ Rails.application.routes.draw do
   #  resource route (maps HTTP verbs to controller actions automatically):
     resources :ws_methods
     get 'ws_methods/:id/test' => 'ws_methods#test', as: :test_ws_method
-    resources :ws_jobs
+    resources :ws_jobs do
+      member do
+        get  :file_form
+        patch :file_save
+        get  :show_content
+      end
+    end
+
+    #get 'ws_jobs/:id/file_form' => 'ws_jobs#file_form', as: :file_form_ws_job
+    #put 'ws_jobs/:id/file_save' => 'ws_jobs#file_save', as: :file_save_ws_job
   # Example resource route with options:
   #   resources :products do
   #     member do

@@ -1,0 +1,22 @@
+<h3>Вложение к задаче</h3>
+<%= form_for(@ws_job, :url => file_save_ws_job_path(@ws_job) ) do |f| %>
+  <% if @ws_job.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ws_job.errors.count, "error") %> запрещено сохранение данного вложения:</h2>
+
+      <ul>
+      <% @ws_job.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.file_field :file, accept: 'application/pdf' %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Сохранить" %>
+  </div>
+<% end %>
+<%= link_to 'Показать', @ws_job %> |
+<%= link_to 'Назад', ws_jobs_path %>
