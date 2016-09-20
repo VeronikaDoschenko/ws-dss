@@ -60,6 +60,8 @@
 <br>
 
 <%= link_to 'Новый студент', new_student_path %>
+<br/>
+<%= link_to 'Список для экспорта', students_export_path %>
 
 
 <%= form_tag({controller: "students", action: "import"}, method: "post") do %>

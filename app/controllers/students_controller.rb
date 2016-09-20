@@ -78,7 +78,17 @@ class StudentsController < ApplicationController
     end
     redirect_to :students
   end
-
+  
+  def export
+    buf = ''
+    Student.includes(:student_group).references(:student_group).order("student_groups.name", :lname, :name).all.each do |s|
+      u = s.get_user
+      sl = u.get_sloved if u
+      buf += "#{s.student_group.name}\t#{s.serial}\t#{s.lname}\t#{s.name}\t#{s.email}\t#{sl}\n"
+    end
+    render text: "<pre>#{buf}</pre>", :layout => true
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student

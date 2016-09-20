@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :student_groups
   resources :students
   post 'students/import' => 'students#import'
+  get  'students_export' => 'students#export'
   namespace :admin do
     resources :users
   end
