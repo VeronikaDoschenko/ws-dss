@@ -1,5 +1,5 @@
 class WsJobsController < ApplicationController
-
+  load_and_authorize_resource
   before_action :set_ws_job, only: [:show, :edit, :update, :destroy,
                                     :file_form, :file_save, :show_content]
 
@@ -11,21 +11,16 @@ class WsJobsController < ApplicationController
     else
       redirect_to :back
     end
-    
   end
 
   # GET /ws_jobs
   # GET /ws_jobs.json
   def index
-    if current_user.admin? and params[:user_id]
-      @ws_jobs = WsJob.where(user_id: params[:user_id].to_i).order('updated_at  desc')
-    else
-      @ws_jobs = current_user.ws_jobs.order('updated_at  desc')
-    end
+    user_id = params[:user_id] || current_user.id
+    @ws_jobs = WsJob.accessible_by(current_ability).where(user_id: user_id).order('updated_at  desc')
   end
 
   def file_form
-    #code
     
   end
   
@@ -143,9 +138,6 @@ class WsJobsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_ws_job
       @ws_job = WsJob.find(params[:id])
-      if not current_user.admin? and @ws_job.user.id != current_user.id
-        redirect_to ws_jobs_url, notice: 'Нет прав на чужие задачи' 
-      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

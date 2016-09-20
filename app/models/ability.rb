@@ -6,13 +6,23 @@ class Ability
     if user.admin?
       can :manage, :all
     else
+      if user.teacher?
+        can :manage, Student
+        can :read, WsJob
+        can :show_content, WsJob
+      end
+      
+      can :create, WsJob 
+      can [:update,:destroy,:read], WsJob, :user_id => user.id
+      can [:show_content,:file_form,:file_save], WsJob, :user_id => user.id
+      
       can :show_content, Document
       
       can :index, :modeling
       can :index, :ws_model_runs
       can :index, :ws_set_model_runs
       can :index, :ws_param_values
-      
+
       can [:update,:destroy,:read], WsModel, :user_id => user.id
       can :read, WsModel,
           :id => ActiveRecord::Base.connection.execute(
@@ -59,7 +69,7 @@ class Ability
       can :create, WsParamValue
       can [:update,:destroy,:read], WsParamValue,
         :ws_model_run_id => WsModelRun.where(user_id: user.id).pluck(:id)
-	  can :read, WsParamValue,
+	    can :read, WsParamValue,
           :ws_model_run_id => ActiveRecord::Base.connection.execute(
                  "select distinct rc.roleable_id from royce_connector rc
                   where rc.roleable_type = 'WsModelRun' and 
@@ -71,7 +81,7 @@ class Ability
                         )").collect{|x| x["roleable_id"].to_i}
           
           
-	  can :create, WsSetModelRun 
+	    can :create, WsSetModelRun 
       can [:update,:destroy,:read], WsSetModelRun, :user_id => user.id
       can :read, WsSetModelRun,
           :id => ActiveRecord::Base.connection.execute(
@@ -83,7 +93,8 @@ class Ability
                                          where rcu.roleable_type = 'User' and
                                          rcu.roleable_id=#{user.id})
                         )").collect{|x| x["roleable_id"].to_i}
-    end   
+    end
+    
     if user.model_creator?
       can :manage, WsParamModel 
       can :create, WsModel
@@ -93,5 +104,6 @@ class Ability
       can :set_model_permission, WsModel
       can :set_model_permission, WsSetModelRun
     end
+    
   end
 end
