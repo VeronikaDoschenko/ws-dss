@@ -29,7 +29,7 @@
         </td>
         <td><%= student.email %></td>
         <% if u %>
-          <td><%= link_to u.ws_jobs.size.to_s, ws_jobs_url(:user_id => u.id)  %></td>
+          <td><%= link_to u.get_jobs, ws_jobs_url(:user_id => u.id)  %></td>
           <td><%= u.get_sloved %></td>
         <% else %>
           <td></td>
@@ -47,7 +47,7 @@
         <td></td>
         <td align="right"><%= u.get_teams.join('<br/>').html_safe %></td>
         <td><%= u.email %></td>
-        <td><%= link_to u.ws_jobs.size.to_s, ws_jobs_url(:user_id => u.id)  %></td>
+        <td><%= link_to u.get_jobs, ws_jobs_url(:user_id => u.id)  %></td>
         <td><%= u.get_sloved %></td>
         <td></td>
         <td></td>

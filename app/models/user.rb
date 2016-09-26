@@ -19,7 +19,11 @@ class User < ActiveRecord::Base
   def get_sloved
     ws_jobs.where("error_code=0 and for_check=1").distinct.count(:ws_method_id)
   end
-
+  
+  def get_jobs
+    ws_jobs.select(:ws_method_id).distinct.count
+  end
+  
   def get_teams
     r = ActiveRecord::Base.connection.execute "SELECT DISTINCT (input)::json->>'team' a
            FROM ws_jobs WHERE (is_json(input)) and user_id=#{self.id}"
