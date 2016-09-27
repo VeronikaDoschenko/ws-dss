@@ -75,7 +75,7 @@ en:
   srv_descr:
     On this portal there are a lot of methods to support decision-making and operations research,
     including methods of multiple-criteria decision analysis and optimization methods.
-    All methods are available for free through restful api.
+    All methods are available for free through RESTful API.
   copyright:
     © Copyright 2015 Vladimir Sudakov, Release 1.1
   helpers:
