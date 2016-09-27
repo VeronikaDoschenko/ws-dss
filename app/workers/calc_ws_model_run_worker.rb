@@ -22,12 +22,14 @@ class CalcWsModelRunWorker
       a = mr.ws_model.ws_method.do_calc(input.to_json)
       output = JSON.parse(a[0])
       is_save = false
-      mr.ws_param_values.each do |pv|
-        if output[pv.ws_param.name]
+      mr.ws_model.ws_param_models.each do |pm|
+        if pm.ws_param and output[pm.ws_param.name]
+          pv = mr.ws_param_values.find_by_ws_param_id(pm.ws_param.id)
+          pv = mr.ws_param_values.new(ws_param: pm.ws_param) if pv.nil?
           pv.new_value = output[pv.ws_param.name] 
           pv.save
           is_save = true
-        end
+        end 
       end
       if output['trace']
         if output['trace'].kind_of?(Array)
