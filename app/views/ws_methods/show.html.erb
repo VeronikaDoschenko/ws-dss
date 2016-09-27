@@ -6,10 +6,12 @@
   Описание:<br/>
   <%= content_tag('pre', @ws_method.descr) %>
 </div>
+<% if can? :update, @ws_method %>
 <div class="field">
   Код метода:<br/>
   <%= content_tag('pre', @ws_method.code) %>
 </div>
+<% end %>
 <div class="field">
   Формат вывода:<br/>
   <%= content_tag('pre', @ws_method.format_output) %>

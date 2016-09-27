@@ -12,6 +12,8 @@ class Ability
         can :show_content, WsJob
       end
       
+      can :read, WsMethod
+      
       can :create, WsJob 
       can [:update,:destroy,:read], WsJob, :user_id => user.id
       can [:show_content,:file_form,:file_save], WsJob, :user_id => user.id
