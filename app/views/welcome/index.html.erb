@@ -2,10 +2,10 @@
 <p>
   <%= t(:srv_descr) %>
 </p>
-<%d = Document.find(9)%>
+<%d = Document.find_by_id(9)%>
 <% if d %>
-<p><%= link_to 'Скачать описание RESTful API', show_content_document_path(d) %></p>
-<p><%= link_to 'Исходные тексты на github', 'https://github.com/sudakov/ws-dss' %></p>
+  <p><%= link_to 'Скачать описание RESTful API', show_content_document_path(d) %></p>
+  <p><%= link_to 'Исходные тексты на github', 'https://github.com/sudakov/ws-dss' %></p>
 <% end %>
 <p>Основные доступные методы:</p>
 <table class="table">
