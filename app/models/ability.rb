@@ -74,6 +74,10 @@ class Ability
       can :create, WsParamValue
       can [:update,:destroy,:read], WsParamValue,
         :ws_model_run_id => WsModelRun.where(user_id: user.id).pluck(:id)
+        
+      can [:update,:destroy,:read], WsParamValue,
+        :ws_model_run_id => WsModel.where(user_id: user.id).includes(:ws_model_runs).pluck('ws_model_runs.id')
+        
 	    can :read, WsParamValue,
           :ws_model_run_id => ActiveRecord::Base.connection.execute(
                  "select distinct rc.roleable_id from royce_connector rc

@@ -46,6 +46,7 @@ class WsParamValuesController < ApplicationController
   # PATCH/PUT /ws_param_values/1
   # PATCH/PUT /ws_param_values/1.json
   def update
+    params[:ws_param_value] ||= {}
     params[:ws_param_value][:source_ws_param_ids] ||= []
     respond_to do |format|
       if @ws_param_value.update(ws_param_value_params)
