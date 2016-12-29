@@ -5,6 +5,12 @@
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="theme-color" content="#f0e3e3">
+
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
 (function (d, w, c) {
@@ -42,13 +48,9 @@
 
 </script>
 <style>
-.navbar-nav > li > a, .navbar-brand {
-    padding-top:4px !important; 
-    padding-bottom:0 !important;
-    height: 28px;
-}
-.navbar {min-height:28px !important;}
-td { word-wrap: break-word;max-width:200px;}            
+
+td { word-wrap: break-word;max-width:200px;}
+
 </style>
 </head>
 <body>
@@ -69,28 +71,44 @@ td { word-wrap: break-word;max-width:200px;}
       <%= link_to_unless I18n.locale == :en, "English", url_for(params.merge(locale: :en)) %>
       </p>
     <% end %>
+    
     <nav class="navbar navbar-default">
-    <ul class="nav nav-pills">
-      <li role="presentation"> <%= link_to image_tag("/logo.svg", size: "50x20", :alt => "ws-dss"), root_url %></li>
-     
-      <% if user_signed_in? %>
-        <li role="presentation"><%= link_to t(:profile), user_root_url %></li>
-        <li role="presentation"><%= link_to "Учебные материалы", edu_index_url %></li>
-        <li role="presentation"><%= link_to "Задачи", ws_jobs_url %></li>
-        <li role="presentation"><%= link_to "Модели", modeling_url %></li>
-        <% if can? :read, Student %>
-          <li role="presentation"><%= link_to "Студенты", students_url %></li>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <%= link_to image_tag("/logo.svg", size: "100x50", :alt => "ws-dss"), root_url %>
+        </div>
+        <% if user_signed_in? %>
+        <ul class="nav nav-pills navbar-left">
+          <li role="presentation"><%= link_to "Задачи", ws_jobs_url %></li>
+          <li role="presentation"><%= link_to "Модели", modeling_url %></li>
+          <li role="presentation"><%= link_to "Учебные материалы", edu_index_url %></li>
+          <% if can? :read, Student %>
+            <li role="presentation"><%= link_to "Студенты", students_url %></li>
+          <% end %>
+          <% if current_user.admin? %>
+            <li role="presentation"><%= link_to "Администрирование", admin_url %></li>
+          <% end %>
+        </ul>
         <% end %>
-        <% if current_user.admin? %>
-          <li role="presentation"><%= link_to "Администрирование", admin_url %></li>
+        <ul class="nav nav-pills navbar-right">
+        <% if user_signed_in? %>
+          <li role="presentation">
+            <%= link_to user_root_url, title: t(:profile) do %>
+              <i class="glyphicon glyphicon-user"></i>
+            <% end %>
+          </li>
+          <li role="presentation">
+            <%= link_to destroy_user_session_path, method: :delete, title: t(:logout) do %>
+              <i class="glyphicon glyphicon-log-out"></i>
+            <% end %>
+          </li>
+        <% else %>
+          <li role="presentation"><%= link_to( t(:login), new_user_session_path ) %></li>
+          <li role="presentation"><%= link_to( t(:sign_up), new_user_registration_path ) %></li>
         <% end %>
-        <li role="presentation"><%= link_to t(:logout), destroy_user_session_path, :method => :delete %></li>
-      <% else %>
-        <li role="presentation"><%= link_to( t(:login), new_user_session_path) %></li>
-        <li role="presentation"><%= link_to( t(:sign_up), new_user_registration_path) %></li>
-      <% end %>
-    </ul>
-    </nav>
+        </ul>
+      </div>
+    </nav>  
     <%= yield %>
     <footer>
       <p class="text-right small text-primary"><%= t(:copyright) %></p>
