@@ -34,6 +34,12 @@ class WsModelRun < ActiveRecord::Base
       when 2
         if mr.ws_model.ws_method    
           CalcWsModelRunWorker.perform_async( mr.id )
+        elsif !mr.ws_model.model_url.nil? and !mr.ws_model.model_url.empty?
+          if mr.ws_model.model_url[0..3] != 'http'
+             pid = spawn(mr.ws_model.model_url,
+                         [:out, :err] => ["#{Rails.root.join('log',"#{Rails.env}.log")}",'a'])
+             Process.detach(pid)
+          end
         end
       when 7
         prep_model_run( mr )
