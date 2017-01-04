@@ -74,3 +74,7 @@ end
 group :development, :test do
     gem 'railroady'
 end
+
+gem 'refinerycms', '~> 3.0.0'
+gem 'refinerycms-wymeditor', ['~> 1.0', '>= 1.0.6']
+

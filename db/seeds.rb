@@ -49,5 +49,12 @@ test_output = <<-EOS
     {"name"=>"Прикладной эффект", "scale"=>[98, 155, 173, 256], "rank"=>0.19697, "min"=>0}]}
 EOS
 
-WsMethod.create({:name => 'DummyMethod', :code => code, :test_input => test_input, :test_output => test_output})
+if WsMethod.find_by_name('DummyMethod').nil?
+  WsMethod.create( {:name => 'DummyMethod',
+                    :code => code,
+                    :test_input => test_input,
+                    :test_output => test_output})
+end
 
+# Added by Refinery CMS Pages extension
+Refinery::Pages::Engine.load_seed

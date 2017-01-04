@@ -79,32 +79,32 @@ td { word-wrap: break-word;max-width:200px;}
         </div>
         <% if user_signed_in? %>
         <ul class="nav nav-pills navbar-left">
-          <li role="presentation"><%= link_to "Задачи", ws_jobs_url %></li>
-          <li role="presentation"><%= link_to "Модели", modeling_url %></li>
-          <li role="presentation"><%= link_to "Учебные материалы", edu_index_url %></li>
+          <li role="presentation"><%= link_to "Задачи", main_app.ws_jobs_url %></li>
+          <li role="presentation"><%= link_to "Модели", main_app.modeling_url %></li>
+          <li role="presentation"><%= link_to "Учебные материалы", main_app.edu_index_url %></li>
           <% if can? :read, Student %>
-            <li role="presentation"><%= link_to "Студенты", students_url %></li>
+            <li role="presentation"><%= link_to "Студенты", main_app.students_url %></li>
           <% end %>
           <% if current_user.admin? %>
-            <li role="presentation"><%= link_to "Администрирование", admin_url %></li>
+            <li role="presentation"><%= link_to "Администрирование", main_app.admin_url %></li>
           <% end %>
         </ul>
         <% end %>
         <ul class="nav nav-pills navbar-right">
         <% if user_signed_in? %>
           <li role="presentation">
-            <%= link_to user_root_url, title: t(:profile) do %>
+            <%= link_to main_app.user_root_url, title: t(:profile) do %>
               <i class="glyphicon glyphicon-user"></i>
             <% end %>
           </li>
           <li role="presentation">
-            <%= link_to destroy_user_session_path, method: :delete, title: t(:logout) do %>
+            <%= link_to main_app.destroy_user_session_path, method: :delete, title: t(:logout) do %>
               <i class="glyphicon glyphicon-log-out"></i>
             <% end %>
           </li>
         <% else %>
-          <li role="presentation"><%= link_to( t(:login), new_user_session_path ) %></li>
-          <li role="presentation"><%= link_to( t(:sign_up), new_user_registration_path ) %></li>
+          <li role="presentation"><%= link_to( t(:login), main_app.new_user_session_path ) %></li>
+          <li role="presentation"><%= link_to( t(:sign_up), main_app.new_user_registration_path ) %></li>
         <% end %>
         </ul>
       </div>
