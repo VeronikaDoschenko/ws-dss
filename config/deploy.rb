@@ -13,7 +13,7 @@ set :repo_url, 'git@github.com:sudakov/ws-dss.git'
 
 application = 'ws-dss'
 set :rvm_type, :user
-set :rvm_ruby_version, '2.2.2'
+set :rvm_ruby_version, '2.3.3'
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, '/var/www/my_app_name'
