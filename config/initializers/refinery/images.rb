@@ -35,11 +35,11 @@ Refinery::Images.configure do |config|
 
   # Configure Dragonfly
   # config.dragonfly_verify_urls = true
-  config.dragonfly_secret = "08a4cef9b57f166b8076009537c19ee8c6cda6c7b79c2cf0"
+  config.dragonfly_secret = ENV["DRAGONFLY_SECRET"]
   # config.dragonfly_url_format = "/system/images/:job/:basename.:ext"
   # config.dragonfly_url_host = ""
-  # config.datastore_root_path = "/Users/vsudakov/ws-dss/public/system/refinery/images"
-
+  config.datastore_root_path = ENV["DRAGONFLY_DATASTORE"]
+  Dragonfly.logger = Rails.logger  
   # Configure Dragonfly custom storage backend
   # The custom_backend setting by default defers to the core setting for this but can be set just for images.
   # config.custom_backend_class = nil
