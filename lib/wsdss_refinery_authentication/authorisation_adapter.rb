@@ -16,11 +16,11 @@ module WsdssRefineryAuthentication
     def allow?(operation, resource)
       case
       when resource == :site_bar
-        current_user.refinery? or current_user.admin?
+        Ability.new(current_user).can? :manage, :cms
       when operation == :plugin
-        current_user.admin?
+        Ability.new(current_user).can? :manage, :cms
       when operation == :controller
-        current_user.admin?
+        Ability.new(current_user).can? :manage, :cms
       else
         false
       end

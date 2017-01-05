@@ -15,6 +15,10 @@ class Ability
         can :show_content, WsJob
       end
       
+      if user.refinery?
+        can :manage, :cms
+      end
+      
       can :read, WsMethod
       
       can :create, WsJob 

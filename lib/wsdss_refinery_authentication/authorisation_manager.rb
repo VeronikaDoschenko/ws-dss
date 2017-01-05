@@ -6,7 +6,7 @@ module WsdssRefineryAuthentication
 
     # The user needs to be an admin to access Refinery's backend.
     def authenticate!
-      unless adapter.current_user.admin?
+      unless Ability.new(adapter.current_user).can? :manage, :cms 
         raise Zilch::Authorisation::NotAuthorisedException
       end
 
