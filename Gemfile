@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby "2.3.3"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.3'
+gem 'rails', '4.2.4'
 
 gem 'pg'
 
@@ -77,4 +77,6 @@ end
 
 gem 'refinerycms', '~> 3.0.0'
 gem 'refinerycms-wymeditor', ['~> 1.0', '>= 1.0.6']
+
+gem 'refinerycms-inquiries', '~> 3.0.0'
 
