@@ -11,6 +11,15 @@ module ApplicationHelper
     link_to name, '#', onclick: "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")"
   end
   
+  def safe_url(h)
+    begin
+      url_for(params.merge(h))
+    rescue
+      refinery.url_for(params.merge(h))
+    end
+  end
+    
+    
   def long_string(s)
     if s
         if s.kind_of?(String) and s.size < 255

@@ -1,6 +1,6 @@
 Refinery::Inquiries.configure do |config|
   # Configure whether to show privacy link
-  # config.show_contact_privacy_link = true
+  config.show_contact_privacy_link = false
 
   # Configure whether to show phone number field
   # config.show_phone_number_field = true
@@ -20,5 +20,7 @@ Refinery::Inquiries.configure do |config|
   # config.page_path_thank_you = "/contact/thank_you"
 
   # Toggle the spam filter
-  # config.filter_spam = true
+  config.filter_spam = false
+  config.recaptcha_site_key = ENV['RECAPCHA_PUBLIC_KEY']
+
 end

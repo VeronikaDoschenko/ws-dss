@@ -65,17 +65,18 @@ td { word-wrap: break-word;max-width:200px;}
       <p class="text-right small">
       <% if user_signed_in? %>
         Пользователь: <%= current_user.email %>&nbsp;&nbsp;
-      <% end %> 
-      <%= link_to_unless I18n.locale == :ru, "Русский", url_for(params.merge(locale: :ru)) %>
+      <% end %>
+
+      <%= link_to_unless I18n.locale == :ru, "Русский", safe_url(locale: :ru) %>
       |
-      <%= link_to_unless I18n.locale == :en, "English", url_for(params.merge(locale: :en)) %>
+      <%= link_to_unless I18n.locale == :en, "English", safe_url(locale: :en) %>
       </p>
     <% end %>
     
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <%= link_to image_tag("/logo.svg", size: "100x50", :alt => "ws-dss"), root_url %>
+          <%= link_to image_tag("/logo.svg", size: "100x50", :alt => "ws-dss"), main_app.root_url %>
         </div>
         <% if user_signed_in? %>
         <ul class="nav nav-pills navbar-left">
@@ -108,7 +109,7 @@ td { word-wrap: break-word;max-width:200px;}
         <% end %>
         </ul>
       </div>
-    </nav>  
+    </nav>
     <%= yield %>
     <footer>
       <p class="text-right small text-primary"><%= t(:copyright) %></p>
