@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/ghoppe/refinerycms-tinymce
+  revision: 002d58a062f9ba407e5878a996fa248ccdab2775
+  specs:
+    refinerycms-tinymce (1.0.0)
+      refinerycms-core (~> 3.0, >= 3.0.0)
+
+GIT
   remote: https://github.com/refinery/refinerycms-inquiries
   revision: 4744b8d0ececc3c30b65a1a91be09124e570d1c8
   ref: 4744b8d
@@ -9,13 +16,6 @@ GIT
       httpclient
       refinerycms-core (~> 3.0.0)
       refinerycms-settings (~> 3.0.0)
-
-GIT
-  remote: https://github.com/sudakov/refinerycms-tinymce
-  revision: f4ef02bd0a83cdca578b40a212d5a0d76dffb337
-  specs:
-    refinerycms-tinymce (1.0.0)
-      refinerycms-core (~> 3.0, >= 3.0.0)
 
 GEM
   remote: https://rubygems.org/
