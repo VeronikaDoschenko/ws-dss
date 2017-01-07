@@ -1,12 +1,6 @@
-<h3><%= t(:welcome_to_ws_dss) %></h3>
-<p>
-  <%= t(:srv_descr) %>
-</p>
-<%d = Document.find_by_id(9)%>
-<% if d %>
-  <p><%= link_to 'Скачать описание RESTful API', show_content_document_path(d) %></p>
-  <p><%= link_to 'Исходные тексты на github', 'https://github.com/sudakov/ws-dss' %></p>
-<% end %>
+<h3><%= Refinery::Page.joins(:translations).find_by_slug("home").title %></h3>
+<%= raw Refinery::Page.joins(:translations).find_by_slug("home").content_for(:body) %>
+
 <p>Основные доступные методы:</p>
 <table class="table">
   <tr>
