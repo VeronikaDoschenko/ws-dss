@@ -7,27 +7,27 @@
 
   <div class="field">
     <%= f.label :name, :class => 'placeholder-fallback required' %>
-    <%= f.text_field :name, :class => 'text', :required => 'required',
+    <%= f.text_field :name, :class => 'text', :required => 'required', size: 50,
       :placeholder => (t('name', :scope => 'activerecord.attributes.refinery/inquiries/inquiry') if Refinery::Inquiries.show_placeholders) %>
   </div>
 
   <div class="field">
     <%= f.label :email, :class => 'placeholder-fallback required' %>
-    <%= f.email_field :email, :value => current_user.try(:email), :class => 'text email', :required => 'required',
+    <%= f.email_field :email, :value => current_user.try(:email), size: 50, :class => 'text email', :required => 'required',
       :placeholder => (t('email', :scope => 'activerecord.attributes.refinery/inquiries/inquiry') if Refinery::Inquiries.show_placeholders) %>
   </div>
 
   <% if Refinery::Inquiries.show_phone_number_field %>
     <div class="field">
       <%= f.label :phone, :class => 'placeholder-fallback' %>
-      <%= f.text_field :phone, :class => 'text phone',
+      <%= f.text_field :phone, :class => 'text phone', size: 50, 
         :placeholder => (t('phone', :scope => 'activerecord.attributes.refinery/inquiries/inquiry') if Refinery::Inquiries.show_placeholders) %>
     </div>
   <% end %>
 
   <div class='field message_field'>
     <%= f.label :message, :class => 'placeholder-fallback required' %>
-    <%= f.text_area :message, :rows => 8, :required => 'required',
+    <%= f.text_area :message, :rows => 8, cols: 100, :required => 'required',
       :placeholder => (t('message', :scope => 'activerecord.attributes.refinery/inquiries/inquiry') if Refinery::Inquiries.show_placeholders) %>
   </div>
   <% if Refinery::Inquiries.recaptcha_site_key.present? %>
