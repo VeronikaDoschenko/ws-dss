@@ -338,7 +338,7 @@ DEPENDENCIES
   recaptcha
   refinerycms (~> 3.0.0)
   refinerycms-inquiries!
-  refinerycms-wymeditor (~> 1.0, >= 1.0.6)
+  refinerycms-wymeditor (~> 1.0, >= 1.0.7)
   royce
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

@@ -76,7 +76,7 @@ group :development, :test do
 end
 
 gem 'refinerycms', '~> 3.0.0'
-gem 'refinerycms-wymeditor', ['~> 1.0', '>= 1.0.6']
+gem 'refinerycms-wymeditor', ['~> 1.0', '>= 1.0.7']
 
 gem "refinerycms-inquiries", git: "https://github.com/refinery/refinerycms-inquiries", :ref => "4744b8d"
 
