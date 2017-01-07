@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/sudakov/refinerycms-tinymce
-  revision: 76571cdeda259516a03baf2af31f50c26dcc2b68
+  revision: f4ef02bd0a83cdca578b40a212d5a0d76dffb337
   specs:
     refinerycms-tinymce (1.0.0)
       refinerycms-core (~> 3.0, >= 3.0.0)
