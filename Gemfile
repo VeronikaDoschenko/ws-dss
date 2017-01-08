@@ -75,10 +75,11 @@ group :development, :test do
     gem 'railroady'
 end
 
+gem "non-stupid-digest-assets"
+
 gem 'refinerycms', '~> 3.0.0'
 
-gem 'refinerycms-tinymce', git: "https://github.com/ghoppe/refinerycms-tinymce"
-# "https://github.com/sudakov/refinerycms-tinymce"
+gem 'refinerycms-tinymce', git: "https://github.com/sudakov/refinerycms-tinymce"
 
 gem "refinerycms-inquiries", git: "https://github.com/refinery/refinerycms-inquiries", :ref => "4744b8d"
 
