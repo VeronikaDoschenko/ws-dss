@@ -76,19 +76,22 @@
         <div class="navbar-header">
           <%= link_to image_tag("/logo.svg", size: "100x50", :alt => "ws-dss"), main_app.root_url %>
         </div>
-        <% if user_signed_in? %>
+        
         <ul class="nav nav-pills navbar-left">
-          <li role="presentation"><%= link_to "Задачи", main_app.ws_jobs_url %></li>
-          <li role="presentation"><%= link_to "Модели", main_app.modeling_url %></li>
-          <li role="presentation"><%= link_to "Учебные материалы", main_app.edu_index_url %></li>
+          <% if user_signed_in? %>
+            <li role="presentation"><%= link_to "Задачи", main_app.ws_jobs_url %></li>
+            <li role="presentation"><%= link_to "Модели", main_app.modeling_url %></li>
+          <% end %>
+          <% Refinery::Page.where(show_in_menu: true).order(:lft).each do |page| %>
+            <li role="presentation"><%= link_to page.title, refinery.url_for(page.url) %></li>
+          <% end %>
           <% if can? :read, Student %>
             <li role="presentation"><%= link_to "Студенты", main_app.students_url %></li>
           <% end %>
-          <% if current_user.admin? %>
+          <% if can?(:manage,:cms) %>
             <li role="presentation"><%= link_to "Администрирование", main_app.admin_url %></li>
           <% end %>
         </ul>
-        <% end %>
         <ul class="nav nav-pills navbar-right">
         <% if user_signed_in? %>
           <li role="presentation">

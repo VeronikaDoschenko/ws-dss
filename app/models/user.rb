@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   def active_plugins
     @active_plugins ||= Refinery::Plugins.new(
       Refinery::Plugins.registered.select do |plugin|
-        admin?
+        admin? or refinery?
       end
     )
   end

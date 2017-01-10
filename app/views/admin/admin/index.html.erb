@@ -1,13 +1,13 @@
 <h3>Административные действия</h3>
- 
-<p><%= link_to "Редактор пользователей", admin_users_path %></p>
-<p><%= link_to "Редактор методов", ws_methods_path %></p>
-<p><%= link_to "Редактор статусов моделей", ws_model_statuses_path %></p>
-
-<br/>
-<p><%= link_to "Редактор документов", documents_path %></p>
-<br/>
-<p><%= link_to "Редактор групп", student_groups_path %></p>
-<p><%= link_to "Редактор предметов", subjects_path %></p>
+<% if can?(:mange, :all) %> 
+  <p><%= link_to "Редактор пользователей", admin_users_path %></p>
+  <p><%= link_to "Редактор методов", ws_methods_path %></p>
+  <p><%= link_to "Редактор статусов моделей", ws_model_statuses_path %></p>
+  <br/>
+  <p><%= link_to "Редактор документов", documents_path %></p>
+  <br/>
+  <p><%= link_to "Редактор групп", student_groups_path %></p>
+  <p><%= link_to "Редактор предметов", subjects_path %></p>
+<% end %>
 
 <p><%= link_to "Refinery CMS", refinery.admin_root_path %></p>

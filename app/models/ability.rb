@@ -17,6 +17,7 @@ class Ability
       
       if user.refinery?
         can :manage, :cms
+        can :index, :admin
       end
       
       can :read, WsMethod
