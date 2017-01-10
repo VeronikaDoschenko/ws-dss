@@ -19,10 +19,10 @@ Refinery::Resources.configure do |config|
 
   # Configure Dragonfly
   # config.dragonfly_verify_urls = true
-  # config.dragonfly_secret = "08a4cef9b57f166b8076009537c19ee8c6cda6c7b79c2cf0"
+  config.dragonfly_secret = ENV["DRAGONFLY_SECRET"]
   # config.dragonfly_url_format = "/system/resources/:job/:basename.:ext"
   # config.dragonfly_url_host = ""
-  # config.datastore_root_path = "/Users/vsudakov/ws-dss/public/system/refinery/resources"
+  config.datastore_root_path = ENV["DRAGONFLY_DATASTORE"]
   # config.content_disposition = :attachment
 
   # Configure Dragonfly custom storage backend
