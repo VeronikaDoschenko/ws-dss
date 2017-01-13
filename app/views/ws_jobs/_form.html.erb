@@ -1,4 +1,27 @@
-<%= form_for(@ws_job) do |f| %>
+<script>
+function updateExample(){
+  if ($("#ws_job_input").val().trim()!="" &&
+      !confirm('Очисть поле "Входные данные" и заполнить его примером?')) {
+    return;
+  };
+  $.ajax({
+    url: "/ws_methods/" + $("#ws_job_ws_method_id")[0].value + ".json",
+    success: function(result){   
+      $("#ws_job_input").val(result.test_input);
+    }
+  });
+
+};
+function getDescr(){
+  $.ajax({
+    url: "/ws_methods/" + $("#ws_job_ws_method_id")[0].value + ".json",
+    success: function(result){   
+      $("#method_descr").html(result.descr);
+    }
+  });
+};
+</script>
+<%= form_for @ws_job, html: {:class => 'form-horizontal'}  do |f| %>
   <% if @ws_job.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@ws_job.errors.count, "error") %> Не возможно сохранение данной задачи:</h2>
@@ -11,25 +34,52 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :ws_method_id, "Метод" %><br/>
-    <%= f.collection_select(:ws_method_id, WsMethod.ask_working, :id, :name) %>
-  </div>
-
-  <% if @json_edit %>
-    <div id='editor_holder'></div>
-  <% else %>
-    <div class="field">
-      <%= f.label :input, "Входные данные" %><br/>
-      <%= f.text_area :input, autocomplete: "off", cols: 100, rows: 30 %>
+  <div class="form-group">
+    <%= f.label :ws_method_id, "Метод", class: "col-sm-1 control-label required" %>
+    <div class="col-sm-2">
+      <%= f.collection_select(:ws_method_id, WsMethod.ask_working, :id, :name,
+                                {}, :class => 'form-control', onChange: "getDescr();") %>
     </div>
+    <div class="col-sm-6">
+      <div id="method_descr"><%= WsMethod.ask_working.first.descr %></div>
+    </div>
+    <div class="col-sm-3">
+        <%= link_to "Пример входных данных",  '#',
+              onclick: "updateExample();",
+              class: 'btn btn-default' %>
+    </div>
+  </div>
+  <div class="form-group">
+  <% if @json_edit %>
+    <div class="col-sm-12">
+      <div id='editor_holder'/>  
+    </div>
+  <% else %>
+      <%= f.label :input, "Входные данные", class: "col-sm-1 control-label required"  %><br/>
+      <div class="col-sm-11">
+        <%= f.text_area :input, autocomplete: "off", rows: 20,
+                        :class => 'form-control', :required => 'required' %>
+      
+      </div>
   <% end %>
-  <div class="actions">
-    <%= f.submit "Сохранить" %>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-11">
+      <%= f.submit "Сохранить", :class => "btn btn-default" %>
+    </div>
   </div>
   <% if @json_edit %>
-    <%= f.text_area :input, autocomplete: "off", cols: 100, rows: 2, style: "display:none" %>
-    <button type="button" onclick="toggle(document.getElementById('ws_job_input'), this);">Показать JSON</button>
+    <div class="form-group">
+      <div class="col-sm-12">
+        <%= f.text_area :input, autocomplete: "off", cols: 100, rows: 2,
+                        :class => 'form-control', style: "display:none" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-1 col-sm-11">
+        <button type="button" class="btn btn-default" onclick="toggle(document.getElementById('ws_job_input'), this);">Показать JSON</button>
+      </div>
+    </div>
     <script>
       function toggle(el, el2) {
         el.style.display = (el.style.display == 'none') ? '' : 'none';
