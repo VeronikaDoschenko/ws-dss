@@ -7,6 +7,8 @@ gem 'rails', '4.2.7'
 
 gem 'pg'
 
+gem 'dotenv-rails', :groups => [:development, :test]
+
 gem 'bootstrap-sass', '~> 3.3.5'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -69,6 +71,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
   gem 'capistrano-rvm'
+  gem 'capistrano3-puma'
 end
 
 group :development, :test do
@@ -82,4 +85,6 @@ gem 'refinerycms', '~> 3.0.0'
 gem 'refinerycms-tinymce', git: "https://github.com/sudakov/refinerycms-tinymce"
 
 gem "refinerycms-inquiries", git: "https://github.com/refinery/refinerycms-inquiries", :ref => "4744b8d"
+
+gem 'puma'
 
