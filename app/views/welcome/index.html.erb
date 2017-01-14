@@ -1,6 +1,8 @@
-<h3><%= Refinery::Page.joins(:translations).find_by_slug("home").title %></h3>
-<%= raw Refinery::Page.joins(:translations).find_by_slug("home").content_for(:body) %>
-
+<% rp = Refinery::Page.joins(:translations).find_by_slug("home") %>
+<% if rp %>
+<h3><%= rp.title %></h3>
+<%= raw rp.content_for(:body) %>
+<% end %>
 <p>Основные доступные методы:</p>
 <table class="table">
   <tr>
