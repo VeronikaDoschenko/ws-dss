@@ -51,3 +51,14 @@ set :puma_preload_app, false
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+namespace :sidekiq do
+  task :restart do
+    on roles(:app) do
+      execute :sudo, :service, :sidekiq, :restart
+    end
+  end
+end
+
+after 'deploy:reverted', 'sidekiq:restart'
+after 'deploy:published', 'sidekiq:restart'
