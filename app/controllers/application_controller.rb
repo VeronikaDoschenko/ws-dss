@@ -7,8 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user_from_token!
   # This is Devise's authentication
   before_action :authenticate_user!
-  skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
-  
+    
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end

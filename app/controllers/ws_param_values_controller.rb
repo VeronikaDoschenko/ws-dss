@@ -1,5 +1,4 @@
-class WsParamValuesController < ApplicationController
-  load_and_authorize_resource
+class WsParamValuesController < AuthController
   before_action :set_ws_param_value, only: [:show, :edit, :update, :destroy]
 
   # GET /ws_param_values

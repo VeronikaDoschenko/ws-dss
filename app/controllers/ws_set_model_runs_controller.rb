@@ -1,5 +1,4 @@
-class WsSetModelRunsController < ApplicationController
-  load_and_authorize_resource
+class WsSetModelRunsController < AuthController
   before_action :set_ws_set_model_run, only: [:show, :edit, :update, :destroy]
 
   # GET /ws_set_model_runs

@@ -1,5 +1,4 @@
-class WsJobsController < ApplicationController
-  load_and_authorize_resource
+class WsJobsController < AuthController
   before_action :set_ws_job, only: [:show, :edit, :update, :destroy,
                                     :file_form, :file_save, :show_content]
 

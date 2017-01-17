@@ -1,5 +1,4 @@
-class WsMethodsController < ApplicationController
-  load_and_authorize_resource
+class WsMethodsController < AuthController
   before_action :set_ws_method, only: [:show, :edit, :update, :destroy, :test]
 
   # GET /ws_methods

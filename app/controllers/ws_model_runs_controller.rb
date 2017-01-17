@@ -1,5 +1,4 @@
-class WsModelRunsController < ApplicationController
-  load_and_authorize_resource
+class WsModelRunsController < AuthController
   before_action :set_ws_model_run, only: [:show, :edit, :update, :destroy, :ranking]
 
   # GET /ws_model_runs

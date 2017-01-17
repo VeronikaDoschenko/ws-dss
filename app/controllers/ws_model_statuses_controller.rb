@@ -1,5 +1,4 @@
-class WsModelStatusesController < ApplicationController
-  load_and_authorize_resource
+class WsModelStatusesController < AuthController
   before_action :set_ws_model_status, only: [:show, :edit, :update, :destroy]
 
   # GET /ws_model_statuses

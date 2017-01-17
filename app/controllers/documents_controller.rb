@@ -1,8 +1,4 @@
-class DocumentsController < ApplicationController
-  load_and_authorize_resource
-  skip_before_filter :authenticate_user_from_token!, :only => :show_content
-  skip_before_action :authenticate_user!, :only => :show_content
-  
+class DocumentsController < AuthController  
   before_action :set_document, only: [:show, :show_content, :edit, :update, :destroy]
 
   def show_content

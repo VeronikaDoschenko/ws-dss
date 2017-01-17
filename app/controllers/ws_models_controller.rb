@@ -1,5 +1,4 @@
-class WsModelsController < ApplicationController
-  load_and_authorize_resource
+class WsModelsController < AuthController
   before_action :set_ws_model, only: [:show, :edit, :update, :destroy]
 
   # GET /ws_models

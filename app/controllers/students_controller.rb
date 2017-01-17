@@ -1,5 +1,4 @@
-class StudentsController < ApplicationController
-  load_and_authorize_resource
+class StudentsController < AuthController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
 
   # GET /students

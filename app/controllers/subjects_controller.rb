@@ -1,5 +1,4 @@
-class SubjectsController < ApplicationController
-  load_and_authorize_resource
+class SubjectsController < AuthController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
 
   # GET /subjects
