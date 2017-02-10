@@ -103,7 +103,7 @@ class WsJobsController < AuthController
     if @ws_job.do_check==0 or current_user.admin?
       respond_to do |format|
         if @ws_job.update(ws_job_params)
-          @ws_job.update(output: nil)
+          @ws_job.update(output: nil, output_data: nil)
           CalcWsJobWorker.perform_async( @ws_job.id )
           sleep 3
           @ws_job.reload

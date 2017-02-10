@@ -38,6 +38,7 @@ class WsJob < ActiveRecord::Base
     self.output = a[0]
     self.error_code = a[1]
     self.for_check  = a[2]
+    self.output_data = a[3]
     self.save
   end
   

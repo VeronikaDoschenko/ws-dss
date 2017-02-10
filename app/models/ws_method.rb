@@ -26,8 +26,9 @@ class WsMethod < ActiveRecord::Base
   end
 
   def do_calc (m_input)
-	error_code = 0
+    error_code = 0
     for_check = 0
+    output_data = nil
 	if m_input and self.code   
 		exec_val = <<-WS_EOS
 		  begin
@@ -50,6 +51,6 @@ class WsMethod < ActiveRecord::Base
 	else
 		s = {trace: ( self.code ? "no input" : "no code" ) }.to_json
 	end
-    return [s, error_code, for_check]
+    return [s, error_code, for_check, output_data]
   end
 end

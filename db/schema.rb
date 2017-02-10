@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170106174547) do
+ActiveRecord::Schema.define(version: 20170210150507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -272,6 +272,7 @@ ActiveRecord::Schema.define(version: 20170106174547) do
     t.string   "filename"
     t.string   "content_type"
     t.binary   "file_contents"
+    t.string   "output_data"
   end
 
 # Could not dump table "ws_methods" because of following StandardError
