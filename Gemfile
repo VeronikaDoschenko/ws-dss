@@ -84,5 +84,6 @@ gem "refinerycms-inquiries", git: "https://github.com/refinery/refinerycms-inqui
 
 gem 'puma'
 
-gem 'simplex'
+gem 'dentaku'
 
+gem 'simplex'

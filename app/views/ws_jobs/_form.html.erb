@@ -44,7 +44,7 @@ function getDescr(){
                                 {}, :class => 'form-control', onChange: "getDescr();") %>
     </div>
     <div class="col-sm-6">
-      <div id="method_descr"><%= WsMethod.ask_working.first.descr %></div>
+      <div id="method_descr"><%= (@ws_job.ws_method.nil?)?(WsMethod.ask_working.first.descr):(@ws_job.ws_method.descr)%></div>
     </div>
     <div class="col-sm-3">
         <%= link_to "Пример входных данных",  '#',
