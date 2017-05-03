@@ -1,5 +1,6 @@
 class WsSetModelRun < ActiveRecord::Base
   nilify_blanks
+  has_many :descriptions, as: :rec, dependent: => :destroy
   has_many :ws_model_runs_set_model_runs, :dependent => :destroy
   has_many :ws_model_runs, through: :ws_model_runs_set_model_runs
   has_many :ws_param_values
