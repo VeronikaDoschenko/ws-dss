@@ -87,3 +87,5 @@ gem 'puma'
 gem 'dentaku'
 
 gem 'simplex'
+
+ gem 'i18n-active_record', :require => 'i18n/active_record'

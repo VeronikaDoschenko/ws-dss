@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   #
   # We ask that you don't use the :as option here, as Refinery relies on it being the default of "refinery"
   mount Refinery::Core::Engine, at: Refinery::Core.mounted_path
-
+  
+  resources :locales do
+    resources :translations, constraints: { :id => /[^\/]+/ }
+  end
 
   resources :ws_set_model_runs
   resources :ws_param_values

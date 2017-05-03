@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210150507) do
+ActiveRecord::Schema.define(version: 20170416044710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -233,6 +233,16 @@ ActiveRecord::Schema.define(version: 20170210150507) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "translations", force: :cascade do |t|
+    t.string   "locale"
+    t.string   "key"
+    t.text     "value"
+    t.text     "interpolations"
+    t.boolean  "is_proc",        default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -389,6 +399,8 @@ ActiveRecord::Schema.define(version: 20170210150507) do
 
   add_foreign_key "students", "student_groups"
   add_foreign_key "ws_jobs", "users"
+  add_foreign_key "ws_jobs", "users"
+  add_foreign_key "ws_jobs", "ws_methods"
   add_foreign_key "ws_jobs", "ws_methods"
   add_foreign_key "ws_model_runs", "users"
   add_foreign_key "ws_model_runs", "ws_model_statuses"

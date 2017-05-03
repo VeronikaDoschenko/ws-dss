@@ -1,0 +1,46 @@
+<h3>Перевод локали: <%= @locale %></h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Ключ</th><th>Перевод</th><th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% translation_keys(@locale).each do |key| %>
+      <% translation = translation_for_key(@translations, key) %>
+      <tr id="<%= key %>">
+        <td><%= key %></td>
+        <td><%= translation.nil? ? I18n.t(key, locale: @locale) : translation.value %></td>
+        <% if translation.nil? %>
+           <td> 
+              <%= link_to  new_locale_translation_url(@locale, key: key), class: "btn btn-default", title: "Редактировать" do %>
+                <i class="glyphicon glyphicon-pencil"></i>
+              <% end %>
+           </td>
+        <% else %>
+          <td>
+            <% if can? :update, locale_translation_url(@locale, translation) %>
+              <%= link_to  edit_locale_translation_url(@locale, translation), class: "btn btn-default", title: "Редактировать" do %>
+                <i class="glyphicon glyphicon-pencil"></i>
+              <% end %>
+            <% end %>
+          </td>
+          <td> 
+            <% if can? :destroy, locale_translation_url(@locale, translation) %>
+              <%= link_to locale_translation_url(@locale, translation), class: "btn btn-default", method: :delete, title: "Удалить", data: { confirm: 'Вы уверены?' } do %>
+                <i class="glyphicon glyphicon-trash"></i>
+              <% end %>
+            <% end %>
+          </td>
+           <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to new_locale_translation_path, class: "btn btn-default" do %>
+    <span class="glyphicon glyphicon-share"></span> Создать перевод
+<% end %>
+
