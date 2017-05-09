@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170416044710) do
+ActiveRecord::Schema.define(version: 20170503042910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -325,7 +325,6 @@ ActiveRecord::Schema.define(version: 20170416044710) do
 
   create_table "ws_models", force: :cascade do |t|
     t.string   "name"
-    t.string   "descr"
     t.string   "model_url"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -375,7 +374,6 @@ ActiveRecord::Schema.define(version: 20170416044710) do
 
   create_table "ws_params", force: :cascade do |t|
     t.string   "name"
-    t.string   "descr"
     t.boolean  "is_int"
     t.integer  "dim",        default: 0
     t.decimal  "min_val"
@@ -389,7 +387,6 @@ ActiveRecord::Schema.define(version: 20170416044710) do
 
   create_table "ws_set_model_runs", force: :cascade do |t|
     t.string   "name"
-    t.string   "descr"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"

@@ -1,4 +1,5 @@
 class WsModel < ActiveRecord::Base
+  include DescriptionsModule
   nilify_blanks
   belongs_to :user
   has_many :descriptions, as: :rec, dependent: :destroy
