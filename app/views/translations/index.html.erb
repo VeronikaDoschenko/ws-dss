@@ -1,4 +1,4 @@
-<h3>Перевод локали: <%= @locale %></h3>
+<h3>Перевод локали: <%= I18n.locale %></h3>
 <table class="table">
   <thead>
     <tr>
@@ -8,9 +8,8 @@
   <tbody>
     <% translation_keys(@locale).each do |key| %>
       <% translation = translation_for_key(@translations, key) %>
-      <tr id="<%= key %>">
         <td><%= key %></td>
-        <td><%= translation.nil? ? I18n.t(key, locale: @locale) : translation.value %></td>
+        <td><%= translation.nil? ? I18n.t(key.split('.').drop(1).join('.')) : translation.value %></td>
         <% if translation.nil? %>
            <td> 
               <%= link_to  new_locale_translation_url(@locale, key: key), class: "btn btn-default", title: "Редактировать" do %>

@@ -19,14 +19,14 @@ module TranslationsHelper
   private
 
   def en_keys
-    [ "welcome", "site_description" ]
+    I18n.get_keys
   end
 
   def ru_keys
-    [ "welcome", "site_description" ]
+    I18n.get_keys
   end
 
   def default_keys
-    [ "welcome", "site_description" ]
+    I18n.get_keys
   end
 end

@@ -9,8 +9,7 @@
   <p><%= link_to "Редактор групп", student_groups_path %></p>
   <p><%= link_to "Редактор предметов", subjects_path %></p>
   <br/>
-  <p><%= link_to "Редактор русских переводов", locale_translations_url(:ru) %></p>
-  <p><%= link_to "Редактор английских переводов", locale_translations_url(:en) %></p>
+  <p><%= link_to "Редактор локализации", locale_translations_url(I18n.locale) %></p>
 <% end %>
 
 <p><%= link_to "Refinery CMS", refinery.admin_root_path %></p>
