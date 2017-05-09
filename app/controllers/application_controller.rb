@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
     
   def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
+    I18n.locale = params[:locale] || extract_locale_from_accept_language_header
   end
   
   def default_url_options(options={})
@@ -18,6 +18,42 @@ class ApplicationController < ActionController::Base
   
   private
   
+  def extract_locale_from_accept_language_header
+    case request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+      when 'az'
+        'ru'
+      when 'am'
+        'ru'
+      when 'by'
+        'ru'
+      when 'kz'
+        'ru'
+      when 'kg'
+        'ru'
+      when 'md'
+        'ru'
+      when 'tj'
+        'ru'
+      when 'tm'
+        'ru'
+      when 'uz'
+        'ru'
+      when 'ua'
+        'ru'
+      when 'ge'
+        'ru'
+      when 'af' 
+        'ru'
+      when 'mn'
+        'ru'
+      when 'ru'
+        'ru'
+      else
+        'en'
+    end
+  end
+
+
   def authenticate_user_from_token!
     user_token = request.headers["HTTP_USER_TOKEN"].presence
     user       = user_token && User.find_by_authentication_token(user_token.to_s)
