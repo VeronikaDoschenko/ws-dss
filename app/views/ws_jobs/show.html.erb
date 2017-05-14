@@ -21,18 +21,18 @@
 }  
 </style>
 <div class="field">
-  Метод: <%=  @ws_job.ws_method.name %>
+  <%=t('views.ws_jobs.method')%>: <%=  @ws_job.ws_method.name %>
 </div>
 <div class="field">
-  Пользователь: <%=  @ws_job.user.email %>
+  <%=t('views.ws_jobs.ws_job_user')%>: <%=  @ws_job.user.email %>
 </div>
 <div class="field">
-  Входные данные:<br/>
+  <%=t('views.ws_jobs.input_data')%>:<br/>
   <%= content_tag('pre', @ws_job.input) %>
 </div>
 
 <div class="field">
-  Выходные данные:<br/>
+  <%=t('views.ws_jobs.output_data')%>:<br/>
   <% if @ws_job.output %>
     <% if @ws_job.ws_method.format_output == 'latex' %>
       <%= ('$' + @ws_job.output + '$').html_safe %>
@@ -50,19 +50,19 @@
       <%= content_tag('pre', @ws_job.output) %>
     <% end %>
   <% else %>
-    <p>Результат пока не готов, обновите данную страницу через некоторое время....</p>
+    <p><%=t('views.ws_jobs.waiting_for_result')%></p>
   <% end %>
 </div>
 
 <div class="field">
-  Код ошибки/проверки: <%= @ws_job.error_code %>/<%= @ws_job.for_check %>/<%= @ws_job.do_check %>
+  <%=t('views.ws_jobs.error_check_code')%>: <%= @ws_job.error_code %>/<%= @ws_job.for_check %>/<%= @ws_job.do_check %>
 </div>
 
 <div class="field">
-  Создан: <%= @ws_job.created_at %>
+  <%=t('views.ws_jobs.created')%>: <%= @ws_job.created_at %>
 </div>
 <div class="field">
-  Изменен: <%=  @ws_job.updated_at %>
+  <%=t('views.ws_jobs.changed')%>: <%=  @ws_job.updated_at %>
 </div>
 <br/>
 <div id="qrcode" class="test-page-break-inside"></div>
@@ -70,5 +70,5 @@
 new QRCode(document.getElementById("qrcode"), "http://www.ws-dss.com/ws_jobs/<%= @ws_job.id %>?do_check=1");
 </script>
 <br/>
-<%= link_to 'Редактировать', edit_ws_job_path(@ws_job) %> |
-<%= link_to 'Назад', ws_jobs_path %>
+<%= link_to t('edit'), edit_ws_job_path(@ws_job) %> |
+<%= link_to t('back'), ws_jobs_path %>

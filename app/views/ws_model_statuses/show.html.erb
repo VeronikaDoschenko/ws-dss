@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong><%=t('views.ws_model_statuses.name')%>:</strong>
   <%= @ws_model_status.name %>
 </p>
 
-<%= link_to 'Edit', edit_ws_model_status_path(@ws_model_status) %> |
-<%= link_to 'Back', ws_model_statuses_path %>
+<%= link_to t('edit'), edit_ws_model_status_path(@ws_model_status) %> |
+<%= link_to t('back'), ws_model_statuses_path %>

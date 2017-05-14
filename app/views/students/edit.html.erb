@@ -1,6 +1,6 @@
-<h3>Editing Student</h3>
+<h3><%=t('views.students.editing_student')%></h3>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @student %> |
-<%= link_to 'Back', students_path %>
+<%= link_to t('show'), @student %> |
+<%= link_to t('back'), students_path %>

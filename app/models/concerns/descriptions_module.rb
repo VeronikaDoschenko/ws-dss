@@ -2,7 +2,7 @@ module DescriptionsModule
   extend ActiveSupport::Concern
 
   included do
-    has_many :descriptions, as: :rec
+    has_many :descriptions, as: :rec, dependent: :destroy
   end
 
     def descr

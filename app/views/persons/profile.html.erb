@@ -15,16 +15,16 @@ function toggle(el, el2) {
     <button onclick="toggle(document.getElementById('my_token'), this);">Показать</button>
 </p>
 
-<p>Доступные методы:</p>
+<p><%=t('views.persons.available_methods')%>:</p>
 <table class="table">
   <tr>
-    <th>Метод</th><th>Описание</th><th>Пример вх. данных</th>
+    <th><%=t('views.persons.method')%></th><th><%=t('views.persons.descr')%></th><th><%=t('views.persons.example_input_data')%></th>
   </tr>
   <% @ws_methods.each do |ws| %>
   <tr>
     <td><%= ws.name %></td>
     <td><%= ws.descr %></td>
-    <td><%= link_to 'Показать', person_test_output_url(ws.id) %></td>
+    <td><%= link_to t('show'), person_test_output_url(ws.id) %></td>
   </tr>
   <% end %>
 </table>

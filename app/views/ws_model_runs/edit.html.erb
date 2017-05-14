@@ -1,6 +1,6 @@
-<h1>Редактирование прогона модели</h1>
+<h1><%=t('views.ws_model_runs.editing_model_runs')%></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Показать', @ws_model_run %> |
-<%= link_to 'Назад', ws_model_runs_path %>
+<%= link_to t('show'), @ws_model_run %> |
+<%= link_to t('back'), ws_model_runs_path %>

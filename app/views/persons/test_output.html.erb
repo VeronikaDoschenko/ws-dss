@@ -1,9 +1,9 @@
-<p>Метод</p>
+<p><%=t('views.persons.method')%></p>
 <%=  @ws_method.name %>
 <br/>
 <%=  @ws_method.descr %>
 <br/>
-<p>Пример входных данных:</p>
+<p><%=t('views.persons.example_input_data')%>:</p>
 <%= content_tag('pre', @ws_method.test_input) %>
 <br/>
-<%= link_to 'Назад', user_root_url %>
+<%= link_to t('back'), user_root_url %>

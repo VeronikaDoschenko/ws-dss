@@ -2,7 +2,7 @@
 
   <% if @admin_user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(@admin_user.errors.count, t('error')) %> <%= t('views.admin.users.cant_save_user') %>:</h2>
 
       <ul>
       <% @admin_user.errors.full_messages.each do |message| %>
@@ -23,7 +23,7 @@
     </div>
   <% end %>
   <div class="actions">
-    <%= f.submit "Сохранить" %>
+    <%= f.submit t('save') %>
   </div>
   
 <% end %>

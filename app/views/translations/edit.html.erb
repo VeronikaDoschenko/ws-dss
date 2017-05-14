@@ -1,7 +1,8 @@
 <%= form_for @translation, url: locale_translation_path do |form| %>
-  <%= form.label :locale %> <%= form.text_field :locale, readonly: true %>
-  <%= form.label :key %> <%= form.text_field :key, readonly: true %>
-  <%= form.label :value %> <%= form.text_area :value %>
+  <%= form.label t('views.translations.locale')  %> <%= form.text_field :locale, readonly: true %>
+  <%= form.label t('views.translations.key') %> <%= form.text_field :key, readonly: true %>
+  <%= form.label t('views.translations.translation') %> <%= form.text_area :value %>
 
-  <%= form.submit 'Save Translation' %> <%= link_to "Cancel", locale_translations_url(@locale) %>
+  <%= form.submit t('views.translations.save_translation') %> <%= link_to t('cancel'), locale_translations_url(@locale) %>
 <% end %>
+

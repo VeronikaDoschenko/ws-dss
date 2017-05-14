@@ -2,7 +2,6 @@ class WsMethod < ActiveRecord::Base
   include DescriptionsModule
   nilify_blanks
   
-  has_many :descriptions, as: :rec, dependent: :destroy
   has_many :ws_jobs, dependent: :restrict_with_exception
   has_many :ws_models
   royce_roles %w[ public ] + User.available_roles.collect{|s| s.name} - %w[ admin ]

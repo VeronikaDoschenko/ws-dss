@@ -1,40 +1,40 @@
 <p>
-  <strong>Название:</strong>
+  <strong><%=t('views.ws_model_runs.name')%>:</strong>
   <%= @ws_model_run.name %>
 </p>
 
 <p>
-  <strong>Модель:</strong>
+  <strong><%=t('views.ws_model_runs.model_name')%>:</strong>
   <%= @ws_model_run.ws_model.name %>
 </p>
 
 <p>
-  <strong>Статус прогона:</strong>
+  <strong><%=t('views.ws_model_runs.run_status')%>:</strong>
   <%= @ws_model_run.ws_model_status.name %>
 </p>
 
 <p>
-  <strong>Описание:</strong>
+  <strong><%=t('views.ws_model_runs.descr')%>:</strong>
   <pre><%= @ws_model_run.descr %></pre>
 </p>
 
 <p>
-  <strong>Трассировочная печать:</strong>
+  <strong><%=t('views.ws_model_runs.trace_printing')%>:</strong>
   <pre><%= @ws_model_run.trace %></pre>
 </p>
 
 <p>
-  <strong>Доступность:</strong>
+  <strong><%=t('views.ws_model_runs.accessibility')%>:</strong>
   <%= @ws_model_run.role_list.join(', ') %>
 </p>
 
-<strong>Значения параметров</strong>
+<strong><%=t('views.ws_model_runs.values_​of_parameters')%></strong>
 <table class="table">
   <thead>
     <tr>
-      <th>Параметр</th>
-      <th>Значение до прогона</th>
-      <th>Значение после прогона</th>
+      <th><%=t('views.ws_model_runs.parameter')%></th>
+      <th><%=t('views.ws_model_runs.value_before_run')%></th>
+      <th><%=t('views.ws_model_runs.value_after_run')%></th>
     </tr>
   </thead>
   <tbody>
@@ -49,22 +49,22 @@
 </table>
 <% if @ws_model_run.ws_set_model_run %>
 <p>
-  <strong>Множество для записи результатов прогонов:</strong>
+  <strong><%=t('views.ws_model_runs.set_for_recording_run_results')%>:</strong>
   <%= @ws_model_run.ws_set_model_run.try{ |s| link_to(s.name, s) } %>
 </p>
 <p>
-  <strong>Модель для записи результатов прогонов:</strong>
+  <strong><%=t('views.ws_model_runs.model_for_recording_run_results')%>:</strong>
   <%= @ws_model_run.target_ws_model.try{ |s| link_to(s.name, s) } %>
 </p>
 <p>
-  <strong>Целевой параметр прогона:</strong>
+  <strong><%=t('views.ws_model_runs.target_parametr_of_run')%>:</strong>
   <%= @ws_model_run.goal_ws_param_value.try{ |s| link_to(s.full_name,s)} %>
   <% if @ws_model_run.goal_ws_param_value %>
-    <%= link_to 'Ранжирование', show_model_runs_ranking_path(@ws_model_run) %>
+    <%= link_to t('views.ws_model_runs.ranging'), show_model_runs_ranking_path(@ws_model_run) %>
   <% end %>
 </p>
 <% end %>
 <% if can? :update, @ws_model_run %>
-  <%= link_to 'Редактировать', edit_ws_model_run_path(@ws_model_run) %> |
+  <%= link_to t('edit'), edit_ws_model_run_path(@ws_model_run) %> |
 <% end %>
-<%= link_to 'Назад', ws_model_runs_path %>
+<%= link_to t('back'), ws_model_runs_path %>

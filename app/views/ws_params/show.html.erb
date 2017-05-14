@@ -1,33 +1,33 @@
 <p>
-  <strong>Название:</strong>
+  <strong><%=t('views.ws_params.name')%>:</strong>
   <%= @ws_param.name %>
 </p>
 
 <p>
-  <strong>Описание:</strong>
+  <strong><%=t('views.ws_params.descr')%>:</strong>
   <%= @ws_param.descr %>
 </p>
 
 <p>
-  <strong>Целочисленный:</strong>
+  <strong><%=t('views.ws_params.integer')%>:</strong>
   <%= ((@ws_param.is_int) ? "Да":"Нет") %>
 </p>
 
 <p>
-  <strong>Число измерений:</strong>
+  <strong><%=t('views.ws_params.number_of_meas')%>:</strong>
   <%= @ws_param.dim %>
 </p>
 
 <p>
-  <strong>Минимальное значение:</strong>
+  <strong><%=t('views.ws_params.min_value')%>:</strong>
   <%= @ws_param.min_val %>
 </p>
 
 <p>
-  <strong>Максимальное значение:</strong>
+  <strong><%=t('views.ws_params.max_value')%>:</strong>
   <%= @ws_param.max_val %>
 </p>
 <% if can? :update, @ws_param %>
-  <%= link_to 'Редактировать', edit_ws_param_path(@ws_param) %> |
+  <%= link_to t('edit'), edit_ws_param_path(@ws_param) %> |
 <% end %>
-<%= link_to 'Назад', ws_params_path %>
+<%= link_to t('back'), ws_params_path %>

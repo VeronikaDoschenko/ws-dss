@@ -1,40 +1,40 @@
 <div class="field">
-  Название:<br/>
+  <%=t('views.ws_methods.name')%>:<br/>
   <%= content_tag('pre', @ws_method.name) %>
 </div>
 <div class="field">
-  Описание:<br/>
+  <%=t('views.ws_methods.descr')%>:<br/>
   <%= content_tag('pre', @ws_method.descr) %>
 </div>
 <% if can? :update, @ws_method %>
 <div class="field">
-  Код метода:<br/>
+  <%=t('views.ws_methods.code_of_method')%>:<br/>
   <%= content_tag('pre', @ws_method.code) %>
 </div>
 <% end %>
 <div class="field">
-  Формат вывода:<br/>
+  <%=t('views.ws_methods.output_format')%>:<br/>
   <%= content_tag('pre', @ws_method.format_output) %>
 </div>
 <div class="field">
-  Пример вх. данных:<br/>
+  <%=t('views.ws_methods.example_input_data')%>:<br/>
   <%= content_tag('pre', @ws_method.test_input) %>
 </div>
 <div class="field">
-  Пример вых. данных:<br/>
+  <%=t('views.ws_methods.example_output_data')%>:<br/>
   <%= content_tag('pre', @ws_method.test_output) %>
 </div>
 <p>
-  <strong>Доступность:</strong>
+  <strong><%=t('views.ws_methods.accessibility')%>:</strong>
   <%= @ws_method.role_list.join(', ') %>
 </p>
 <div class="field">
-  Создан:<br/>
+  <%=t('views.ws_methods.created')%>:<br/>
   <%= content_tag('pre', @ws_method.created_at) %>
 </div>
 <div class="field">
-  Изменен:<br/>
+  <%=t('views.ws_methods.changed')%>:<br/>
   <%= content_tag('pre', @ws_method.updated_at) %>
 </div>
-<%= link_to 'Редактировать', edit_ws_method_path(@ws_method) %> |
-<%= link_to 'Назад', ws_methods_path %>
+<%= link_to t('edit'), edit_ws_method_path(@ws_method) %> |
+<%= link_to t('back'), ws_methods_path %>

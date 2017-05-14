@@ -1,7 +1,7 @@
 <%= form_for(@document) do |f| %>
   <% if @document.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
+      <h2><%= pluralize(@document.errors.count, t('error')) %> <%= t('views.documents.cant_save_document') %>:</h2>
 
       <ul>
       <% @document.errors.full_messages.each do |message| %>
@@ -12,13 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label t('views.documents.name') %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
     <%= f.file_field :file %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit t('views.documents.submit_document')%>
   </div>
 <% end %>

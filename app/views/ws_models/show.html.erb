@@ -1,10 +1,10 @@
 <p>
-  <strong>Название:</strong>
+  <strong><%=t('views.ws_models.name')%>:</strong>
   <%= @ws_model.name %>
 </p>
 
 <p>
-  <strong>Описание:</strong>
+  <strong><%=t('views.ws_models.descr')%>:</strong>
   <%= @ws_model.descr %>
 </p>
 
@@ -14,27 +14,27 @@
 </p>
 
 <p>
-  <strong>Внутренний метод:</strong>
+  <strong><%=t('views.ws_models.internal_method')%>:</strong>
   <%= @ws_model.try(:ws_method).try(:name) %>
 </p>
 
 <p>
-  <strong>Доступность:</strong>
+  <strong><%=t('views.ws_models.accessibility')%>:</strong>
   <%= @ws_model.role_list.join(', ') %>
 </p>
 
-<p>Параметры модели</p>
+<p><%=t('views.ws_models.model_parameters')%></p>
 <table class="table">
   <thead>
     <tr>
-      <th>Название</th>
-      <th>Описание</th>
-      <th>Целочисл.</th>
-      <th>Число измер.</th>
-      <th>Мин.знач.</th>
-      <th>Макс.знач.</th>
-      <th>Обязательный</th>
-      <th>Копирование</th>
+      <th><%=t('views.ws_models.name')%></th>
+      <th><%=t('views.ws_models.descr')%></th>
+      <th><%=t('views.ws_models.integer')%></th>
+      <th><%=t('views.ws_models.number_of_meas')%></th>
+      <th><%=t('views.ws_models.min_value')%></th>
+      <th><%=t('views.ws_models.max_value')%></th>
+      <th><%=t('views.ws_models.required')%></th>
+      <th><%=t('views.ws_models.replication')%></th>
     </tr>
   </thead>
 
@@ -45,7 +45,7 @@
           <td><%= pm.ws_param.name %></td>
           <td><%= pm.ws_param.descr %></td>
           <td>
-            <%= ( (pm.ws_param.is_int) ? "Да": "Нет" ) %>   
+            <%= ( (pm.ws_param.is_int) ? t('yes'): t('no') ) %>   
           </td>
           <td>
             <%= pm.ws_param.dim %>
@@ -60,10 +60,10 @@
           <td/><td/><td/><td/><td/><td/>
         <% end %>
         <td>
-            <%= ((pm.is_required) ? "Да" : "Нет" ) %>        
+            <%= ((pm.is_required) ? t('yes') : t('no') ) %>        
         </td>
         <td>
-            <%= ((pm.is_copy) ? "Да" : "Нет" ) %>        
+            <%= ((pm.is_copy) ? t('yes') : t('no') ) %>        
         </td>        
       </tr>
     <% end %>
@@ -71,6 +71,6 @@
 </table>
 
 <% if can? :update, @ws_model %>
-  <%= link_to 'Редактировать', edit_ws_model_path(@ws_model) %> |
+  <%= link_to t('edit'), edit_ws_model_path(@ws_model) %> |
 <% end %>
-<%= link_to 'Назад', ws_models_path %>
+<%= link_to t('back'), ws_models_path %>
