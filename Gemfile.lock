@@ -11,6 +11,12 @@ GIT
       refinerycms-settings (~> 3.0.0)
 
 GIT
+  remote: https://github.com/sudakov/ai4r
+  revision: fdd655b985b531a18839f707f65b99f24d752be4
+  specs:
+    ai4r (1.13)
+
+GIT
   remote: https://github.com/sudakov/refinerycms-tinymce
   revision: 76571cdeda259516a03baf2af31f50c26dcc2b68
   specs:
@@ -334,6 +340,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ai4r!
   bootstrap-sass (~> 3.3.5)
   byebug
   cancancan

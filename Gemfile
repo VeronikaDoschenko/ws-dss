@@ -80,6 +80,8 @@ gem 'refinerycms', '~> 3.0.0'
 
 gem 'refinerycms-tinymce', git: "https://github.com/sudakov/refinerycms-tinymce"
 
+gem 'ai4r', git: "https://github.com/sudakov/ai4r"
+
 gem "refinerycms-inquiries", git: "https://github.com/refinery/refinerycms-inquiries", :ref => "4744b8d"
 
 gem 'puma'
