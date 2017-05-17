@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503042910) do
+ActiveRecord::Schema.define(version: 20170517011150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -396,8 +396,6 @@ ActiveRecord::Schema.define(version: 20170503042910) do
 
   add_foreign_key "students", "student_groups"
   add_foreign_key "ws_jobs", "users"
-  add_foreign_key "ws_jobs", "users"
-  add_foreign_key "ws_jobs", "ws_methods"
   add_foreign_key "ws_jobs", "ws_methods"
   add_foreign_key "ws_model_runs", "users"
   add_foreign_key "ws_model_runs", "ws_model_statuses"

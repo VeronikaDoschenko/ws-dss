@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   
   resources :locales do
     resources :translations, constraints: { :id => /[^\/]+/ }
-  end
+  endz
 
   resources :ws_set_model_runs
   resources :ws_param_values

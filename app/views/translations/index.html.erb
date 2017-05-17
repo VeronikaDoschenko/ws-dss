@@ -9,7 +9,7 @@
     <% translation_keys(@locale).each do |key| %>
       <% translation = translation_for_key(@translations, key) %>
         <td><%= key %></td>
-        <td><%= translation.nil? ? I18n.t(key.split('.').drop(1).join('.')) : translation.value %></td>
+        <td><%= translation.nil? ? " " : translation.value %></td>
         <% if translation.nil? %>
            <td> 
               <%= link_to  new_locale_translation_url(@locale, key: key), class: "btn btn-default", title: t('edit') do %>

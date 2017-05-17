@@ -1,8 +1,23 @@
-<%= form_for @translation, url: locale_translation_path do |form| %>
-  <%= form.label t('views.translations.locale')  %> <%= form.text_field :locale, readonly: true %>
-  <%= form.label t('views.translations.key') %> <%= form.text_field :key, readonly: true %>
-  <%= form.label t('views.translations.translation') %> <%= form.text_area :value %>
+<%= form_for @translation, url: locale_translations_url(I18n.locale) do |form| %>
 
-  <%= form.submit t('views.translations.save_translation') %> <%= link_to t('cancel'), locale_translations_url(@locale) %>
+	<div class="field">
+    	<%= form.label t('views.translations.locale') %><br/>
+    	<%= form.text_field :locale, readonly: true %>
+	</div>
+
+	<div class="field">
+    	<%= form.label t('views.translations.key') %><br/>
+    	<%= form.text_field :key, readonly: true , size: 100%>
+	</div>
+
+	<div class="field">
+    	<%= form.label t('views.translations.translation') %><br/>
+    	<%= form.text_area :value, autofocus: true, autocomplete: "off" , cols: 100, rows: 4%>
+	</div>
+
+	<div class="actions">
+    	<%= form.submit t('views.translations.save_translation') %> 
+  	</div>
+  
 <% end %>
-
+<%= link_to t('cancel'), locale_translations_url(@locale) %>

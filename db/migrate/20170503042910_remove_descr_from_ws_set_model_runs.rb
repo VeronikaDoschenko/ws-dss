@@ -1,14 +1,16 @@
 class RemoveDescrFromWsSetModelRuns < ActiveRecord::Migration
   def change
-  	Ws_SetModelRuns.each do |w|
-  		dscr = Descriptions.new(
-  			:descr => w.descr,
+    rename_column :ws_set_model_runs, :descr, :descripion
+    
+  	WsSetModelRun.all.each do |w|
+  		dscr = Description.new(
+  			:descr => w.descripion,
   			:locale => "ru",
   			:rec_id => w.id,
-  			:rec_type => "WsSetModelRuns"
+  			:rec_type => "WsSetModelRun"
   			)
   		dscr.save!
   	end
-    remove_column :ws_set_model_runs, :descr, :string
+    remove_column :ws_set_model_runs, :descripion, :string
   end
 end
