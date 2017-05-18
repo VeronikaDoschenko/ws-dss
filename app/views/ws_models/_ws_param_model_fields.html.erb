@@ -1,10 +1,10 @@
 <p>
-  <%= f.label :ws_param_id, "Параметр:" %>
-  <%= f.collection_select(:ws_param_id, WsParam.accessible_by(current_ability), :id, :name, include_blank: 'выберите параметр...') %>
-  <%= f.label :is_reqired, "Обязательный" %>
+  <%= f.label :ws_param_id, t('views.ws_models.parametr') %>
+  <%= f.collection_select(:ws_param_id, WsParam.accessible_by(current_ability), :id, :name, include_blank: t('views.ws_models.choose_parametr')) %>
+  <%= f.label :is_reqired, t('views.ws_models.required') %>
   <%= f.check_box :is_required %>
-  <%= f.label :is_copy, "Копирование" %>
+  <%= f.label :is_copy, t('views.ws_models.replication') %>
   <%= f.check_box :is_copy %>
-  <%= f.label :_destroy, "Удалить" %>
+  <%= f.label :_destroy, t('destroy') %>
   <%= f.check_box :_destroy %>
 </p>

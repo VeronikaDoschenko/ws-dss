@@ -1,13 +1,15 @@
-<h3>Административные действия</h3>
+<h3><%=t('views.admin.administrative_actions')%></h3>
 <% if can?(:mange, :all) %> 
-  <p><%= link_to "Редактор пользователей", admin_users_path %></p>
-  <p><%= link_to "Редактор методов", ws_methods_path %></p>
-  <p><%= link_to "Редактор статусов моделей", ws_model_statuses_path %></p>
+  <p><%= link_to t('views.admin.user_editor'), admin_users_path %></p>
+  <p><%= link_to t('views.admin.method_editor'), ws_methods_path %></p>
+  <p><%= link_to t('views.admin.model_status_editor'), ws_model_statuses_path %></p>
   <br/>
-  <p><%= link_to "Редактор документов", documents_path %></p>
+  <p><%= link_to t('views.admin.document_editor'), documents_path %></p>
   <br/>
-  <p><%= link_to "Редактор групп", student_groups_path %></p>
-  <p><%= link_to "Редактор предметов", subjects_path %></p>
+  <p><%= link_to t('views.admin.group_editor'), student_groups_path %></p>
+  <p><%= link_to t('views.admin.subject_editor'), subjects_path %></p>
+  <br/>
+  <p><%= link_to t('views.admin.localization_editor'), locale_translations_url(I18n.locale) %></p>
 <% end %>
 
 <p><%= link_to "Refinery CMS", refinery.admin_root_path %></p>

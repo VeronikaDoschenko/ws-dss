@@ -1,0 +1,23 @@
+<%= form_for @translation, url: locale_translations_url(I18n.locale) do |form| %>
+
+	<div class="field">
+    	<%= form.label t('views.translations.locale') %><br/>
+    	<%= form.text_field :locale%>
+	</div>
+
+	<div class="field">
+    	<%= form.label t('views.translations.key') %><br/>
+    	<%= form.text_field :key, autofocus: true, size: 100%>
+	</div>
+
+	<div class="field">
+    	<%= form.label t('views.translations.translation') %><br/>
+    	<%= form.text_area :value, cols: 100, rows: 4%>
+	</div>
+
+	<div class="actions">
+    	<%= form.submit t('views.translations.save_translation') %> 
+  	</div>
+
+<% end %>
+<%= link_to t('cancel'), locale_translations_url(@locale) %> 

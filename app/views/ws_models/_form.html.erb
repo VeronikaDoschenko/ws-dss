@@ -1,7 +1,7 @@
 <%= form_for(@ws_model) do |f| %>
   <% if @ws_model.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@ws_model.errors.count, "Ошибка") %>Не возможно сохранение данной модели:</h2>
+      <h2><%= pluralize(@ws_model.errors.count, t('error')) %><%=t('views.ws_models.cant_save_ws_model')%>:</h2>
 
       <ul>
       <% @ws_model.errors.full_messages.each do |message| %>
@@ -12,25 +12,25 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name, "Название"%><br>
+    <%= f.label :name, t('views.ws_models.name')%><br>
     <%= f.text_field :name, size: 100 %>
   </div>
   <div class="field">
-    <%= f.label :descr, "Описание"%><br>
+    <%= f.label :descr, t('views.ws_models.descr')%><br>
     <%= f.text_area :descr, autocomplete: "off", cols: 103, rows: 6 %>
   </div>
   <div class="field">
-    <%= f.label :model_url, "URL-адрес веб-сервиса модели" %><br>
+    <%= f.label :model_url, "URL" %><br>
     <%= f.url_field :model_url, size: 100 %>
   </div>
   <div class="field">
-    <%= f.label :ws_method_id, "Внутренний метод" %><br>
-    <%= f.collection_select(:ws_method_id, WsMethod.ask_working, :id, :name, include_blank: 'выберите метод...') %>
+    <%= f.label :ws_method_id, t('views.ws_models.internal_method') %><br>
+    <%= f.collection_select(:ws_method_id, WsMethod.ask_working, :id, :name, include_blank: t('views.ws_models.choose_method')) %>
   </div>
   <br/>
   <% if can? :set_model_permission, @ws_model %>
     <div>
-      <%= f.label :role_ids, "Доступность модели" %>
+      <%= f.label :role_ids, t('views.ws_models.accessibility') %>
       <% WsModel.available_roles.each do |r| %>
         <%= check_box_tag "ws_model[role_ids][]", r.id, @ws_model.roles.include?(r) %>
         <%= r.name %>
@@ -41,9 +41,9 @@
   <%= f.fields_for :ws_param_models do |builder| %>
     <%= render "ws_param_model_fields", :f => builder %>
   <% end %>
-  <p><%= link_to_add_fields "Добавить параметр", f, :ws_param_models %></p>
+  <p><%= link_to_add_fields t('views.ws_models.add_parametr'), f, :ws_param_models %></p>
   <br/>
   <div class="actions">
-    <%= f.submit "Сохранить" %>
+    <%= f.submit t('save') %>
   </div>
 <% end %>

@@ -1,6 +1,6 @@
-<h1>Редактирование параметра</h1>
+<h1><%=t('views.ws_params.editing_ws_params')%></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Показать', @ws_param %> |
-<%= link_to 'Назад', ws_params_path %>
+<%= link_to t('show'), @ws_param %> |
+<%= link_to t('back'), ws_params_path %>

@@ -20,10 +20,273 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  views:
+    pagination:
+      truncate:
+        ...
+      next:
+        Next
+      last:
+        Last
+      first:
+        First
+      previous:
+        Previous
+    admin:
+      administrative_actions: Administrative actions
+      user_editor: User editor
+      method_editor: Method editor
+      model_status_editor: Model status editor
+      document_editor: Document editor
+      group_editor: Group editor
+      subject_editor: Subject editor
+      localization_editor: Localization editor
+      users:
+        list_of_users: List of users
+        editing_a_user: Editing a user
+        cant_save_user: prohibited this user from being saved
+    documents:
+      list_of_documents: List of documents
+      name: Name
+      filename: Filename
+      content_type: Content type
+      document: Document
+      new_document: New document
+      submit_document: Create document
+      cant_save_document: prohibited this document from being saved
+    edu:
+      educational_materials: Educational materials
+    layouts:
+      tasks: Jobs
+      models: Models
+      students: Students
+      administration: Administration
+    modeling:
+      integration_of_models: Integration of models
+      model_editor: Model editor
+      parameter_editor: Parameters editor
+      model_runs: Model runs
+      set_model_runs: Set of model runs
+      param_values_for_runs: Param values for runs
+    persons:
+      available_methods: Available methods
+      method: Method
+      descr: Describtion
+      example_input_data: Example of input data
+    students_group:
+      listing_student_groups: Listing student groups
+      name: Name
+      year: Year 
+      new_student_group: New student group
+      submit_student_group: Create student group
+      edit_student_group: Editing student group
+      cant_save_student_group: prohibited this student_group from being saved
+    students:
+      students_list: Students list
+      group: Group
+      name: Name
+      mname : Middlename
+      surname: Surname
+      serial: serial
+      num_of_tasks: Num of tasks
+      solved_crrectly: Solved correctly
+      new_student: New student
+      list_for_export: List for export
+      imported_list_of_students: Imported list of students
+      import: Import
+      editing_student: Editing student
+      submit_student: Save student
+      cant_save_student: prohibited this student from being saved
+    subjects:
+      list_of_subjects: List of subjects
+      name: Name
+      new_subject: New subject
+      editing_subject: Editing subject
+      submit_subject: Save subject
+      cant_save_subject: prohibited this subject from being saved
+    translations:
+      translation_of_locale: Translation of locale
+      locale: Locale
+      key: Key
+      translation: Translation
+      create_translation: Create_translation
+      save_translation: Save translation
+    welcome:
+      main_available_methods: Main available methods
+      main_available_models: Main available models
+      method: Method
+      model: Model
+      descr: Describtion
+    ws_jobs:
+      list_of_ws_jobs: List of jobs
+      date_time: Date/Time
+      method: Method
+      input_data: Input data
+      error_code: Error code
+      attachment: Attachment
+      new_ws_job: New job
+      edit_ws_job: Edit job
+      ws_job_user: User
+      output_data: Output data
+      waiting_for_result: The result is not ready yet, refresh this page after a while....
+      error_check_code: Error/check code
+      created: Created at
+      changed: Changed at
+      cant_save_ws_job: prohibited this job from being saved
+      example_input_data: Example input data
+      show_json: Показать JSON
+      attachment_to_the_problem: Attachment to the job
+      cant_save_attachment: prohibited this attachment from being saved
+    ws_methods:
+      list_of_methods: List of methods
+      method: Method
+      descr: Describtion
+      check: Check
+      create_method: Create method
+      new_ws_method: New method
+      name: Name
+      code_of_method: Code of method
+      output_format: Output format
+      input_data: Input data
+      example_input_data: Example input data
+      example_output_data: Example output data
+      accessibility: Accessibility
+      created: Created at
+      changed: Changed at
+      editing_ws_method: Editing method
+      cant_save_ws_method: prohibited this method from being saved
+    ws_model_runs:
+      list_of_model_runs: List of model runs
+      date_time: Date/Time update
+      name: Name
+      model_name: Model name
+      status: Status
+      trace_printing: Trace printing
+      create_new_model_run: Create new model run
+      new_model_run: New model run
+      result_of_ranking: Result of ranking
+      descr: Describtion
+      rank: Rank
+      run_status: Status of run 
+      accessibility: Accessibility
+      values_​of_parameters: Values ​of parameters
+      parameter: Parameter
+      value_before_run: Value before run 
+      value_after_run: Value after run 
+      set_for_recording_run_results: Set for recording run results
+      model_for_recording_run_results: Model for recording run results
+      target_parametr_of_run: Target parametr of run
+      ranging: ranging
+      editing_model_runs: Editing model runs
+      cant_save_ws_model_runs: prohibited this ws_model_runs from being saved
+      choose_model: choose model...
+      choose_set: choose set...
+      choose_parametr: choose parametr...
+      editing_isnt_available: Editing is not available
+    ws_model_statuses:
+      list_of_ws_model_statuses: List of model statuses
+      name: Name
+      new_ws_model_status: Create new model status
+      editing_ws_model_status: Editing model status
+      submit_ws_model_status: Create new model status
+      cant_save_ws_model_status: prohibited this ws_model_status from being saved
+    ws_models:
+      list_of_ws_models: List of models
+      name: Name
+      descr: Describtion
+      new_ws_model: New model
+      editing_ws_model: Editing model
+      internal_method: Internal method
+      accessibility: Accessibility
+      parametr: Parameter
+      model_parameters: Model parameters
+      integer: integer.
+      number_of_meas: Number of meas.
+      min_value: Min value
+      max_value: Max value
+      required: Required
+      replication: Replication
+      cant_save_ws_model: prohibited this ws_model from being saved
+      choose_method: choose method...
+      choose_parametr: choose parametr...
+      add_parametr: Add parametr
+    ws_param_values:
+      list_of_ws_params_values: List of params values
+      model: Model
+      run: Run
+      parametr: Parametr
+      source_of_input_value: Source of input value
+      input_value: Input value
+      output_value: Output value
+      new_source_of_ws_params_values: New source of params values
+      editing_ws_params_values: Editing params values
+      formula: Formula
+      source: Source
+      cant_save_ws_params_values: prohibited this ws_param_value from being saved
+      model_run: Model run
+      run_parametr: Run parametr
+      choose_run: choose run...
+      choose_parametr: choose parametr...
+      source_of_values: Source of values
+      set_of_runs: Set of runs
+      choose_set: choose set...
+      formula_for_calc_values: Formula for calculating the values
+      serial: Serial
+      values: Values
+      value_before_run: Value before run
+      value_after_run: Value after run
+      editing_isnt_available: Editing is not available
+    ws_params:
+      list_of_ws_params: List of params
+      name: Name
+      descr: Describtion
+      integer: integer.
+      number_of_meas: Number of meas.
+      min_value: Min value
+      max_value: Max value
+      new_ws_params: New params
+      editing_ws_params: Editing params
+      cant_save_ws_params: prohibited this ws_params from being saved
+      number_of_meas_full: Number of measurements (0-number, 1-vector, 2-matrix ...)
+    ws_set_model_runs:
+      list_of_ws_set_model_runs: List of set model runs
+      name: Name
+      descr: Describtion
+      capacity: Capacity
+      new_ws_set_model_runs: New set model runs
+      editing_ws_set_model_runs: Editing set model runs
+      accessibility: Accessibility
+      model_runs: Model runs
+      model_run: Model run
+      model: Model
+      serial: Serial
+      cant_save_ws_set_model_runs: prohibited this ws_set_model_runs from being saved  
   your_token:
     Your token
   welcome_profile:
     Welcome to your personal page!
+  edit: 
+    Edit
+  remove:
+    Remove
+  save:
+    Save
+  show:
+    Show
+  destroy:
+    Destroy
+  delete:
+    Delete
+  download: 
+    Download
+  back:
+    Back
+  cancel:
+    Cancel
+  are_you_sure:
+    Are you sure?
+  error:
+    Error
   confirm_link:
     Confirm my account
   confirm_email:
@@ -76,6 +339,8 @@ en:
     On this portal there are a lot of methods to support decision-making and operations research,
     including methods of multiple-criteria decision analysis and optimization methods.
     All methods are available for free through RESTful API.
+  feedback:
+    Feedback
   copyright:
     © Copyright 2015 Vladimir Sudakov, Release 1.1
   helpers:

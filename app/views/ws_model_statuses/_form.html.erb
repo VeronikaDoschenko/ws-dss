@@ -1,7 +1,7 @@
 <%= form_for(@ws_model_status) do |f| %>
   <% if @ws_model_status.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@ws_model_status.errors.count, "error") %> prohibited this ws_model_status from being saved:</h2>
+      <h2><%= pluralize(@ws_model_status.errors.count, t('error')) %> <%= t('views.ws_model_statuses.cant_save_ws_model_status') %>:</h2>
 
       <ul>
       <% @ws_model_status.errors.full_messages.each do |message| %>
@@ -12,10 +12,10 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label t('views.ws_model_statuses.name')%><br>
     <%= f.text_field :name %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit t('views.ws_model_statuses.submit_ws_model_status')%>
   </div>
 <% end %>

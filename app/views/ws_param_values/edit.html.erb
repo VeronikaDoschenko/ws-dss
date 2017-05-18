@@ -1,6 +1,6 @@
-<h1>Редактирование источников значений</h1>
+<h1><%=t('views.ws_param_values.editing_ws_params_values')%></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Показать', @ws_param_value %> |
-<%= link_to 'Назад', ws_param_values_path %>
+<%= link_to t('show'), @ws_param_value %> |
+<%= link_to t('back'), ws_param_values_path %>

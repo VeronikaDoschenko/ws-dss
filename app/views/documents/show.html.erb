@@ -1,19 +1,19 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong><%=t('views.documents.name')%>:</strong>
   <%= @document.name %>
 </p>
 
 <p>
-  <strong>Filename:</strong>
+  <strong><%=t('views.documents.filename')%>:</strong>
   <%= @document.filename %>
 </p>
 
 <p>
-  <strong>Content type:</strong>
+  <strong><%=t('views.documents.content_type')%>:</strong>
   <%= @document.content_type %>
 </p>
 
-<%= link_to 'Edit', edit_document_path(@document) %> |
-<%= link_to 'Back', documents_path %>
+<%= link_to t('edit'), edit_document_path(@document) %> |
+<%= link_to t('back'), documents_path %>

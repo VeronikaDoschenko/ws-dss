@@ -1,22 +1,22 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong><%=t('views.students.name')%>:</strong>
   <%= @student.name %>
 </p>
 
 <p>
-  <strong>Mname:</strong>
+  <strong><%=t('views.students.mname')%>:</strong>
   <%= @student.mname %>
 </p>
 
 <p>
-  <strong>Lname:</strong>
+  <strong><%=t('views.students.surname')%>:</strong>
   <%= @student.lname %>
 </p>
 
 <p>
-  <strong>Serial:</strong>
+  <strong><%=t('views.students.serial')%>:</strong>
   <%= @student.serial %>
 </p>
 
@@ -25,5 +25,5 @@
   <%= @student.email %>
 </p>
 
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+<%= link_to t('edit'), edit_student_path(@student) %> |
+<%= link_to t('back'), students_path %>

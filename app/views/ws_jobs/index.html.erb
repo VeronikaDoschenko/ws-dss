@@ -1,11 +1,11 @@
-<h3>Список задач</h3>
+<h3><%=t('views.ws_jobs.list_of_ws_jobs')%></h3>
 
 <table class="table">
   <col width="90">
   <thead>
     <tr>
-      <th>Дата/Время</th><th>Метод</th><th>Входные данные</th><th>Код ошибки</th>
-      <th>Вложение</th>
+      <th><%=t('views.ws_jobs.date_time')%></th><th><%=t('views.ws_jobs.method')%></th><th><%=t('views.ws_jobs.input_data')%></th><th><%=t('views.ws_jobs.error_code')%></th>
+      <th><%=t('views.ws_jobs.attachment')%></th>
       <th colspan="4"></th>
     </tr>
   </thead>
@@ -23,11 +23,11 @@
           <% end %>
         </td>
         <% if ws_job.do_check==0 or current_user.admin? %>
-          <td><%= link_to  edit_ws_job_path(ws_job), class: "btn btn-default", title: "Редактировать" do %>
+          <td><%= link_to  edit_ws_job_path(ws_job), class: "btn btn-default", title: t('edit') do %>
                 <i class="glyphicon glyphicon-pencil"></i>
               <% end %>
           </td>
-          <td><%= link_to ws_job, class: "btn btn-default", method: :delete, title: "Удалить", data: { confirm: 'Вы уверены?' } do %>
+          <td><%= link_to ws_job, class: "btn btn-default", method: :delete, title: t('delete'), data: { confirm: t('are_you_sure') } do %>
                 <i class="glyphicon glyphicon-trash"></i>
               <% end %>
           </td>
@@ -36,13 +36,13 @@
         <% end %>
           <td>
             <% unless ws_job.output.nil? %>
-              <%= link_to ws_job, class: "btn btn-default", title: "Посмотреть результат" do %>
+              <%= link_to ws_job, class: "btn btn-default", title: t('show') do %>
                 <i class="glyphicon glyphicon-zoom-in"></i>
               <% end %>
             <% end %>
           </td>
           <td>
-            <%= link_to file_form_ws_job_path(ws_job), class: "btn btn-default", title: "Вложение" do %>
+            <%= link_to file_form_ws_job_path(ws_job), class: "btn btn-default", title: t('views.ws_jobs.attachment') do %>
               <i class="glyphicon glyphicon-paperclip"></i>
             <% end %>
           </td>
@@ -54,5 +54,5 @@
 
 <br>
 <% if current_user.ws_jobs.size < current_user.numjobs or current_user.admin? %>
-  <%= link_to 'Новая задача', new_ws_job_path %>
+  <%= link_to t('views.ws_jobs.new_ws_job'), new_ws_job_path %>
 <% end %>

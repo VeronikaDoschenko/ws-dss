@@ -89,10 +89,263 @@ ru:
         Первая
       previous:
         Предыдущая
+    admin:
+      administrative_actions: Административные действия
+      user_editor: Редактор пользователей
+      method_editor: Редактор методов
+      model_status_editor: Редактор статусов моделей
+      document_editor: Редактор документов
+      group_editor: Редактор групп
+      subject_editor: Редактор предметов
+      localization_editor: Редактор локализации
+      users:
+        list_of_users: Список пользователей
+        editing_a_user: Редактирование пользователя
+        cant_save_user: Не возможно сохранение данного пользователя
+    documents:
+      list_of_documents: Список документов
+      name: Название
+      filename: Файл
+      content_type: Тип контента
+      document: Документ
+      new_document: Новый документ
+      submit_document: Создать документ
+      cant_save_document: Не возможно сохранение данного документа
+    edu:
+      educational_materials: Учебные материалы
+    layouts:
+      tasks: Задачи
+      models: Модели
+      students: Студенты
+      administration: Администрирование
+    modeling:
+      integration_of_models: Интеграция моделей
+      model_editor: Редактор моделей
+      parameter_editor: Редактор параметров
+      model_runs: Прогоны моделей
+      set_model_runs: Множества прогонов моделей
+      param_values_for_runs: Источники значений для прогонов
+    persons:
+      available_methods: Доступные методы
+      method: Метод
+      descr: Описание
+      example_input_data: Пример вх. данных
+    students_group:
+      listing_student_groups: Список групп студентов
+      name: Имя
+      year: Год 
+      new_student_group: Новая группа студентов
+      submit_student_group: Создать группу студентов
+      edit_student_group: Редактировать группу студентов
+      cant_save_student_group: Не возможно сохранение данной группы
+    students:
+      students_list: Список студентов
+      group: Группа
+      name: Имя
+      mname : Отчество
+      surname: Фамилия
+      serial: Порядковый номер
+      num_of_tasks: Число задач
+      solved_crrectly: Решено верно
+      new_student: Новый студент
+      list_for_export: Список для экспорта
+      imported_list_of_students: Импортируемый список студентов
+      import: Импортировать
+      editing_student: Редактирование студента
+      new_student : Новый студент
+      submit_student: Сохранить студента
+      cant_save_student: Не возможно сохранение данного студента
+    subjects:
+      list_of_subjects: Список дисциплин
+      name: Название
+      new_subject: Новая дисциплина
+      editing_subject: Редактирование дисциплины
+      submit_subject: Сохранить дисциплину
+      cant_save_subject: Не возможно сохранение данной дисциплины
+    translations:
+      translation_of_locale: Перевод локали
+      locale: Локаль
+      key: Ключ
+      translation: Перевод
+      create_translation: Создать перевод
+      save_translation: Сохранить перевод
+    welcome:
+      main_available_methods: Основные доступные методы
+      main_available_models: Основные доступные модели
+      method: Метод
+      model: Модель
+      descr: Описание
+    ws_jobs:
+      list_of_ws_jobs: Список задач
+      date_time: Дата/Время
+      method: Метод
+      input_data: Входные данные
+      error_code: Код ошибки
+      attachment: Вложение
+      new_ws_job: Новая задача
+      edit_ws_job: Редактирование задачи
+      ws_job_user: Пользователь
+      output_data: Выходные данные
+      waiting_for_result: Результат пока не готов, обновите данную страницу через некоторое время....
+      error_check_code: Код ошибки/проверки
+      created: Создан
+      changed: Изменен
+      cant_save_ws_job: Не возможно сохранение данной задачи
+      example_input_data: Пример входных данных
+      show_json: Показать JSON
+      attachment_to_the_problem: Вложение к задаче
+      cant_save_attachment: запрещено сохранение данного вложения
+    ws_methods:
+      list_of_methods: Список методов
+      method: Метод
+      descr: Описание
+      check: Проверить
+      create_method: Создать метод
+      new_ws_method: Ввод нового метода
+      name: Название
+      code_of_method: Код метода
+      output_format: Формат вывода
+      input_data: Вх. данные
+      example_input_data: Пример вх. данных
+      example_output_data: Пример вых. данных
+      accessibility: Доступность
+      created: Создан
+      changed: Изменен
+      editing_ws_method: Редактирование метода
+      cant_save_ws_method: Не возможно сохранение данного метода
+    ws_model_runs:
+      list_of_model_runs: Список прогонов моделей
+      date_time: Дата/Время обновления
+      name: Название
+      model_name: Модель
+      status: Статус
+      trace_printing: Трассировочная печать
+      create_new_model_run: Создать новый прогон модели
+      new_model_run: Новый прогон модели
+      result_of_ranking: Результат ранжирования
+      descr: Описание
+      rank: Ранг
+      run_status: Статус прогона
+      accessibility: Доступность
+      values_​of_parameters: Значения параметров
+      parameter: Параметр
+      value_before_run: Значение до прогона
+      value_after_run: Значение после прогона
+      set_for_recording_run_results: Множество для записи результатов прогонов
+      model_for_recording_run_results: Модель для записи результатов прогонов
+      target_parametr_of_run: Целевой параметр прогона
+      ranging: Ранжирование
+      editing_model_runs: Редактирование прогона модели
+      cant_save_ws_model_runs: Не возможно сохранение данного прогона модели
+      choose_model: выберите модель...
+      choose_set: выберите множество...
+      choose_parametr: выберите параметр...
+      editing_isnt_available: Редактирование недоступно
+    ws_model_statuses:
+      list_of_ws_model_statuses: Список статусов моделей
+      name: Название
+      new_ws_model_status: Создать новый статус модели
+      editing_ws_model_status: Редактирование статуса модели
+      submit_ws_model_status: Создать статус модели
+      cant_save_ws_model_status: Не возможно сохранение данного статуса модели
+    ws_models:
+      list_of_ws_models: Список моделей
+      name: Название
+      descr: Описание
+      new_ws_model: Создать новую модель
+      editing_ws_model: Редактирование модели
+      internal_method: Внутренний метод
+      accessibility: Доступность
+      parametr: Параметр
+      model_parameters: Параметры модели
+      integer: Целочисл.
+      number_of_meas: Число измер.
+      min_value: Мин.знач.
+      max_value: Макс.знач.
+      required: Обязательный
+      replication: Копирование
+      cant_save_ws_model: Не возможно сохранение данной модели
+      choose_method: выберите метод...
+      choose_parametr: выберите параметр...
+      add_parametr: Добавить параметр
+    ws_param_values:
+      list_of_ws_params_values: Список источников значений параметров
+      model: Модель
+      run: Прогон
+      parametr: Параметр
+      source_of_input_value: Источник вх.значения
+      input_value: Вх.значение
+      output_value: Вых.значение
+      new_source_of_ws_params_values: Новый источник значений параметров
+      editing_ws_params_values: Редактирование источников значений параметров
+      formula: Формула
+      source: Источник
+      cant_save_ws_params_values: Не возможно сохранение данного источника значений параметра
+      model_run: Прогон модели
+      run_parametr: Параметр прогона
+      choose_run: выберите прогон...
+      choose_parametr: выберите параметр...
+      source_of_values: Источник значений
+      set_of_runs: Множетсво прогонов
+      choose_set: выберите множество...
+      formula_for_calc_values: Формула расчета значений
+      serial: Порядковый номер
+      values: Значения
+      value_before_run: Значение до прогона
+      value_after_run: Значение после прогона
+      editing_isnt_available: Редактирование недоступно
+    ws_params:
+      list_of_ws_params: Список параметров
+      name: Название
+      descr: Описание
+      integer: Целочисл.
+      number_of_meas: Число измер.
+      min_value: Мин.знач.
+      max_value: Макс.знач.
+      new_ws_params: Новый параметр
+      editing_ws_params: Редактирование параметра
+      cant_save_ws_params: Не возможно сохранение параметра
+      number_of_meas_full: Число измерений (0-число, 1-вектор, 2-матрица...)
+    ws_set_model_runs:
+      list_of_ws_set_model_runs: Список множеств прогонов
+      name: Название
+      descr: Описание
+      capacity: Мощность
+      new_ws_set_model_runs: Новое множество прогонов
+      editing_ws_set_model_runs: Редактирование множества прогонов
+      accessibility: Доступность
+      model_runs: Прогоны модели
+      model_run: Прогон
+      model: Модель
+      serial: Порядковый номер
+      cant_save_ws_set_model_runs: Не возможно сохранение множества
+
   your_token:
     Ваш токен
   welcome_profile:
     Добро пожаловать на персональную страницу!
+  edit: 
+    Редактировать
+  remove:
+    Удалить
+  save:
+    Сохранить
+  show:
+    Показать
+  destroy:
+    Удалить
+  delete:
+    Удалить
+  download: 
+    Скачать
+  back:
+    Назад
+  cancel:
+    Отмена
+  are_you_sure:
+    Вы уверены?
+  error:
+    Ошибка
   confirm_link:
     Подтвердить регистрацию
   confirm_email:
@@ -146,6 +399,8 @@ ru:
     исследования операций, включая методы многокритериального анализа альтернатив и
     оптимизации. Все методы доступны поcле регистрации через пользовательский интерфейс и
     через RESTful API.
+  feedback:
+    Обратная связь
   copyright:
     © 2015 Владимир Судаков, Версия 1.1
   date:

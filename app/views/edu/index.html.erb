@@ -1,4 +1,4 @@
-<h3>Учебные материалы</h3>
+<h3><%= t('views.edu.educational_materials')%></h3>
 <% @subjects.each do |s|%>
 <p>
 <%= s.name %>  
@@ -7,7 +7,7 @@
   <%s.documents.order(:name).each do |document|%>
     <tr>
       <td><%= document.name %></td>
-      <td><%= link_to 'Скачать', show_content_document_path(document) %></td>
+      <td><%= link_to t('download'), show_content_document_path(document) %></td>
     </tr>
   <% end %>
 </table>

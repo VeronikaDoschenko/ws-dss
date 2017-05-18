@@ -1,14 +1,14 @@
-<h1>Список источников значений параметров</h1>
+<h1><%=t('views.ws_param_values.list_of_ws_params_values')%></h1>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Модель</th>      
-      <th>Прогон</th>
-      <th>Параметр</th>
-      <th>Источник вх.значения</th>
-      <th>Вх.значение</th>
-      <th>Вых.значение</th>
+      <th><%=t('views.ws_param_values.model')%></th>      
+      <th><%=t('views.ws_param_values.run')%></th>
+      <th><%=t('views.ws_param_values.parametr')%></th>
+      <th><%=t('views.ws_param_values.source_of_input_value')%></th>
+      <th><%=t('views.ws_param_values.input_value')%></th>
+      <th><%=t('views.ws_param_values.output_value')%></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -26,20 +26,20 @@
         </td>
         <td><%= long_string(ws_param_value.old_value) %></td>
         <td><%= long_string(ws_param_value.new_value) %></td>
-        <td><%= link_to ws_param_value, class: "btn btn-default", title: "Показать" do %>
+        <td><%= link_to ws_param_value, class: "btn btn-default", title: t('show') do %>
               <i class="glyphicon glyphicon-zoom-in"></i>
             <% end %>
         </td>
         <td>
           <% if can? :update, ws_param_value %>
-            <%= link_to edit_ws_param_value_path(ws_param_value), class: "btn btn-default", title: "Редактировать" do %>
+            <%= link_to edit_ws_param_value_path(ws_param_value), class: "btn btn-default", title: t('edit') do %>
               <i class="glyphicon glyphicon-pencil"></i>
             <% end %>
           <% end %>
         </td>
         <td>
           <% if can? :destroy, ws_param_value %>
-            <%= link_to ws_param_value, class: "btn btn-default", method: :delete, title: "Удалить", data: { confirm: 'Вы уверены?' } do %>
+            <%= link_to ws_param_value, class: "btn btn-default", method: :delete, title: t('delete'), data: { confirm: t('are_you_sure') } do %>
               <i class="glyphicon glyphicon-trash"></i>
             <% end %>
           <% end %>
@@ -55,5 +55,5 @@
 
 <br/>
 <% if can? :create, WsParamValue %> 
-<%= link_to 'Новый источник значений параметров', new_ws_param_value_path %>
+<%= link_to t('views.ws_param_values.new_source_of_ws_params_values'), new_ws_param_value_path %>
 <% end %>

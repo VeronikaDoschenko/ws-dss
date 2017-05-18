@@ -1,7 +1,7 @@
 <%= form_for(@ws_param_value, :html => {:class => 'form-horizontal'}) do |f| %>
   <% if @ws_param_value.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@ws_param_value.errors.count, "error") %> prohibited this ws_param_value from being saved:</h2>
+      <h2><%= pluralize(@ws_param_value.errors.count, t('error')) %> <%=t('views.ws_param_values.cant_save_ws_params_values')%>:</h2>
 
       <ul>
       <% @ws_param_value.errors.full_messages.each do |message| %>
@@ -11,28 +11,28 @@
     </div>
   <% end %>
   <div class="form-group">
-    <%= f.label :ws_model_run_id, "Прогон модели", class: "col-md-3 control-label" %>
-    <%= f.collection_select(:ws_model_run_id, WsModelRun.accessible_by(current_ability), :id, :name, {include_blank: 'выберите прогон...'}, {class: "col-md-3"}) %>
-    <%= f.label :ws_param_id, "Параметр прогона", class: "col-md-3 control-label" %>
-    <%= f.collection_select(:ws_param_id, WsParam.accessible_by(current_ability), :id, :name, {include_blank: 'выберите параметр...'}, {class: "col-md-3"}) %>    
+    <%= f.label :ws_model_run_id, t('views.ws_param_values.model_run'), class: "col-md-3 control-label" %>
+    <%= f.collection_select(:ws_model_run_id, WsModelRun.accessible_by(current_ability), :id, :name, {include_blank: t('views.ws_param_values.choose_run')}, {class: "col-md-3"}) %>
+    <%= f.label :ws_param_id, t('views.ws_param_values.run_parametr'), class: "col-md-3 control-label" %>
+    <%= f.collection_select(:ws_param_id, WsParam.accessible_by(current_ability), :id, :name, {include_blank: t('views.ws_param_values.choose_parametr')}, {class: "col-md-3"}) %>    
   </div>
   <fieldset>
-    <legend>Источник значений:</legend>
+    <legend><%=t('views.ws_param_values.source_of_values')%>:</legend>
       <div class="field">
-       <%= f.label :ws_set_model_run_id, "Множетсво прогонов" %><br>
-       <%= f.collection_select(:ws_set_model_run_id, WsSetModelRun.accessible_by(current_ability), :id, :name, include_blank: 'выберите множество...') %>
+       <%= f.label :ws_set_model_run_id, t('views.ws_param_values.set_of_runs') %><br>
+       <%= f.collection_select(:ws_set_model_run_id, WsSetModelRun.accessible_by(current_ability), :id, :name, include_blank: t('views.ws_param_values.choose_set')) %>
       </div>
       <br/>
       <div class="field">
-       <%= f.label :formula, "Формула расчета значений" %><br>
+       <%= f.label :formula, t('views.ws_param_values.formula_for_calc_values') %><br>
        <%= f.text_field :formula, size: 100 %>
       </div>
       <% if @ws_param_value.ws_set_model_run %>
         <table class="table">
           <thead>
             <tr>
-              <th>Параметр</th>
-              <th>Порядковый номер</th>
+              <th><%=t('views.ws_param_values.parametr')%></th>
+              <th><%=t('views.ws_param_values.serial')%></th>
             </tr>
           </thead>
           <tbody>
@@ -54,25 +54,25 @@
   </fieldset>
   <br/>
   <fieldset>
-    <legend>Значения:</legend>
+    <legend><%=t('views.ws_param_values.values')%>:</legend>
     <div class="form-group">
-      <%= f.label :old_value, "Значение до прогона", class: "col-md-3 control-label" %>
+      <%= f.label :old_value, t('views.ws_param_values.value_before_run'), class: "col-md-3 control-label" %>
       <% if @ws_param_value.old_value.blank? or @ws_param_value.old_value.size < 10000 %>
         <%= f.text_area :old_value, autocomplete: "off", cols: 50, rows: 3, maxlength: 10000, class: "col-md-3" %>
       <% else %>
-        <span class="col-md-3">Редактирование недоступно</span>
+        <span class="col-md-3"><%=t('views.ws_param_values.editing_isnt_available')%></span>
       <% end %>
-      <%= f.label :new_value, "Значение после прогона", class: "col-md-3 control-label" %>
+      <%= f.label :new_value, t('views.ws_param_values.value_after_run'), class: "col-md-3 control-label" %>
       <% if @ws_param_value.new_value.blank? or @ws_param_value.new_value.size < 10000 %>
          <%= f.text_area :new_value, autocomplete: "off", cols: 50, rows: 3, maxlength: 10000, class: "col-md-3" %>
       <% else %>
-        <span class="col-md-3">Редактирование недоступно</span>
+        <span class="col-md-3"><%=t('views.ws_param_values.editing_isnt_available')%></span>
       <% end %>      
      
     </div>
   </fieldset>
   <br/>
   <div class="actions">
-    <%= f.submit "Сохранить"%>
+    <%= f.submit t('save')%>
   </div>
 <% end %>
