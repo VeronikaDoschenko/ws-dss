@@ -19,24 +19,29 @@ class ApplicationController < ActionController::Base
   private
   
   def extract_locale_from_accept_language_header
-    case request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
-      when 'az'
-      when 'am'
-      when 'by'
-      when 'kz'
-      when 'ru'
-      when 'kg'
-      when 'md'
-      when 'tj'
-      when 'tm'
-      when 'uz'
-      when 'ua'
-      when 'ge'
-      when 'af' 
-      when 'mn'
-        'ru'
-      else
-        'en'
+    if request.env['HTTP_ACCEPT_LANGUAGE'].nil? or
+       [ 'ru', #	Russian
+         'uk', #	Ukrainian
+         'be', #	Belarusian
+         'uz', #	
+         'kk', #		Kazakh
+         'ka', #	Georgian
+         'az', #	Azerbaijani
+         'lt', #	Lithuanian
+         'mo', #	Moldavian
+         'lv', #	Latvian
+         'ky', #	Kirghiz
+         'tg', #
+         'hy', #	Armenian
+         'tk', #	Turkmen
+         'et', #	Estonian
+         'ro-mo', #	Romanian (Moldavia)		
+         'ru-mo', #	Russian (Moldavia)		
+         'cv', #	Chuvash
+       ].include? request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+          'ru'
+    else
+          'en'
     end
   end
 
