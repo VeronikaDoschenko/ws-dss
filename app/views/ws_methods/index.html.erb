@@ -1,9 +1,9 @@
-<h3>Список методов</h3>
+<h3><%=t('views.ws_methods.list_of_methods')%></h3>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Метод</th><th>Описание</th><th colspan="4"></th>
+      <th><%=t('views.ws_methods.method')%></th><th><%=t('views.ws_methods.descr')%></th><th colspan="4"></th>
     </tr>
   </thead>
 
@@ -12,13 +12,13 @@
       <tr>
         <td><%= ws_method.name %></td>
         <td><%= ws_method.descr %></td>
-        <td><%= link_to 'Показать', ws_method %></td>
-        <td><%= link_to 'Редактировать', edit_ws_method_path(ws_method) %></td>
+        <td><%= link_to t('show'), ws_method %></td>
+        <td><%= link_to t('edit'), edit_ws_method_path(ws_method) %></td>
         <td><% if ws_method.test_output %>
-              <%= link_to 'Проверить', test_ws_method_path(ws_method) %>
+              <%= link_to t('views.ws_methods.check'), test_ws_method_path(ws_method) %>
             <% end %>
         </td>
-        <td><%= link_to 'Удалить', ws_method, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t('delete'), ws_method, method: :delete, data: { confirm: t('are_you_sure') } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'Создать метод', new_ws_method_path %>
+<%= link_to t('views.ws_methods.create_method'), new_ws_method_path %>

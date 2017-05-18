@@ -1,0 +1,45 @@
+<h3><%=t('views.translations.translation_of_locale')%>: <%= I18n.locale %></h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th><%=t('views.translations.key')%></th><th><%=t('views.translations.translation')%></th><th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% translation_keys(@locale).each do |key| %>
+      <% translation = translation_for_key(@translations, key) %>
+        <td><%= key %></td>
+        <td><%= translation.nil? ? " " : translation.value %></td>
+        <% if translation.nil? %>
+           <td> 
+              <%= link_to  new_locale_translation_url(@locale, key: key), class: "btn btn-default", title: t('edit') do %>
+                <i class="glyphicon glyphicon-pencil"></i>
+              <% end %>
+           </td>
+        <% else %>
+          <td>
+            <% if can? :update, locale_translation_url(@locale, translation) %>
+              <%= link_to  edit_locale_translation_url(@locale, translation), class: "btn btn-default", title: t('edit') do %>
+                <i class="glyphicon glyphicon-pencil"></i>
+              <% end %>
+            <% end %>
+          </td>
+          <td> 
+            <% if can? :destroy, locale_translation_url(@locale, translation) %>
+              <%= link_to locale_translation_url(@locale, translation), class: "btn btn-default", method: :delete, title: t('delete'), data: { confirm: t('are_you_sure') } do %>
+                <i class="glyphicon glyphicon-trash"></i>
+              <% end %>
+            <% end %>
+          </td>
+           <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to new_locale_translation_path, class: "btn btn-default" do %>
+    <span class="glyphicon glyphicon-share"></span> <%=t('views.translations.create_translation')%>
+<% end %>
+

@@ -1,7 +1,7 @@
 <%= form_for(@ws_param) do |f| %>
   <% if @ws_param.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@ws_param.errors.count, "error") %> Не возможно сохранение параметра:</h2>
+      <h2><%= pluralize(@ws_param.errors.count, t('error')) %> <%=t('views.ws_params.cant_save_ws_params')%>:</h2>
 
       <ul>
       <% @ws_param.errors.full_messages.each do |message| %>
@@ -12,31 +12,31 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name, "Название" %><br>
+    <%= f.label :name, t('views.ws_params.name') %><br>
     <%= f.text_field :name, size: 50 %>
   </div>
   <div class="field">
-    <%= f.label :descr, "Описание" %><br>
+    <%= f.label :descr, t('views.ws_params.descr') %><br>
     <%= f.text_area :descr, autocomplete: "off", cols: 103, rows: 6 %>
   </div>
   <div class="field">
-    <%= f.label :is_int, "Целочисленный" %><br>
+    <%= f.label :is_int, t('views.ws_params.integer') %><br>
     <%= f.check_box :is_int %>
   </div>
   <div class="field">
-    <%= f.label :dim, "Число измерений (0-число, 1-вектор, 2-матрица...)" %><br>
+    <%= f.label :dim, t('views.ws_params.number_of_meas_full') %><br>
     <%= f.number_field :dim, min: 0, max: 7 %>
   </div>
   <div class="field">
-    <%= f.label :min_val, "Минимальное значение" %><br>
+    <%= f.label :min_val, t('views.ws_params.min_value') %><br>
     <%= f.text_field :min_val %>
   </div>
   <div class="field">
-    <%= f.label :max_val, "Максимальное значение" %><br>
+    <%= f.label :max_val, t('views.ws_params.max_value') %><br>
     <%= f.text_field :max_val %>
   </div>
   <br/>
   <div class="actions">
-    <%= f.submit "Сохранить" %>
+    <%= f.submit t('save') %>
   </div>
 <% end %>

@@ -1,7 +1,7 @@
 <%= form_for(@subject) do |f| %>
   <% if @subject.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@subject.errors.count, "error") %> prohibited this subject from being saved:</h2>
+      <h2><%= pluralize(@subject.errors.count, t('error')) %> <%= t('views.subjects.cant_save_subject') %>:</h2>
 
       <ul>
       <% @subject.errors.full_messages.each do |message| %>
@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label t('views.subjects.name') %><br>
     <%= f.text_field :name %>
   </div>
 
@@ -23,6 +23,6 @@
     </div>
   <% end %>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit t('views.subjects.submit_subject')%>
   </div>
 <% end %>

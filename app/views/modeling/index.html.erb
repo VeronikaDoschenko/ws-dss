@@ -1,16 +1,16 @@
-<h3>Интеграция моделей</h3>
+<h3><%=t('views.modeling.integration_of_models') %></h3>
  
-<p><%= link_to "Редактор моделей", ws_models_path %></p>
+<p><%= link_to t('views.modeling.model_editor'), ws_models_path %></p>
 <% if can? :index, :ws_params %>
-  <p><%= link_to "Редактор параметров", ws_params_path %></p>
+  <p><%= link_to t('views.modeling.parameter_editor'), ws_params_path %></p>
 <% end %>
 <% if can? :index, :ws_model_runs %>
-  <p><%= link_to "Прогоны моделей", ws_model_runs_path %></p>
+  <p><%= link_to t('views.modeling.model_runs'), ws_model_runs_path %></p>
 <% end %>
 <br/>
 <% if can? :index, :ws_set_model_runs %>
-  <p><%= link_to "Множества прогонов моделей", ws_set_model_runs_path %></p>
+  <p><%= link_to t('views.modeling.set_model_runs'), ws_set_model_runs_path %></p>
 <% end %>
 <% if can? :index, :ws_param_values %>
-  <p><%= link_to "Источники значений для прогонов", ws_param_values_path %></p>
+  <p><%= link_to t('views.modeling.param_values_for_runs'), ws_param_values_path %></p>
 <% end %>

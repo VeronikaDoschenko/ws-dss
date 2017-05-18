@@ -3,14 +3,14 @@
   <%= @ws_model_run.goal_ws_param_value.ws_model_run.name %>
   </strong>
 </p>
-<p class="text-center">Результат ранжирования</p>
+<p class="text-center"><%=t('views.ws_model_runs.result_of_ranking')%></p>
 <table class="table">
   <thead>
     <tr>
       <th>№</th>
-      <th>Название</th>
-      <th>Описание</th>
-      <th>Ранг</th>
+      <th><%=t('views.ws_model_runs.name')%></th>
+      <th><%=t('views.ws_model_runs.descr')%></th>
+      <th><%=t('views.ws_model_runs.rank')%></th>
     </tr>
   </thead>
   <tbody>
@@ -30,4 +30,4 @@
     <% end %>
   </tbody>
 </table>
-<%= link_to 'Назад', @ws_model_run %>
+<%= link_to t('back'), @ws_model_run %>

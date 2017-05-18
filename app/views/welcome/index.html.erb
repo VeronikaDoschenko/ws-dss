@@ -3,10 +3,10 @@
 <h3><%= rp.title %></h3>
 <%= raw rp.content_for(:body) %>
 <% end %>
-<p>Основные доступные методы:</p>
+<p><%=t('views.welcome.main_available_methods')%>:</p>
 <table class="table">
   <tr>
-    <th>Метод</th><th>Описание</th>
+    <th><%=t('views.welcome.method')%></th><th><%=t('views.welcome.descr')%></th>
   </tr>
   <% WsMethod.order(:name).each do |ws| %>
     <% if ws.public? %>
@@ -18,10 +18,10 @@
   <% end %>
 </table>
 
-<p>Основные доступные  модели:</p>
+<p><%=t('views.welcome.main_available_models')%>:</p>
 <table class="table">
   <tr>
-    <th>Модель</th><th>Описание</th>
+    <th><%=t('views.welcome.model')%></th><th><%=t('views.welcome.descr')%></th>
   </tr>
   <% WsModel.order(:name).each do |ws| %>
     <% if ws.public? %>

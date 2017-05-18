@@ -1,21 +1,21 @@
 <p>
-  <strong>Модель:</strong>
+  <strong><%=t('views.ws_param_values.model')%>:</strong>
   <%= @ws_param_value.ws_model_run.ws_model.try{|s| link_to(s.name, s)} %>
 </p>
 <p>
-  <strong>Прогон:</strong>
+  <strong><%=t('views.ws_param_values.run')%>:</strong>
   <%= @ws_param_value.ws_model_run.try{|s| link_to(s.name, s)} %>
 </p>
 <p>
-  <strong>Параметр:</strong>
+  <strong><%=t('views.ws_param_values.parametr')%>:</strong>
   <%= @ws_param_value.ws_param.try{|s| link_to(s.name, s)} %>
 </p>
 <p>
-  <strong>Формула:</strong>
+  <strong><%=t('views.ws_param_values.formula')%>:</strong>
   <%= @ws_param_value.formula %>
 </p>
 <p>
-  <strong>Источник:</strong>
+  <strong><%=t('views.ws_param_values.source')%>:</strong>
   <% if @ws_param_value.ws_set_model_run %>
     <%=  link_to @ws_param_value.ws_set_model_run.name, @ws_param_value.ws_set_model_run %>
     <br/>
@@ -23,14 +23,14 @@
     <br/>
   <% end %>
 <p>
-  <strong>Входное значение:</strong>
+  <strong><%=t('views.ws_param_values.input_value')%>:</strong>
   <pre><%= long_string(@ws_param_value.old_value) %></pre>
 </p>
 <p>
-  <strong>Выходное значение:</strong>
+  <strong><%=t('views.ws_param_values.output_value')%>:</strong>
   <pre><%= long_string(@ws_param_value.new_value) %></pre>
 </p>
 <% if can? :update, @ws_param_value %>
-  <%= link_to 'Редактировать', edit_ws_param_value_path(@ws_param_value) %> | 
+  <%= link_to t('edit'), edit_ws_param_value_path(@ws_param_value) %> | 
 <% end %>
-<%= link_to 'Назад', ws_param_values_path %>
+<%= link_to t('back'), ws_param_values_path %>

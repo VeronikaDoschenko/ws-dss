@@ -1,8 +1,8 @@
-<h3>Вложение к задаче</h3>
+<h3><%= t('views.ws_jobs.attachment_to_the_problem') %></h3>
 <%= form_for(@ws_job, :url => file_save_ws_job_path(@ws_job) ) do |f| %>
   <% if @ws_job.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@ws_job.errors.count, "error") %> запрещено сохранение данного вложения:</h2>
+      <h2><%= pluralize(@ws_job.errors.count, t('error')) %> <%= t('views.ws_jobs.cant_save_attachment') %>:</h2>
 
       <ul>
       <% @ws_job.errors.full_messages.each do |message| %>
@@ -15,8 +15,8 @@
     <%= f.file_field :file, accept: 'application/pdf' %>
   </div>
   <div class="actions">
-    <%= f.submit "Сохранить" %>
+    <%= f.submit t('save') %>
   </div>
 <% end %>
-<%= link_to 'Показать', @ws_job %> |
-<%= link_to 'Назад', ws_jobs_path %>
+<%= link_to t('show'), @ws_job %> |
+<%= link_to t('back'), ws_jobs_path %>

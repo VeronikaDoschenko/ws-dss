@@ -27,7 +27,7 @@ function getDescr(){
 <%= form_for @ws_job, html: {:class => 'form-horizontal'}  do |f| %>
   <% if @ws_job.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@ws_job.errors.count, "error") %> Не возможно сохранение данной задачи:</h2>
+      <h2><%= pluralize(@ws_job.errors.count, "error") %> <%=t('views.ws_jobs.cant_save_ws_job')%>:</h2>
 
       <ul>
       <% @ws_job.errors.full_messages.each do |message| %>
@@ -38,7 +38,7 @@ function getDescr(){
   <% end %>
 
   <div class="form-group">
-    <%= f.label :ws_method_id, "Метод", class: "col-sm-1 control-label required" %>
+    <%= f.label :ws_method_id, t('views.ws_jobs.method'), class: "col-sm-1 control-label required" %>
     <div class="col-sm-2">
       <%= f.collection_select(:ws_method_id, WsMethod.ask_working, :id, :name,
                                 {}, :class => 'form-control', onChange: "getDescr();") %>
@@ -47,14 +47,14 @@ function getDescr(){
       <div id="method_descr"><%= (@ws_job.ws_method.nil?)?(WsMethod.ask_working.first.descr):(@ws_job.ws_method.descr)%></div>
     </div>
     <div class="col-sm-3">
-        <%= link_to "Пример входных данных",  '#',
+        <%= link_to t('views.ws_jobs.example_input_data'),  '#',
               onclick: "updateExample();",
               class: 'btn btn-default' %>
     </div>
   </div>
   <div class="form-group">
   <% if @json_edit.nil? %>
-      <%= f.label :input, "Входные данные", class: "col-sm-1 control-label required"  %><br/>
+      <%= f.label :input, t('views.ws_jobs.input_data'), class: "col-sm-1 control-label required"  %><br/>
       <div class="col-sm-11">
         <%= f.text_area :input, autocomplete: "off", rows: 20,
                         :class => 'form-control', :required => 'required' %>
@@ -64,7 +64,7 @@ function getDescr(){
   </div>
   <div class="form-group">
     <div class="col-sm-offset-1 col-sm-11">
-      <%= f.submit "Сохранить", :class => "btn btn-default" %>
+      <%= f.submit t('save'), :class => "btn btn-default" %>
     </div>
   </div>
   <% if @json_edit %>
@@ -96,5 +96,5 @@ function getDescr(){
   <% end %>
 <% end %>
 <% if @json_edit %>
-  <button type="button" class="btn btn-default" onclick="toggle(document.getElementById('ws_job_input'), this);">Показать JSON</button>
+  <button type="button" class="btn btn-default" onclick="toggle(document.getElementById('ws_job_input'), this);"><%=t('views.ws_jobs.show_json')%></button>
 <% end %>

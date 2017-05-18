@@ -1,24 +1,24 @@
 <p>
-  <strong>Название:</strong>
+  <strong><%=t('views.ws_set_model_runs.name')%>:</strong>
   <%= @ws_set_model_run.name %>
 </p>
 
 <p>
-  <strong>Описание:</strong>
+  <strong><%=t('views.ws_set_model_runs.descr')%>:</strong>
   <pre><%= @ws_set_model_run.descr %></pre>
 </p>
 
 <p>
-  <strong>Доступность:</strong>
+  <strong><%=t('views.ws_set_model_runs.accessibility')%>:</strong>
   <%= @ws_set_model_run.role_list.join(', ') %>
 </p>
 
-<h4>Прогоны модели</h4>
+<h4><%=t('views.ws_set_model_runs.model_runs')%></h4>
 <table class="table">
   <thead>
     <tr>
-      <th>Название</th>
-      <th>Модель</th>
+      <th><%=t('views.ws_set_model_runs.name')%></th>
+      <th><%=t('views.ws_set_model_runs.model')%></th>
       <th></th>
     </tr>
   </thead>
@@ -28,7 +28,7 @@
       <tr>
           <td><%= mr.name %></td>
           <td><%= mr.ws_model.name %></td>
-          <td><%= link_to mr, class: "btn btn-default", title: "Показать" do %>
+          <td><%= link_to mr, class: "btn btn-default", title: t('show') do %>
                 <i class="glyphicon glyphicon-zoom-in"></i>
               <% end %>
           </td>
@@ -38,7 +38,7 @@
 </table>
 
 <% if can? :update, @ws_set_model_run %>
-  <%= link_to 'Редактировать', edit_ws_set_model_run_path(@ws_set_model_run) %> | 
+  <%= link_to t('edit'), edit_ws_set_model_run_path(@ws_set_model_run) %> | 
 <% end %>
 
-<%= link_to 'Назад', ws_set_model_runs_path %>
+<%= link_to t('back'), ws_set_model_runs_path %>

@@ -1,7 +1,7 @@
 <%= form_for(@ws_model_run) do |f| %>
   <% if @ws_model_run.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@ws_model_run.errors.count, "error") %>Не возможно сохранение данного прогона модели:</h2>
+      <h2><%= pluralize(@ws_model_run.errors.count, t('error')) %><%=t('views.ws_model_runs.cant_save_ws_model_runs')%>:</h2>
 
       <ul>
       <% @ws_model_run.errors.full_messages.each do |message| %>
@@ -12,26 +12,26 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name, "Название" %><br>
+    <%= f.label :name, t('views.ws_model_runs.name')%><br>
     <%= f.text_field :name, size: 50 %>
   </div>
   <div class="field">
-    <%= f.label :ws_model_id, "Модель" %><br>
-    <%= f.collection_select(:ws_model_id, WsModel.accessible_by(current_ability), :id, :name, include_blank: 'выберите модель...') %>
+    <%= f.label :ws_model_id, t('views.ws_model_runs.model_name') %><br>
+    <%= f.collection_select(:ws_model_id, WsModel.accessible_by(current_ability), :id, :name, include_blank: t('views.ws_model_runs.choose_model')) %>
   </div>
   <div class="field">
-    <%= f.label :ws_model_status_id, "Статус прогона" %><br>
+    <%= f.label :ws_model_status_id, t('views.ws_model_runs.run_status') %><br>
     <%= f.collection_select(:ws_model_status_id, WsModelStatus.all, :id, :name) %>
   </div>
   <div class="field">
-    <%= f.label :descr, "Описание" %><br/>
+    <%= f.label :descr, t('views.ws_model_runs.descr') %><br/>
     <%= f.text_area :descr, autocomplete: "off", cols: 100, rows: 4 %>
   </div>
  
   <% if @ws_model_run.ws_model %>
   <% if can? :set_model_permission, @ws_model_run %>
     <div class="field">
-      <%= f.label :role_ids, "Доступность прогона" %>
+      <%= f.label :role_ids, t('views.ws_model_runs.accessibility') %>
       <% WsModelRun.available_roles.each do |r| %>
         <%= check_box_tag "ws_model_run[role_ids][]", r.id, @ws_model_run.roles.include?(r) %>
         <%= r.name %>
@@ -41,8 +41,8 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Параметр</th>
-        <th>Значение до прогона</th>
+        <th><%=t('views.ws_model_runs.parameter')%></th>
+        <th><%=t('views.ws_model_runs.value_before_run')%></th>
       </tr>
     </thead>
     <tbody>
@@ -59,7 +59,7 @@
                 <%= pm_fields.hidden_field :ws_param_id  %>
               <% end %>
             <% else %>
-              Редактирование недоступно
+              <%=t('views.ws_model_runs.editing_isnt_available')%>
             <% end %>
           </td>
         </tr>
@@ -69,20 +69,20 @@
   </table>
   <% end %>
   <div class="field">
-    <%= f.label :ws_set_model_run_id, "Множество для записи результатов прогонов" %><br>
-    <%= f.collection_select(:ws_set_model_run_id, WsSetModelRun.accessible_by(current_ability).order(:name), :id, :name, include_blank: 'выберите множество...') %>
+    <%= f.label :ws_set_model_run_id, t('views.ws_model_runs.set_for_recording_run_results') %><br>
+    <%= f.collection_select(:ws_set_model_run_id, WsSetModelRun.accessible_by(current_ability).order(:name), :id, :name, include_blank: t('views.ws_model_runs.choose_set')) %>
   </div>
   <div class="field">
-    <%= f.label :target_ws_model_id, "Модель для записи результатов прогонов" %><br>
-    <%= f.collection_select(:target_ws_model_id, WsModel.accessible_by(current_ability).order(:name), :id, :name, include_blank: 'выберите модель...') %>
+    <%= f.label :target_ws_model_id, t('views.ws_model_runs.model_for_recording_run_results') %><br>
+    <%= f.collection_select(:target_ws_model_id, WsModel.accessible_by(current_ability).order(:name), :id, :name, include_blank: t('views.ws_model_runs.choose_model')) %>
   </div>
   <div class="field">
-    <%= f.label :goal_ws_param_value_id, "Целевой параметр погона" %><br>
+    <%= f.label :goal_ws_param_value_id, t('views.ws_model_runs.target_parametr_of_run') %><br>
     <%= f.collection_select(:goal_ws_param_value_id, WsParamValue.full_info.accessible_by(current_ability).select("ws_param_values.id,
-          (ws_models.name || '/' || ws_model_runs.name || '/' || ws_params.name) as name"), :id, :name, include_blank: 'выберите параметр...') %>
+          (ws_models.name || '/' || ws_model_runs.name || '/' || ws_params.name) as name"), :id, :name, include_blank: t('views.ws_model_runs.choose_parametr')) %>
   </div>
   <br/>
   <div class="actions">
-    <%= f.submit "Сохранить" %>
+    <%= f.submit t('save') %>
   </div>
 <% end %>
