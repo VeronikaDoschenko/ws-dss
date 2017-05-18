@@ -12,10 +12,11 @@ class ApplicationController < ActionController::Base
     I18n.locale = params[:locale] || extract_locale_from_accept_language_header
   end
   
+
   def default_url_options(options={})
-    { :locale => I18n.locale == I18n.default_locale ? nil : I18n.locale  }
+    { :locale => I18n.locale  }
   end
-  
+
   private
   
   def extract_locale_from_accept_language_header
