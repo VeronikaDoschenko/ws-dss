@@ -14,7 +14,7 @@ function updateExample(){
 };
 function getDescr(){
   $.ajax({
-    url: "/ws_methods/" + $("#ws_job_ws_method_id")[0].value + ".json",
+    url: "/ws_methods/" + $("#ws_job_ws_method_id")[0].value + ".json?locale=<%=I18n.locale%>",
     success: function(result){   
       $("#method_descr").html(result.descr);
     }
