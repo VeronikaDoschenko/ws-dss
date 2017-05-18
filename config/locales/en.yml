@@ -71,7 +71,7 @@ en:
     persons:
       available_methods: Available methods
       method: Method
-      descr: Describtion
+      descr: Description
       example_input_data: Example of input data
     students_group:
       listing_student_groups: Listing student groups
@@ -116,7 +116,7 @@ en:
       main_available_models: Main available models
       method: Method
       model: Model
-      descr: Describtion
+      descr: Description
     ws_jobs:
       list_of_ws_jobs: List of jobs
       date_time: Date/Time
@@ -140,7 +140,7 @@ en:
     ws_methods:
       list_of_methods: List of methods
       method: Method
-      descr: Describtion
+      descr: Description
       check: Check
       create_method: Create method
       new_ws_method: New method
@@ -165,7 +165,7 @@ en:
       create_new_model_run: Create new model run
       new_model_run: New model run
       result_of_ranking: Result of ranking
-      descr: Describtion
+      descr: Description
       rank: Rank
       run_status: Status of run 
       accessibility: Accessibility
@@ -193,7 +193,7 @@ en:
     ws_models:
       list_of_ws_models: List of models
       name: Name
-      descr: Describtion
+      descr: Description
       new_ws_model: New model
       editing_ws_model: Editing model
       internal_method: Internal method
@@ -239,7 +239,7 @@ en:
     ws_params:
       list_of_ws_params: List of params
       name: Name
-      descr: Describtion
+      descr: Description
       integer: integer.
       number_of_meas: Number of meas.
       min_value: Min value
@@ -251,7 +251,7 @@ en:
     ws_set_model_runs:
       list_of_ws_set_model_runs: List of set model runs
       name: Name
-      descr: Describtion
+      descr: Description
       capacity: Capacity
       new_ws_set_model_runs: New set model runs
       editing_ws_set_model_runs: Editing set model runs
