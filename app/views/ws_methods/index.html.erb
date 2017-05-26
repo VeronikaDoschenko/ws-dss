@@ -3,7 +3,10 @@
 <table class="table">
   <thead>
     <tr>
-      <th><%=t('views.ws_methods.method')%></th><th><%=t('views.ws_methods.descr')%></th><th colspan="4"></th>
+      <th><%=t('views.ws_methods.method')%></th>
+      <th><%=t('views.ws_methods.descr')%></th>
+      <th><%=t('views.ws_methods.num_jobs')%></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -12,6 +15,7 @@
       <tr>
         <td><%= ws_method.name %></td>
         <td><%= ws_method.descr %></td>
+        <td><%= link_to ws_method.ws_jobs.count, ws_jobs_url(q: {ws_method_id_eq: ws_method.id, s: "updated_at desc"})  %></td>
         <td><%= link_to t('show'), ws_method %></td>
         <td><%= link_to t('edit'), edit_ws_method_path(ws_method) %></td>
         <td><% if ws_method.test_output %>

@@ -4,7 +4,7 @@ class WsMethodsController < AuthController
   # GET /ws_methods
   # GET /ws_methods.json
   def index
-    @ws_methods = WsMethod.all
+    @ws_methods = WsMethod.order(:name)
   end
 
   # GET /ws_methods/1

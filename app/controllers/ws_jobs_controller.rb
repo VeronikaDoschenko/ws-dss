@@ -15,8 +15,8 @@ class WsJobsController < AuthController
   # GET /ws_jobs
   # GET /ws_jobs.json
   def index
-    user_id = params[:user_id] || current_user.id
-    @ws_jobs = WsJob.accessible_by(current_ability).where(user_id: user_id).order('updated_at  desc')
+    wj = WsJob.accessible_by(current_ability)
+    @ws_jobs = (params[:q]) ? wj.ransack(params[:q]).result : wj.where(user_id: current_user.id).order('updated_at  desc')
   end
 
   def file_form

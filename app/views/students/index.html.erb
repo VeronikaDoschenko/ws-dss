@@ -29,7 +29,7 @@
         </td>
         <td><%= student.email %></td>
         <% if u %>
-          <td><%= link_to u.get_jobs, ws_jobs_url(:user_id => u.id)  %></td>
+          <td><%= link_to u.get_jobs, ws_jobs_url(q: {user_id_eq: u.id, s: "updated_at desc"})  %></td>
           <td><%= u.get_sloved %></td>
         <% else %>
           <td></td>
