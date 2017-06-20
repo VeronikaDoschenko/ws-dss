@@ -62,7 +62,7 @@
     <% if not notice and not alert %>
       <p class="text-right small">
       <% if user_signed_in? %>
-        Пользователь: <%= current_user.email %>&nbsp;&nbsp;
+        <%=t('views.ws_jobs.ws_job_user')%>: <%= current_user.email %>&nbsp;&nbsp;
       <% end %>
 
       <%= link_to_unless I18n.locale == :ru, "Русский", safe_url(locale: :ru) %>
