@@ -47,7 +47,7 @@
         <td></td>
         <td align="right"><%= u.get_teams.join('<br/>').html_safe %></td>
         <td><%= u.email %></td>
-        <td><%= link_to u.get_jobs, ws_jobs_url(:user_id => u.id)  %></td>
+        <td><%= link_to u.get_jobs, ws_jobs_url(q: {user_id_eq: u.id, s: "updated_at desc"})  %></td>
         <td><%= u.get_sloved %></td>
         <td></td>
         <td></td>
