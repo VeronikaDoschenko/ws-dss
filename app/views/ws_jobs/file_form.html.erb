@@ -12,7 +12,7 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.file_field :file, accept: 'application/pdf' %>
+    <%= f.file_field :file, accept: FILE_TYPE_ACCEPTED.join(',') %>
   </div>
   <div class="actions">
     <%= f.submit t('save') %>

@@ -3,7 +3,7 @@ class WsJob < ActiveRecord::Base
   belongs_to :ws_method
   belongs_to :user
   validate :file_size_and_type
-  
+
 
   def initialize(params = {})
     # File is now an instance variable so it can be
@@ -39,9 +39,20 @@ class WsJob < ActiveRecord::Base
     self.error_code = a[1]
     self.for_check  = a[2]
     self.output_data = a[3]
+    if a[4][:io] and a[4][:type] and a[4][:name]
+      self.filename = a[4][:name]
+      self.content_type = a[4][:type]
+      a[4][:io].rewind
+      f = File.open(Rails.root.join('tmp', "#{self.id}_data.tmp"),'w')
+      IO.copy_stream(a[4][:io], f)
+      f.close
+      ff = File.open(Rails.root.join('tmp', "#{self.id}_data.tmp"),'r')
+      self.file_contents = ff.read
+      ff.close
+    end
     self.save
   end
-  
+
 private
   def sanitize_filename(filename)
     # Get only the filename, not the whole path (for IE)
@@ -50,11 +61,11 @@ private
   end
   NUM_BYTES_IN_MEGABYTE = 1048576
   def file_size_and_type
-    if @file 
+    if @file
       if (@file.size.to_f / NUM_BYTES_IN_MEGABYTE) > 4
         errors.add(:file, 'File size cannot be over 4 megabyte.')
-      elsif @file.content_type != 'application/pdf'
-        errors.add(:file, 'File type must be pdf only!')
+      elsif FILE_TYPE_ACCEPTED.find{|e| e == @file.content_type}.nil?
+        errors.add(:file, 'File type must be pdf or csv or json or xml only!')
       end
     end
   end

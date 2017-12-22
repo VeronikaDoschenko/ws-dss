@@ -1,12 +1,12 @@
 class WsMethod < ActiveRecord::Base
   include DescriptionsModule
   nilify_blanks
-  
+
   has_many :ws_jobs, dependent: :restrict_with_exception
   has_many :ws_models
   royce_roles %w[ public ] + User.available_roles.collect{|s| s.name} - %w[ admin ]
 
-  scope :ask_working,-> do 
+  scope :ask_working,-> do
     where("test_output is not null").order("lower(name)")
   end
 
@@ -14,7 +14,8 @@ class WsMethod < ActiveRecord::Base
     error_code = 0
     for_check = 0
     output_data = nil
-	if m_input and self.code   
+    output_file = {}
+	if m_input and self.code
 		exec_val = <<-WS_EOS
 		  begin
 			ws_input_data = <<-WS_DATA
@@ -26,7 +27,7 @@ class WsMethod < ActiveRecord::Base
 			$stdout.string
 		  rescue Exception => msg
 			error_code = 1
-			$stdout.string + "\n" + msg.to_s 
+			$stdout.string + "\n" + msg.to_s
 		  ensure
 			$stdin  = STDIN
 			$stdout = STDOUT
@@ -36,6 +37,6 @@ class WsMethod < ActiveRecord::Base
 	else
 		s = {trace: ( self.code ? "no input" : "no code" ) }.to_json
 	end
-    return [s, error_code, for_check, output_data]
+    return [s, error_code, for_check, output_data, output_file]
   end
 end
